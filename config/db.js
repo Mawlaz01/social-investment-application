@@ -3,7 +3,7 @@ let connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'db_invest_app',
+  database: 'social_investment_app',
 });
 
 connection.connect((error) => {
@@ -14,4 +14,4 @@ connection.connect((error) => {
   }
 })
 
-module.exports = connection;
+module.exports = connection;

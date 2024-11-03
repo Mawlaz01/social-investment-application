@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Superuser - Social Investment Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard Superuser</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Statistik Aplikasi</h2>
+        <p>Total Pengguna Terdaftar: <%= superuser.total_users %></p>
+        <p>Total Acara yang Dibuat: <%= superuser.total_events %></p>
+        <p>Total Kontribusi yang Divalidasi: <%= superuser.total_validated_contributions %></p>
+        
+        <h2>Diagram Statistik</h2>
+        <div id="charts">
+            <!-- Tempatkan grafik atau diagram statistik di sini -->
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

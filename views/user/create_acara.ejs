@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buat Acara Baru - Social Investment Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Buat Acara Baru</h1>
+        <nav>
+            <ul>
+                <li><a href="/users/dashboard">Dashboard</a></li>
+                <li><a href="/users/acara">Daftar Acara</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form action="/users/create_acara" method="post">
+            <label for="nama_acara">Nama Acara:</label>
+            <input type="text" id="nama_acara" name="nama_acara" required>
+            <label for="waktu_acara">Waktu Acara:</label>
+            <input type="datetime-local" id="waktu_acara" name="waktu_acara" required>
+            <label for="acara_selesai">Waktu Selesai:</label>
+            <input type="datetime-local" id="acara_selesai" name="acara_selesai" required>
+            <label for="lokasi_acara">Lokasi Acara:</label>
+            <input type="text" id="lokasi_acara" name="lokasi_acara" required>
+            <label for="keterangan">Keterangan:</label>
+            <textarea id="keterangan" name="keterangan" required></textarea>
+            <label for="informasi_kontak">Informasi Kontak:</label>
+            <input type="text" id="informasi_kontak" name="informasi_kontak" required>
+            <button type="submit">Buat Acara</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

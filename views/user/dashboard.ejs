@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Pengguna - Social Investment Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Dashboard Pengguna</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/user/profile">Profile</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Ringkasan Kontribusi</h2>
+        <p>Jumlah Kontribusi yang Divalidasi: <%= user.validated_contributions %></p>
+        <p>Acara yang Diikuti: <%= user.participated_events %></p>
+        <p>Pengingat Kontribusi yang Belum Divalidasi: <%= user.pending_contributions %></p>
+        
+        <h2>Acara yang Dikelola</h2>
+        <ul>
+    </main>
+    <footer>
+        <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -3,11 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var flash = require('express-flash');
+var flash = require('connect-flash');
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/user/users');
+var superuserRouter = require('./routes/superuser/superuser');
+const acaraRouter = require('./routes/user/acara');
+const createAcaraRouter = require('./routes/user/createAcara');
+const detailAcaraRouter = require('./routes/user/detailAcara');
+const kontribusiUangRouter = require('./routes/user/kontribusiUang');
+const kontribusiBarangRouter = require('./routes/user/kontribusiBarang');
 
 var app = express();
 
@@ -21,8 +27,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Setup session middleware
+app.use(session({
+  secret: 'yourSecretKey',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Should be true if using HTTPS
+}));
+
+// Setup flash middleware
+app.use(flash());
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/superuser', superuserRouter);
+app.use('/users/acara', acaraRouter);
+app.use('/users/create_acara', createAcaraRouter);
+app.use('/users/acara', detailAcaraRouter);
+app.use('/users/kontribusi_uang', kontribusiUangRouter);
+app.use('/users/kontribusi_barang', kontribusiBarangRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
