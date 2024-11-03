@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Kontribusi - Social Investment Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Tambah Kontribusi</h1>
+        <nav>
+            <ul>
+                <li><a href="/users/dashboard">Dashboard</a></li>
+                <li><a href="/users/acara">Daftar Acara</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form action="/users/acara/<%= id_acara %>/create_kontribusi" method="post">
+            <input type="hidden" name="id_kategori" value="<%= id_kategori %>">
+            <% if (id_kategori === 'uang') { %>
+                <label for="jumlah_uang">Jumlah Uang:</label>
+                <input type="number" id="jumlah_uang" name="jumlah_uang" required>
+            <% } else if (id_kategori === 'barang') { %>
+                <label for="jumlah_barang">Deskripsi Barang:</label>
+                <textarea id="jumlah_barang" name="jumlah_barang" required></textarea>
+            <% } %>
+            <button type="submit">Tambahkan Kontribusi</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Acara - Social Investment Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Daftar Acara</h1>
+        <nav>
+            <ul>
+                <li><a href="/users/dashboard">Dashboard</a></li>
+                <li><a href="/users/create_acara">Buat Acara Baru</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <% if (acara.length > 0) { %>
+            <ul>
+                <% acara.forEach(event => { %>
+                    <li>
+                        <a href="/users/acara/<%= event.id_acara %>">
+                            <h3><%= event.nama_acara %></h3>
+                            <p><%= event.lokasi_acara %></p>
+                            <p><%= event.waktu_acara %> - <%= event.acara_selesai %></p>
+                            <p><%= event.keterangan %></p>
+                            <p>Informasi kontak: <%= event.informasi_kontak %></p>
+                        </a>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>Tidak ada acara yang tersedia.</p>
+        <% } %>
+    </main>
+    <footer>
+        <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

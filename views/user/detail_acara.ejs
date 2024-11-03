@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail Acara - Social Investment Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Detail Acara: <%= acara.nama_acara %></h1>
+        <nav>
+            <ul>
+                <li><a href="/users/dashboard">Dashboard</a></li>
+                <li><a href="/users/acara">Daftar Acara</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Kontribusi Uang</h2>
+            <% if (kontribusiUang.length > 0) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Jumlah Uang</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% kontribusiUang.forEach(kontribusi => { %>
+                            <tr>
+                                <td><%= kontribusi.jumlah_uang %></td>
+                                <td>
+                                    <% if (isEditable) { %>
+                                        <form action="/users/acara/<%= acara.id_acara %>/delete_kontribusi/<%= kontribusi.id_kontribusi %>" method="post" style="display:inline;">
+                                            <button type="submit">Hapus</button>
+                                        </form>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Total</td>
+                            <td>
+                                <%= kontribusiUang.reduce((acc, val) => acc + parseFloat(val.jumlah_uang), 0) %>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            <% } else { %>
+                <p>Tidak ada kontribusi uang.</p>
+            <% } %>
+
+            <% if (isEditable) { %>
+                <form action="/users/kontribusi_uang/<%= acara.id_acara %>/create_kontribusi_uang" method="get">
+                    <button type="submit">Tambah Kontribusi Uang</button>
+                </form>
+            <% } %>
+        </section>
+
+        <section>
+            <h2>Kontribusi Barang</h2>
+            <% if (kontribusiBarang.length > 0) { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Deskripsi Barang</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% kontribusiBarang.forEach(kontribusi => { %>
+                            <tr>
+                                <td><%= kontribusi.jumlah_barang %></td>
+                                <td>
+                                    <% if (isEditable) { %>
+                                        <form action="/users/acara/<%= acara.id_acara %>/delete_kontribusi/<%= kontribusi.id_kontribusi %>" method="post" style="display:inline;">
+                                            <button type="submit">Hapus</button>
+                                        </form>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <p>Tidak ada kontribusi barang.</p>
+            <% } %>
+
+            <% if (isEditable) { %>
+                <form action="/users/kontribusi_barang/<%= acara.id_acara %>/create_kontribusi_barang" method="get">
+                    <button type="submit">Tambah Kontribusi Barang</button>
+                </form>
+            <% } %>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
