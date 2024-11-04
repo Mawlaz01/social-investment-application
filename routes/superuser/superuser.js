@@ -4,7 +4,7 @@ const Superuser = require('../../models/Superuser');
 
 const auth = async (req, res, next) => {
     try {
-        console.log(req.session); // Tambahkan ini untuk debug session
+        console.log(req.session); 
         if (req.session.isSuperuser && req.session.userId) {
             const superuser = await Superuser.getById(req.session.userId);
             if (superuser) {

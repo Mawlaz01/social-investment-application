@@ -6,7 +6,6 @@ const KontribusiUang = require('../../models/KontribusiUang');
 const KontribusiBarang = require('../../models/KontribusiBarang');
 const moment = require('moment');
 
-// Middleware for authentication
 const auth = (req, res, next) => {
     if (req.session && req.session.userId) {
         return next();
@@ -15,7 +14,6 @@ const auth = (req, res, next) => {
     }
 };
 
-// GET detail acara
 router.get('/:id', auth, async (req, res) => {
     try {
         const acara = await Acara.findById(req.params.id);
@@ -32,7 +30,6 @@ router.get('/:id', auth, async (req, res) => {
     }
 });
 
-// POST untuk menghapus kontribusi
 router.post('/:id/delete_kontribusi/:id_kontribusi', auth, async (req, res) => {
     try {
         const id_kontribusi = req.params.id_kontribusi;

@@ -11,7 +11,6 @@ const auth = async (req, res, next) => {
     res.redirect('/login');
 };
 
-// GET semua acara yang dibuat oleh pengguna
 router.get('/', auth, async (req, res) => {
     try {
         let acara = await Acara.getAll();

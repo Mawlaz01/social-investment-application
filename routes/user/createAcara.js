@@ -11,12 +11,10 @@ const auth = async (req, res, next) => {
     res.redirect('/login');
 };
 
-// GET halaman form buat acara
 router.get('/', auth, (req, res) => {
     res.render('user/create_acara');
 });
 
-// POST untuk menyimpan acara baru
 router.post('/', auth, async (req, res) => {
     try {
         let { nama_acara, waktu_acara, acara_selesai, lokasi_acara, keterangan, informasi_kontak } = req.body;

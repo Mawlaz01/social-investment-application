@@ -3,7 +3,6 @@ const router = express.Router();
 const Kontribusi = require('../../models/Kontribusi');
 const KontribusiUang = require('../../models/KontribusiUang');
 
-// Middleware for authentication
 const auth = (req, res, next) => {
     if (req.session && req.session.userId) {
         return next();
@@ -12,12 +11,10 @@ const auth = (req, res, next) => {
     }
 };
 
-// GET form untuk menambahkan kontribusi uang
 router.get('/:id/create_kontribusi_uang', auth, (req, res) => {
     res.render('user/create_kontribusi_uang', { id_acara: req.params.id });
 });
 
-// POST untuk menyimpan kontribusi uang baru
 router.post('/:id/create_kontribusi_uang', auth, async (req, res) => {
     try {
         const { id_penyumbang, jumlah_uang } = req.body;
