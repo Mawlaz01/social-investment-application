@@ -20,7 +20,7 @@ router.get('/:id/create_kontribusi', auth, async (req, res) => {
     } catch (error) {
         console.error("Error:", error);
         req.flash('error', 'Terjadi kesalahan saat memuat form kontribusi.');
-        res.redirect(`/users/acara/${req.params.id}`);
+        res.redirect(`/user/acara/${req.params.id}`);
     }
 });
 
@@ -36,7 +36,7 @@ router.get('/:id/create_kontribusi_form', auth, async (req, res) => {
     } catch (error) {
         console.error("Error:", error);
         req.flash('error', 'Terjadi kesalahan saat memuat form kontribusi.');
-        res.redirect(`/users/acara/${req.params.id}`);
+        res.redirect(`/user/acara/${req.params.id}`);
     }
 });
 
@@ -58,11 +58,11 @@ router.post('/:id/create_kontribusi', auth, async (req, res) => {
         }
 
         req.flash('success', 'Kontribusi berhasil ditambahkan.');
-        res.redirect(`/users/acara/${id_acara}`);
+        res.redirect(`/user/acara/${id_acara}`);
     } catch (error) {
         console.error("Error:", error);
         req.flash('error', 'Gagal menambahkan kontribusi. Silakan coba lagi.');
-        res.redirect(`/users/acara/${req.params.id}/create_kontribusi`);
+        res.redirect(`/user/acara/${req.params.id}/create_kontribusi`);
     }
 });
 

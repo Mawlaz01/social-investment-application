@@ -18,7 +18,7 @@ router.get('/', auth, async (req, res) => {
     } catch (error) {
         console.error("Error:", error);
         req.flash('error', 'Terjadi kesalahan saat memuat data acara');
-        res.redirect('/users/dashboard');
+        res.redirect('/user/dashboard');
     }
 });
 
