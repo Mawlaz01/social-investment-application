@@ -18,7 +18,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// GET home page
 router.get('/', async function(req, res, next) {
     try {
         let data = await User.getAll();
@@ -30,22 +29,18 @@ router.get('/', async function(req, res, next) {
     }
 });
 
-// GET register page
 router.get('/register', function(req, res) {
     res.render('auth/register');
 });
 
-// GET login page
 router.get('/login', function(req, res) {
     res.render('auth/login');
 });
 
-// GET register_superuser page
 router.get('/register_superuser', function(req, res) {
     res.render('auth/register_superuser');
 });
 
-// Handle registration
 router.post('/register', upload.single("foto"), async (req, res) => {
     try {
         let { nama, email, password, NIK, no_wa } = req.body;
@@ -71,7 +66,6 @@ router.post('/register', upload.single("foto"), async (req, res) => {
     }
 });
 
-// Handle superuser registration
 router.post('/register_superuser', async (req, res) => {
     try {
         let { email, password } = req.body;
@@ -90,24 +84,20 @@ router.post('/register_superuser', async (req, res) => {
     }
 });
 
-// Handle login
 router.post('/login', async (req, res) => {
     try {
         let { email, password } = req.body;
         
-        // Cek apakah user biasa atau superuser
         let user = await User.login(email);
         let superuser = await Superuser.login(email);
 
         let data = user || superuser;
 
-        // Jika user tidak ditemukan atau password salah
         if (!data || !(await bcrypt.compare(password, data.password))) {
             req.flash('error', 'Email atau password salah');
             return res.redirect('/login');
         }
 
-        // Simpan session berdasarkan tipe user
         if (user) {
             req.session.userId = user.id_user;
             req.session.isSuperuser = false;
@@ -124,7 +114,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Handle logout
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) return res.redirect('/users/dashboard');
