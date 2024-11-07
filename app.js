@@ -14,6 +14,7 @@ const createAcaraRouter = require('./routes/user/createAcara');
 const detailAcaraRouter = require('./routes/user/detailAcara');
 const kontribusiUangRouter = require('./routes/user/kontribusiUang');
 const kontribusiBarangRouter = require('./routes/user/kontribusiBarang');
+const profilRouter = require('./routes/user/profil');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/users/create_acara', createAcaraRouter);
 app.use('/users/acara', detailAcaraRouter);
 app.use('/users/kontribusi_uang', kontribusiUangRouter);
 app.use('/users/kontribusi_barang', kontribusiBarangRouter);
+app.use('/users/profile', profilRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil Pengguna</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1>Profil Pengguna</h1>
+    <div class="profile-container">
+        <img src="/images/user/<%= user.foto %>" alt="Foto Profil" class="profile-picture">
+        <form action="/users/profile/update" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" value="<%= user.nama %>" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= user.email %>" required>
+            </div>
+            <div class="form-group">
+                <label for="NIK">NIK:</label>
+                <input type="text" id="NIK" name="NIK" value="<%= user.NIK %>" required>
+            </div>
+            <div class="form-group">
+                <label for="no_wa">Nomor WhatsApp:</label>
+                <input type="text" id="no_wa" name="no_wa" value="<%= user.no_wa %>" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Kata Sandi Baru:</label>
+                <input type="password" id="password" name="password">
+                <small>Isi untuk mengubah kata sandi.</small>
+            </div>
+            <div class="form-group">
+                <label for="foto">Foto Profil:</label>
+                <input type="file" id="foto" name="foto">
+            </div>
+            <button type="submit">Simpan Perubahan</button>
+        </form>
+    </div>
+    <a href="/user/dashboard">Kembali ke Dashboard</a>
+</body>
+</html>
