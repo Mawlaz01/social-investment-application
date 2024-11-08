@@ -31,11 +31,11 @@ router.post('/', auth, async (req, res) => {
         });
 
         req.flash('success', 'Acara berhasil dibuat');
-        res.redirect('/user/acara');
+        res.redirect('/users/acara');
     } catch (error) {
         console.log(error);
         req.flash('error', 'Gagal membuat acara. Silakan coba lagi.');
-        res.redirect('/user/create_acara');
+        res.redirect('/users/create_acara');
     }
 });
 

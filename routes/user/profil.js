@@ -18,7 +18,7 @@ function isAuthenticated(req, res, next) {
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/users/');
+        cb(null, 'public/images/user/');  // Pastikan folder ini benar
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -26,11 +26,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-router.get('/profile', isAuthenticated, async (req, res) => {
+router.get('/', isAuthenticated, async (req, res) => {
     try {
         const userId = req.session.userId;
         const user = await User.getById(userId);
-        res.render('user/profile', { user });
+        res.render('user/profile', { user });  // Pastikan path view benar
     } catch (error) {
         res.status(500).send('Error retrieving user profile.');
     }
@@ -39,7 +39,6 @@ router.get('/profile', isAuthenticated, async (req, res) => {
 router.post('/update', isAuthenticated, upload.single('foto'), async (req, res) => {
     try {
         const userId = req.session.userId;
-
         const oldUserData = await User.getById(userId);
 
         const updatedData = {
@@ -57,7 +56,7 @@ router.post('/update', isAuthenticated, upload.single('foto'), async (req, res) 
 
         if (updatedData.foto) {
             if (oldUserData.foto && oldUserData.foto !== 'default.png') {
-                fs.unlinkSync(path.join(__dirname, '../../public/images/users/', oldUserData.foto));
+                fs.unlinkSync(path.join(__dirname, '../../public/images/user/', oldUserData.foto));
             }
         } else {
             delete updatedData.foto;

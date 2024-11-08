@@ -7,13 +7,10 @@ var flash = require('connect-flash');
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/user/users');
 var superuserRouter = require('./routes/superuser/superuser');
+const dashboardRouter = require('./routes/user/dashboard');
 const acaraRouter = require('./routes/user/acara');
 const createAcaraRouter = require('./routes/user/createAcara');
-const detailAcaraRouter = require('./routes/user/detailAcara');
-const kontribusiUangRouter = require('./routes/user/kontribusiUang');
-const kontribusiBarangRouter = require('./routes/user/kontribusiBarang');
 const profilRouter = require('./routes/user/profil');
 
 var app = express();
@@ -40,13 +37,10 @@ app.use(session({
 app.use(flash());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/superuser', superuserRouter);
+app.use('/users/dashboard', dashboardRouter);
 app.use('/users/acara', acaraRouter);
 app.use('/users/create_acara', createAcaraRouter);
-app.use('/users/acara', detailAcaraRouter);
-app.use('/users/kontribusi_uang', kontribusiUangRouter);
-app.use('/users/kontribusi_barang', kontribusiBarangRouter);
 app.use('/users/profile', profilRouter);
 
 // catch 404 and forward to error handler
