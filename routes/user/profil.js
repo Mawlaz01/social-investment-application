@@ -1,24 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../models/User');
+const User = require('../../models/user'); // Pastikan ini menuju ke model User
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcrypt');
 
-// Middleware for session-based authentication
+// Middleware untuk autentikasi berbasis sesi
 function isAuthenticated(req, res, next) {
-    if (req.session.userId) {  // Check if user is authenticated
+    if (req.session.userId) {  // Periksa jika pengguna sudah terautentikasi
         return next();
     } else {
         res.redirect('/login');
     }
 }
 
-// Multer configuration for file uploads
+// Konfigurasi Multer untuk unggah file
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/users/');
+        cb(null, 'public/images/user/'); // Sesuaikan dengan struktur folder Anda
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -30,7 +30,7 @@ router.get('/profile', isAuthenticated, async (req, res) => {
     try {
         const userId = req.session.userId;
         const user = await User.getById(userId);
-        res.render('user/profile', { user });
+        res.render('user/profil', { user }); // Pastikan ini menuju ke tampilan profil di views/user/profil.ejs
     } catch (error) {
         res.status(500).send('Error retrieving user profile.');
     }
@@ -57,7 +57,7 @@ router.post('/update', isAuthenticated, upload.single('foto'), async (req, res) 
 
         if (updatedData.foto) {
             if (oldUserData.foto && oldUserData.foto !== 'default.png') {
-                fs.unlinkSync(path.join(__dirname, '../../public/images/users/', oldUserData.foto));
+                fs.unlinkSync(path.join(__dirname, '../../public/images/user/', oldUserData.foto));
             }
         } else {
             delete updatedData.foto;
