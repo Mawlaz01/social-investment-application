@@ -1,0 +1,49 @@
+main.content {
+    width: 100%;
+    height: 100% !important;
+    background: linear-gradient(to bottom, #37B7C3 30%, #EBF4F6 30%);
+}
+
+.frm-acara{
+    background-color: white;
+    padding: 2.5rem !important;
+    border-radius: 20px;
+}.frm-acara .form-control {
+    border-color: #37B7C3;
+}.frm-acara .form-control::placeholder {
+    color: #37B7C3;
+}
+.frm_layout{
+    color: #37B7C3;
+}
+
+/* Mengubah border dan latar belakang input datetime-local */
+input[type="datetime-local"] {
+    border: 2px solid #37B7C3; /* Ubah border */
+    background-color: white; /* Ubah latar belakang */
+}
+
+/* Mengubah placeholder */
+input[type="datetime-local"]::placeholder {
+    color: #37B7C3; /* Ubah warna placeholder */
+}
+
+/* Mengubah teks dalam input */
+input[type="datetime-local"]::-webkit-datetime-edit {
+    color: #37B7C3; /* Ubah warna teks pada input datetime */
+}
+.frm-acara h4 {
+    font-weight: bold; /* Membuat teks menjadi bold */
+    color: #10266f;    /* Mengubah warna teks menjadi #071952 */
+}
+
+.btn-primary {
+    background-color: #37B7C3;  /* Ubah warna background */
+    border-color: #37B7C3;      /* Ubah warna border */
+}
+
+.btn-primary:hover {
+    background-color: #2b9f9d; /* Ubah warna tombol saat hover */
+    border-color: #2b9f9d;      /* Ubah warna border saat hover */
+}
+
