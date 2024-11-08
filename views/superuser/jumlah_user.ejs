@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <H1>ini halaman jumlah user</H1>
-</body>
+  <!-- HEADER -->
+  <%- include('partials/__head.ejs') %>
+  
+  <body>
+
+    <!-- NAVBAR -->
+    <%- include('partials/__nav.ejs') %>
+
+    <div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+      <div class="container">
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="col-sm-8 col-md-6 mg-t-20 mg-md-t-0">
+              <div class="az-content-label mg-b-5">Total User</div>
+              <p class="mg-b-20">Below is the basic area chart example.</p>
+              <div class="chartjs-wrapper-demo"><canvas id="chartArea2"></canvas></div>
+            </div><!-- areachart // CHART TOTAL USER -->
+          <div class="ht-40"></div>
+          <div class="az-footer mg-t-auto">
+            <div class="container">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"><p>&copy; 2024 Social Investment Application. All Rights Reserved.</p></span>
+            </div><!-- container -->
+          </div><!-- az-footer -->
+        </div><!-- az-content-body -->
+      </div><!-- container -->
+    </div><!-- az-content -->
+
+    <!-- FOOTER -->
+    <%- include('partials/__foot.ejs') %>
+    
+  </body>
 </html>

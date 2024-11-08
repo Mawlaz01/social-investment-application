@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard Superuser - Social Investment Application</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <header>
-        <h1>Dashboard Superuser</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/logout">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h2>Statistik Aplikasi</h2>
-        <p>Total Pengguna Terdaftar: <%= superuser.total_users %></p>
-        <p>Total Acara yang Dibuat: <%= superuser.total_events %></p>
-        
-        <h2>Diagram Statistik</h2>
-        <div id="charts">
+  <!-- HEADER -->
+  <%- include('partials/__head.ejs') %>
 
-        </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
-    </footer>
-</body>
+  <body>
+
+    <!-- NAVBAR -->
+    <%- include('partials/__nav.ejs') %>
+
+
+    <div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
+      <div class="container">
+        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <div class="col-sm-8 col-md-6 mg-t-20 mg-md-t-0">
+                <h2>Statistik Aplikasi</h2>
+                <p>Total Pengguna Terdaftar: <%= superuser.total_users %></p>
+                <p>Total Acara yang Dibuat: <%= superuser.total_events %></p>
+                <h2>Diagram Statistik Dashboard</h2>
+              <div class="chartjs-wrapper-demo"><canvas id="chartBar5"></canvas></div>
+            </div><!-- chartbar5 // CHART DASHBOARD -->
+          <div class="ht-40"></div>
+          <div class="az-footer mg-t-auto">
+            <div class="container">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"><p>&copy; 2024 Social Investment Application. All Rights Reserved.</p></span>
+            </div><!-- container -->
+          </div><!-- az-footer -->
+        </div><!-- az-content-body -->
+      </div><!-- container -->
+    </div><!-- az-content -->
+
+    <!-- FOOTER -->
+    <%- include('partials/__foot.ejs') %>
+
+  </body>
 </html>

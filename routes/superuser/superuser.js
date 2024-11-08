@@ -36,4 +36,36 @@ router.get('/dashboard', auth, (req, res) => {
     }
 });
 
+router.get('/jumlah_acara', auth, (req, res) => {
+    try {
+
+        if (!req.superuser) {
+            req.flash('error', 'Data superuser tidak ditemukan.');
+            return res.redirect('/login');
+        }
+
+        res.render('superuser/jumlah_acara', { superuser: req.superuser });
+    } catch (error) {
+        console.error("Error rendering superuser dashboard:", error);
+        req.flash('error', 'Terjadi kesalahan saat memuat dashboard.');
+        res.redirect('/login');
+    }
+});
+
+router.get('/jumlah_user', auth, (req, res) => {
+    try {
+
+        if (!req.superuser) {
+            req.flash('error', 'Data superuser tidak ditemukan.');
+            return res.redirect('/login');
+        }
+
+        res.render('superuser/jumlah_user', { superuser: req.superuser });
+    } catch (error) {
+        console.error("Error rendering superuser dashboard:", error);
+        req.flash('error', 'Terjadi kesalahan saat memuat dashboard.');
+        res.redirect('/login');
+    }
+});
+
 module.exports = router;
