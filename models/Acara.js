@@ -1,9 +1,9 @@
 const connection = require('../config/db');
 
 class Acara {
-    static async getAll() {
+    static async getAllByUserId(userId) {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM Acara ORDER BY id_acara DESC', (err, rows) => {
+            connection.query('SELECT * FROM Acara WHERE id_pembuat_acara = ? ORDER BY id_acara DESC', [userId], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -36,18 +36,6 @@ class Acara {
             });
         });
     }
-
-        static async findById(id) {
-            return new Promise((resolve, reject) => {
-                connection.query('SELECT * FROM Acara WHERE id_acara = ?', [id], (err, rows) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(rows[0]);
-                    }
-                });
-            });
-        }
 
     static async update(id, data) {
         return new Promise((resolve, reject) => {
