@@ -230,7 +230,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: #3366ff;
+  color: #37B7C3;
   text-decoration: none;
   background-color: transparent; }
   a:hover {
@@ -9109,7 +9109,7 @@ body {
   font-size: 28px;
   font-family: 'Poppins', sans-serif;
   text-transform: lowercase;
-  color: #5b47fb;
+  color: #37B7C3;
   letter-spacing: -1px;
   display: flex;
   align-items: center;
@@ -9229,9 +9229,9 @@ body {
       .az-header-menu .nav-item > .nav-link {
         font-size: 0.875rem; } }
     .az-header-menu .nav-item > .nav-link:hover {
-      color: #5b47fb; }
+      color: #37B7C3; }
       .az-header-menu .nav-item > .nav-link:hover i {
-        color: #5b47fb; }
+        color: #37B7C3; }
     .az-header-menu .nav-item > .nav-link.with-sub::after {
       content: '\f3d0';
       display: inline-block;
