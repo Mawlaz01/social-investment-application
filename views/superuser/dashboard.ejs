@@ -12,10 +12,39 @@
     <div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
       <div class="container">
           <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+            <h2>Statistik Aplikasi</h2>
+            <div class="row row-sm">
+                <div class="col-sm-6">
+                  <div class="card card-dashboard-two">
+                    <div class="card-header">
+                      <h6><%= superuser.dataUser %></h6>
+                      <b>Total Pengguna Terdaftar</b>
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                      <div class="chart-wrapper">
+                        <div id="flotChart1" class="flot-chart"></div>
+                      </div><!-- chart-wrapper -->
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+                </div><!-- col -->
+                <div class="col-sm-6 mg-t-20 mg-sm-t-0">
+                  <div class="card card-dashboard-two">
+                    <div class="card-header">
+                      <h6><%= superuser.dataAcara %></h6>
+                      <b>Total Acara yang Dibuat</b>
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                      <div class="chart-wrapper">
+                        <div id="flotChart2" class="flot-chart"></div>
+                      </div><!-- chart-wrapper -->
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+                </div><!-- col -->
+              </div><!-- row -->
               <div class="col-sm-8 col-md-6 mg-t-20 mg-md-t-0">
-                  <h2>Statistik Aplikasi</h2>
-                  <p>Total Pengguna Terdaftar: <%= superuser.dataUser %></p>
-                  <p>Total Acara yang Dibuat: <%= superuser.dataAcara %></p>
+                
+            <div class="ht-40"></div>
+                  
                   <h2>Diagram Statistik Dashboard</h2>
   
                   <div class="chartjs-wrapper-demo">
