@@ -60,6 +60,48 @@ class Acara {
             });
         });
     }
+
+    static async getTotalAcaraPerBulan() { 
+    return new Promise((resolve, reject) => {
+        const sql = `
+            SELECT 
+                MONTH(waktu_acara) AS bulan,
+                COUNT(id_acara) AS total_acara
+            FROM 
+                acara
+            WHERE 
+                YEAR(waktu_acara) = YEAR(CURDATE()) 
+            GROUP BY 
+                MONTH(waktu_acara)
+            ORDER BY 
+                bulan;
+        `;
+        connection.query(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+            } else {
+
+                const namaBulan = [
+                    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+                ];
+
+                const result = Array(12).fill(0).map((_, i) => ({
+                    bulan: namaBulan[i],
+                    total_acara: 0
+                }));
+
+                rows.forEach(row => {
+                    if (row.bulan >= 1 && row.bulan <= 12) {
+                        result[row.bulan - 1].total_acara = row.total_acara;
+                    }
+                });
+
+                resolve(result);
+            }
+        });
+    });
+    }
 }
 
 module.exports = Acara;

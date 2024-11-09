@@ -11,23 +11,35 @@
 
     <div class="az-content pd-y-20 pd-lg-y-30 pd-xl-y-40">
       <div class="container">
-        <div class="az-content-body pd-lg-l-40 d-flex flex-column">
-            <div class="col-sm-8 col-md-6 mg-t-20 mg-md-t-0">
-                <h2>Statistik Aplikasi</h2>
-                <p>Total Pengguna Terdaftar: <%= superuser.total_users %></p>
-                <p>Total Acara yang Dibuat: <%= superuser.total_events %></p>
-                <h2>Diagram Statistik Dashboard</h2>
-              <div class="chartjs-wrapper-demo"><canvas id="chartBar5"></canvas></div>
-            </div><!-- chartbar5 // CHART DASHBOARD -->
-          <div class="ht-40"></div>
-          <div class="az-footer mg-t-auto">
-            <div class="container">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"><p>&copy; 2024 Social Investment Application. All Rights Reserved.</p></span>
-            </div><!-- container -->
-          </div><!-- az-footer -->
-        </div><!-- az-content-body -->
+          <div class="az-content-body pd-lg-l-40 d-flex flex-column">
+              <div class="col-sm-8 col-md-6 mg-t-20 mg-md-t-0">
+                  <h2>Statistik Aplikasi</h2>
+                  <p>Total Pengguna Terdaftar: <%= superuser.dataUser %></p>
+                  <p>Total Acara yang Dibuat: <%= superuser.dataAcara %></p>
+                  <h2>Diagram Statistik Dashboard</h2>
+  
+                  <div class="chartjs-wrapper-demo">
+                      <canvas id="chartBar5" 
+                          data-labels="<%= JSON.stringify(labelsAcara) %>" 
+                          data-data1="<%= JSON.stringify(dataAcara) %>" 
+                          data-data2="<%= JSON.stringify(dataUser) %>">
+                      </canvas>
+                  </div>
+              </div><!-- chartbar5 // CHART DASHBOARD -->
+              
+              <div class="ht-40"></div>
+              
+              <div class="az-footer mg-t-auto">
+                  <div class="container">
+                      <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">
+                          <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
+                      </span>
+                  </div><!-- container -->
+              </div><!-- az-footer -->
+          </div><!-- az-content-body -->
       </div><!-- container -->
-    </div><!-- az-content -->
+  </div><!-- az-content -->
+  
 
     <!-- FOOTER -->
     <%- include('partials/__foot.ejs') %>
