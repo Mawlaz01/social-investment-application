@@ -13,6 +13,22 @@ class Acara {
         });
     }
 
+    static async getAllByUserIdWithCreatorName(userId) {
+        return new Promise((resolve, reject) => {
+            const query = `
+                SELECT Acara.*, User.nama AS nama_pembuat
+                FROM Acara
+                JOIN User ON Acara.id_pembuat_acara = User.id_user
+                WHERE Acara.id_pembuat_acara = ?
+                ORDER BY Acara.id_acara DESC
+            `;
+            connection.query(query, [userId], (err, results) => {
+                if (err) reject(err);
+                else resolve(results);
+            });
+        });
+    }
+
     static async store(data) {
         return new Promise((resolve, reject) => {
             connection.query('INSERT INTO Acara SET ?', data, (err, result) => {
@@ -31,11 +47,12 @@ class Acara {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(rows[0]);
+                    resolve(rows.length ? rows[0] : null);
                 }
             });
         });
     }
+
 
     static async update(id, data) {
         return new Promise((resolve, reject) => {
@@ -51,11 +68,26 @@ class Acara {
 
     static async delete(id) {
         return new Promise((resolve, reject) => {
-            connection.query('DELETE FROM Acara WHERE id_acara = ?', [id], (err, result) => {
+            connection.query(`
+                SELECT COUNT(*) AS kontribusi_count
+                FROM Kontribusi
+                WHERE id_acara = ?
+            `, [id], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(result);
+                    const kontribusiCount = rows[0].kontribusi_count;
+                    if (kontribusiCount > 0) {
+                        reject(new Error('Acara tidak dapat dihapus karena masih ada kontribusi terkait.'));
+                    } else {
+                        connection.query('DELETE FROM Acara WHERE id_acara = ?', [id], (err, result) => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(result);
+                            }
+                        });
+                    }
                 }
             });
         });
@@ -102,6 +134,22 @@ class Acara {
         });
     });
     }
+
+static async isMoreThan7DaysOld(id) {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT DATEDIFF(NOW(), waktu_acara) AS days_old FROM Acara WHERE id_acara = ?', [id], (err, rows) => {
+            if (err) {
+                reject(err);
+            } else {
+                if (rows.length === 0) {
+                    reject(new Error("Acara tidak ditemukan"));
+                } else {
+                    resolve(rows[0].days_old > 7);
+                }
+            }
+        });
+    });
+}
 }
 
 module.exports = Acara;

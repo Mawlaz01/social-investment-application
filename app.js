@@ -6,12 +6,17 @@ var logger = require('morgan');
 var flash = require('connect-flash');
 var session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var superuserRouter = require('./routes/superuser/superuser');
-const dashboardRouter = require('./routes/user/dashboard');
-const acaraRouter = require('./routes/user/acara');
-const createAcaraRouter = require('./routes/user/createAcara');
-const profilRouter = require('./routes/user/profil');
+const indexRouter = require('./routes/index');
+const detailAcaraRoutes = require('./routes/user/detailAcara');
+const kontribusiUangRoutes = require('./routes/user/kontribusiUang');
+const kontribusiBarangRoutes = require('./routes/user/kontribusiBarang');
+const acaraRoutes = require('./routes/user/acara');
+const createAcaraRoutes = require('./routes/user/createAcara');
+const dashboardRoutes = require('./routes/user/dashboard');
+const detailInvestasiRoutes = require('./routes/user/detailInvestasi');
+const investasiRoutes = require('./routes/user/investasi');
+const profilRoutes = require('./routes/user/profil');
+const superuserRoutes = require('./routes/superuser/superuser');
 
 var app = express();
 
@@ -37,11 +42,16 @@ app.use(session({
 app.use(flash());
 
 app.use('/', indexRouter);
-app.use('/superuser', superuserRouter);
-app.use('/users/dashboard', dashboardRouter);
-app.use('/users/acara', acaraRouter);
-app.use('/users/create_acara', createAcaraRouter);
-app.use('/users/profile', profilRouter);
+app.use('/users/detail_acara', detailAcaraRoutes);
+app.use('/users/kontribusi_uang', kontribusiUangRoutes);
+app.use('/users/kontribusi_barang', kontribusiBarangRoutes);
+app.use('/users/acara', acaraRoutes);
+app.use('/users/create_acara', createAcaraRoutes);
+app.use('/users/dashboard', dashboardRoutes);
+app.use('/users/detail_investasi', detailInvestasiRoutes);
+app.use('/users/investasi', investasiRoutes);
+app.use('/users/profile', profilRoutes);
+app.use('/superuser', superuserRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
