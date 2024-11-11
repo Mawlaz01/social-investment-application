@@ -40,6 +40,15 @@ class User {
         });
     }
 
+    static async getByNIK(nik) {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM User WHERE NIK = ?', [nik], (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows[0]);
+            });
+        });
+    }
+
     static async update(id, data) {
         if (data.password) {
             data.password = await bcrypt.hash(data.password, 10);

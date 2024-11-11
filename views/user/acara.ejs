@@ -62,29 +62,32 @@
                 </nav>
                 <main class="content px-3 py-4">
                     <div class="container-fluid">
-                        <div class="mb-3">                    
+                        <div class="mb-3">
                             <div class="container mt-4">
                                 <a class="btn btn-primary mb-4" href="/users/create_acara" role="button">Buat Acara</a>
                                 <div class="row">
-                                    <% acara.forEach(event => { %>
-
-                                    <div class="col-md-4">
-                                        <div class="card acara-card">
-                                            <div class="card-header card-color-1">
-                                                <a href="/users/acara/<%= event.id_acara %>"><%= event.nama_acara %></a>
-                                                <p class="pemilik-info">Aqil Yoga Pramono</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p><span>Waktu Dimulai: </span><%= event.waktu_acara %></p>
-                                                <p><span>Waktu Selesai: </span><%= event.acara_selesai %></p>
-                                            </div>
+                                    <% if (acara.length === 0) { %>
+                                        <div class="col-12">
+                                            <p>Tidak ada acara yang ditemukan.</p>
                                         </div>
-                                    </div>
-
-                                    <% }) %>
+                                    <% } else { %>
+                                        <% acara.forEach(event => { %>
+                                            <div class="col-md-4">
+                                                <div class="card acara-card">
+                                                    <div class="card-header card-color-1">
+                                                        <a href="/users/detail_acara/<%= event.id_acara %>"><%= event.nama_acara %></a>
+                                                        <p class="pemilik-info"><%= event.nama_pembuat %></p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p><span>Waktu Dimulai: </span><%= new Date(event.waktu_acara).toLocaleString() %></p>
+                                                        <p><span>Waktu Selesai: </span><%= new Date(event.acara_selesai).toLocaleString() %></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% }) %>
+                                    <% } %>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </main>
@@ -96,4 +99,3 @@
         <script src="/js/script.js"></script>
     </body>
 </html>
-

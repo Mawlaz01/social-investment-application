@@ -1,104 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Detail Acara - Social Investment Application</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Acara</title>
+    <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/form_acara.css">
 </head>
+
 <body>
-    <header>
-        <h1>Detail Acara: <%= acara.nama_acara %></h1>
-        <nav>
-            <ul>
-                <li><a href="/users/dashboard">Dashboard</a></li>
-                <li><a href="/users/acara">Daftar Acara</a></li>
-                <li><a href="/logout">Logout</a></li>
+    <div class="wrapper">
+        <aside id="sidebar">
+            <div class="d-flex bottom_border py-1">
+                <button class="toggle-btn" type="button"><i class="lni lni-menu-hamburger-1"></i></button>
+                <div class="sidebar-logo">
+                    <img src="/images/user/logo_siap.png" alt="" style="width: 100px;">
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item"><a href="/users/dashboard" class="sidebar-link"><i class="lni lni-home-2"></i><span>Dashboard</span></a></li>
+                <li class="sidebar-item"><a href="/users/acara" class="sidebar-link"><i class="lni lni-calendar-days"></i><span>Acara</span></a></li>
+                <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="lni lni-bar-chart-4"></i><span>Investasi</span></a></li>
             </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>Kontribusi Uang</h2>
-            <% if (kontribusiUang.length > 0) { %>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Jumlah Uang</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% kontribusiUang.forEach(kontribusi => { %>
-                            <tr>
-                                <td><%= kontribusi.jumlah_uang %></td>
-                                <td>
-                                    <% if (isEditable) { %>
-                                        <form action="/users/acara/<%= acara.id_acara %>/delete_kontribusi/<%= kontribusi.id_kontribusi %>" method="post" style="display:inline;">
-                                            <button type="submit">Hapus</button>
-                                        </form>
-                                    <% } %>
-                                </td>
-                            </tr>
-                        <% }) %>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>Total</td>
-                            <td>
-                                <%= kontribusiUang.reduce((acc, val) => acc + parseFloat(val.jumlah_uang), 0) %>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-            <% } else { %>
-                <p>Tidak ada kontribusi uang.</p>
-            <% } %>
+        </aside>
 
-            <% if (isEditable) { %>
-                <form action="/users/kontribusi_uang/<%= acara.id_acara %>/create_kontribusi_uang" method="get">
-                    <button type="submit">Tambah Kontribusi Uang</button>
-                </form>
-            <% } %>
-        </section>
+        <div class="main">
+            <nav class="navbar navbar-expand px-4 py-3">
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="/images/user/account.png" class="avatar img-fluid" alt="">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end rounded">
+                                <a href="/user/profile" class="dropdown-item">Profile</a>
+                                <a href="/logout" class="dropdown-item">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-        <section>
-            <h2>Kontribusi Barang</h2>
-            <% if (kontribusiBarang.length > 0) { %>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Deskripsi Barang</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% kontribusiBarang.forEach(kontribusi => { %>
-                            <tr>
-                                <td><%= kontribusi.jumlah_barang %></td>
-                                <td>
-                                    <% if (isEditable) { %>
-                                        <form action="/users/acara/<%= acara.id_acara %>/delete_kontribusi/<%= kontribusi.id_kontribusi %>" method="post" style="display:inline;">
-                                            <button type="submit">Hapus</button>
-                                        </form>
-                                    <% } %>
-                                </td>
-                            </tr>
-                        <% }) %>
-                    </tbody>
-                </table>
-            <% } else { %>
-                <p>Tidak ada kontribusi barang.</p>
-            <% } %>
+            <main class="content px-3 py-4">
+                <div class="container-fluid">
+                    <div class="mb-3">
+                        <h1>Detail Acara</h1>
+                        <div class="acara-detail">
+                            <p><strong>Nama Acara:</strong> <%= acara.nama_acara %></p>
+                            <p><strong>Waktu Acara:</strong> <%= new Date(acara.waktu_acara).toLocaleString() %></p>
+                            <p><strong>Acara Selesai:</strong> <%= new Date(acara.acara_selesai).toLocaleString() %></p>
+                            <p><strong>Lokasi Acara:</strong> <%= acara.lokasi_acara %></p>
+                            <p><strong>Keterangan:</strong> <%= acara.keterangan %></p>
+                            <p><strong>Informasi Kontak:</strong> <%= acara.informasi_kontak %></p>
+                        </div>
 
-            <% if (isEditable) { %>
-                <form action="/users/kontribusi_barang/<%= acara.id_acara %>/create_kontribusi_barang" method="get">
-                    <button type="submit">Tambah Kontribusi Barang</button>
-                </form>
-            <% } %>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Social Investment Application. All Rights Reserved.</p>
-    </footer>
+                        <div class="d-flex justify-content-end mb-4">
+                            <a class="btn btn-warning me-2" href="/users/detail_acara/edit/<%= acara.id_acara %>">Edit Acara</a>
+                            <form action="/users/detail_acara/delete/<%= acara.id_acara %>" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Hapus Acara</button>
+                            </form>
+                        </div>
+
+                        <div class="mt-4">
+                            <h2>Kontribusi Uang</h2>
+                            <% if (!isMoreThan7DaysOld) { %>
+                                <a class="btn btn-primary mb-2" href="/users/kontribusi_uang?acaraId=<%= acara.id_acara %>">Tambah Kontribusi Uang</a>
+                            <% } %>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NIK</th>
+                                        <th>Nama Penyumbang</th>
+                                        <th>Tanggal Sumbangan</th>
+                                        <th>Tanggal Edit</th>
+                                        <th>Jumlah Uang</th>
+                                        <th>Status Validasi</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% kontribusiUang.forEach((item, index) => { %>
+                                        <tr>
+                                            <td><%= index + 1 %></td>
+                                            <td><%= item.nik %></td>
+                                            <td><%= item.nama_penyumbang %></td>
+                                            <td><%= new Date(item.tanggal_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) %></td>
+                                            <td><%= item.tanggal_edit_sumbangan ? new Date(item.tanggal_edit_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) : '-' %></td>
+                                            <td><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(item.jumlah_uang) %></td>
+                                            <td><%= item.status_validasi %></td>
+                                            <td>
+                                                <% if (!isMoreThan7DaysOld && item.status_validasi !== 'valid') { %>
+                                                    <a href="/users/kontribusi_uang/edit/<%= item.id_kontribusi_uang %>" class="btn btn-warning btn-sm">Edit</a>
+                                                    <form action="/users/kontribusi_uang/delete/<%= item.id_kontribusi %>" method="POST" style="display:inline;">
+                                                        <input type="hidden" name="id_acara" value="<%= acara.id_acara %>">
+                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                    </form>
+                                                <% } %>
+                                                <% if (item.status_validasi === 'tidak valid') { %>
+                                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal<%= item.id_kontribusi %>">Tidak Valid</button>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                        <div class="modal fade" id="reportModal<%= item.id_kontribusi %>" tabindex="-1" aria-labelledby="reportModalLabel<%= item.id_kontribusi %>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="reportModalLabel<%= item.id_kontribusi %>">Laporan Kontribusi Tidak Valid</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="/users/detail_acara/lapor" method="POST">
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
+                                                            <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
+                                                            <div class="mb-3">
+                                                                <label for="laporan" class="form-label">Laporan</label>
+                                                                <textarea class="form-control" id="laporan" name="laporan" required></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                            <button type="submit" class="btn btn-danger">Laporkan</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                            <p><strong>Total Uang:</strong> <%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(totalUang) %></p>
+                        </div>
+                        <div class="mt-4">
+                            <h2>Kontribusi Barang</h2>
+                            <% if (!isMoreThan7DaysOld) { %>
+                                <a class="btn btn-primary mb-2" href="/users/kontribusi_barang?acaraId=<%= acara.id_acara %>">Tambah Kontribusi Barang</a>
+                            <% } %>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NIK</th>
+                                        <th>Nama Penyumbang</th>
+                                        <th>Tanggal Sumbangan</th>
+                                        <th>Tanggal Edit</th>
+                                        <th>Nama Barang</th>
+                                        <th>Jumlah Barang</th>
+                                        <th>Status Validasi</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% kontribusiBarang.forEach((item, index) => { %>
+                                        <tr>
+                                            <td><%= index + 1 %></td>
+                                            <td><%= item.nik %></td>
+                                            <td><%= item.nama_penyumbang %></td>
+                                            <td><%= new Date(item.tanggal_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) %></td>
+                                            <td><%= item.tanggal_edit_sumbangan ? new Date(item.tanggal_edit_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) : '-' %></td>
+                                            <td><%= item.nama_barang %></td>
+                                            <td><%= item.jumlah_barang %></td>
+                                            <td><%= item.status_validasi %></td>
+                                            <td>
+                                                <% if (!isMoreThan7DaysOld && item.status_validasi !== 'valid') { %>
+                                                    <a href="/users/kontribusi_barang/edit/<%= item.id_kontribusi_barang %>" class="btn btn-warning btn-sm">Edit</a>
+                                                    <form action="/users/kontribusi_barang/delete/<%= item.id_kontribusi %>" method="POST" style="display:inline;">
+                                                        <input type="hidden" name="id_acara" value="<%= acara.id_acara %>">
+                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                    </form>
+                                                <% } %>
+                                                <% if (item.status_validasi === 'tidak valid') { %>
+                                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#reportModalBarang<%= item.id_kontribusi %>">Tidak Valid</button>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                        <div class="modal fade" id="reportModalBarang<%= item.id_kontribusi %>" tabindex="-1" aria-labelledby="reportModalBarangLabel<%= item.id_kontribusi %>" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="reportModalBarangLabel<%= item.id_kontribusi %>">Laporan Kontribusi Barang Tidak Valid</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="/users/detail_acara/lapor" method="POST">
+                                                        <div class="modal-body">
+                                                            <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
+                                                            <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
+                                                            <div class="mb-3">
+                                                                <label for="laporanBarang" class="form-label">Laporan</label>
+                                                                <textarea class="form-control" id="laporanBarang" name="laporan" required></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                            <button type="submit" class="btn btn-danger">Laporkan</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qV/U5NpHxxC/DHhr23LZEMVZLIL0A5hr3WCE3N8l6M0DBZWwBfJ4pvMboZe1QssM" crossorigin="anonymous"></script>
+    <script src="/javascripts/script.js"></script>
 </body>
+
 </html>
