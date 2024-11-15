@@ -14,37 +14,7 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex bottom_border py-1">
-                <button class="toggle-btn" type="button"><i class="lni lni-menu-hamburger-1"></i></button>
-                <div class="sidebar-logo">
-                    <img src="/images/user/logo_siap.png" alt="" style="width: 100px;">
-                </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item"><a href="/users/dashboard" class="sidebar-link"><i class="lni lni-home-2"></i><span>Dashboard</span></a></li>
-                <li class="sidebar-item"><a href="/users/acara" class="sidebar-link"><i class="lni lni-calendar-days"></i><span>Acara</span></a></li>
-                <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="lni lni-bar-chart-4"></i><span>Investasi</span></a></li>
-            </ul>
-        </aside>
-
-        <div class="main">
-            <nav class="navbar navbar-expand px-4 py-3">
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="/images/user/account.png" class="avatar img-fluid" alt="">
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end rounded">
-                                <a href="/user/profile" class="dropdown-item">Profile</a>
-                                <a href="/logout" class="dropdown-item">Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    <%- include('partials/__nav_sidebar') %>
 
             <main class="content px-3 py-4">
                 <div class="container-fluid">
@@ -213,8 +183,10 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qV/U5NpHxxC/DHhr23LZEMVZLIL0A5hr3WCE3N8l6M0DBZWwBfJ4pvMboZe1QssM" crossorigin="anonymous"></script>
-    <script src="/javascripts/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <script src="/js/script.js"></script>
 </body>
 
 </html>

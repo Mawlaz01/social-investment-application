@@ -1,0 +1,69 @@
+.frm-profile{
+    background-color: white;
+    padding: 2.5rem !important;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    width: 70%;
+}.frm-profile .form-control {
+    border-color: #37B7C3;
+}.frm-profile .form-control::placeholder {
+    color: #37B7C3;
+}
+.frm_layout{
+    color: #071952;
+}
+
+input[type="datetime-local"]::placeholder {
+    color: #37B7C3; /* Ubah warna placeholder */
+}
+
+/* Mengubah teks dalam input */
+input[type="datetime-local"]::-webkit-datetime-edit {
+    color: #37B7C3; /* Ubah warna teks pada input datetime */
+}
+.frm-profile h4 {
+    font-weight: bold; /* Membuat teks menjadi bold */
+    color: #10266f;    /* Mengubah warna teks menjadi #071952 */
+}
+
+.btn-primary {
+    background-color: #37B7C3;  /* Ubah warna background */
+    border-radius: 20px;
+    border-color: #ffffff;      /* Ubah warna border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary:hover {
+    background-color: #2b9f9d; /* Ubah warna tombol saat hover */
+    border-color: #2b9f9d;      /* Ubah warna border saat hover */
+}
+
+.profile-photo-label {
+    display: inline-block;
+    width: 80px;
+    height: 80px; /* Ukuran lingkaran foto */
+    position: relative;
+}
+
+#photoPreview {
+    width: 100px; /* ukuran lingkaran */
+    height: 100px; /* ukuran lingkaran */
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #37B7C3;
+    background-color: #ffffff;
+    cursor: pointer;
+    color: rgb(121, 121, 121);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+}
+
+#photoPreview:hover {
+    background-color: #EBF4F6;
+}
+
+.line-divider {
+    border-top: 2px solid #37B7C3;  
+    margin-top: 20px;
+    margin-bottom: 10px;  
+}
+

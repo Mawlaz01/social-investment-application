@@ -1,43 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profil Pengguna</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    <h1>Profil Pengguna</h1>
-    <div class="profile-container">
-        <img src="../images/user/<%= user.foto %>" alt="Foto Profil" class="profile-picture">
-        <form action="/users/profile/update" method="POST" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="nama">Nama:</label>
-                <input type="text" id="nama" name="nama" value="<%= user.nama %>" required>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sidebar With Bootstrap</title>
+        <link href="https://cdn.lineicons.com/5.0/lineicons.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/acara.css">
+        <link rel="stylesheet" href="/stylesheets/profile.css">
+    </head>
+
+    <body>
+        <%- include('partials/__nav_sidebar') %>
+                <main class="content px-3 py-4">
+                    <div class="container-fluid">
+                        <div class="mb-3">
+                            <div class="container-fluid frm-profile">
+                                <h4 class="mb-3">EDIT PROFILE</h4>
+                                <form class="needs-validation" action="/users/profile/update" method="POST" enctype="multipart/form-data" novalidate>
+                                    <div class="row g-3 frm_layout">
+                
+                                        <!-- Upload Photo Section -->
+                                        <div class="col-12 text-center position-relative mt-2 mb-2">
+                                            <label for="uploadPhoto" class="profile-photo-label">
+                                                <img id="photoPreview" class="rounded-circle" 
+                                                    src="../images/user/<%= user.foto %>" 
+                                                    alt="Foto Profil">
+                                            </label>
+                                            <input type="file" class="form-control d-none" id="uploadPhoto" name="foto" accept="image/*" onchange="previewImage(event)">
+                                        </div>
+                
+                                        <!-- Nama Input -->
+                                        <div class="col-12">
+                                            <label for="name" class="form-label">Nama</label>
+                                            <input type="text" class="form-control" id="name" name="nama" value="<%= user.nama %>" placeholder="Masukkan Nama" required>
+                                        </div>
+                
+                                        <!-- NIK Input -->
+                                        <div class="col-12">
+                                            <label for="nik" class="form-label">NIK</label>
+                                            <input type="text" class="form-control" id="nik" name="NIK" value="<%= user.NIK %>" placeholder="Masukkan NIK" required>
+                                        </div>
+                
+                                        <!-- Nomor WhatsApp Input -->
+                                        <div class="col-12">
+                                            <label for="whatsappNumber" class="form-label">Nomor WhatsApp</label>
+                                            <input type="text" class="form-control" id="whatsappNumber" name="no_wa" value="<%= user.no_wa %>" placeholder="Masukkan Nomor WhatsApp" required>
+                                        </div>
+                
+                                        <!-- Email Input -->
+                                        <div class="col-12">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" placeholder="Masukkan Email" required>
+                                        </div>
+                
+                                        <!-- Password Input -->
+                                        <div class="col-12">
+                                            <label for="password" class="form-label">Kata Sandi Baru</label>
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Kata Sandi">
+                                            <small>Isi untuk mengubah kata sandi.</small>
+                                        </div>
+                                        
+                                        <!-- Submit Button -->
+                                        <div class="line-divider"></div>
+                                        <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">Simpan</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+        
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<%= user.email %>" required>
-            </div>
-            <div class="form-group">
-                <label for="NIK">NIK:</label>
-                <input type="text" id="NIK" name="NIK" value="<%= user.NIK %>" required>
-            </div>
-            <div class="form-group">
-                <label for="no_wa">Nomor WhatsApp:</label>
-                <input type="text" id="no_wa" name="no_wa" value="<%= user.no_wa %>" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Kata Sandi Baru:</label>
-                <input type="password" id="password" name="password">
-                <small>Isi untuk mengubah kata sandi.</small>
-            </div>
-            <div class="form-group">
-                <label for="foto">Foto Profil:</label>
-                <input type="file" id="foto" name="foto">
-            </div>
-            <button type="submit">Simpan Perubahan</button>
-        </form>
-    </div>
-    <a href="/user/dashboard">Kembali ke Dashboard</a>
-</body>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <script src="/js/script.js"></script>
+    </body>
+
 </html>
