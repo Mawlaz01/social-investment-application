@@ -1,7 +1,7 @@
 $(function(){
   'use strict';
 
-/* BAR CHART PERBANDINGAN DB */
+/* BAR CHART PERBANDINGAN */
 const chartBarElement = document.getElementById('chartBar5');
 if (chartBarElement) {
     const labels = JSON.parse(chartBarElement.getAttribute('data-labels'));
@@ -24,8 +24,22 @@ if (chartBarElement) {
             maintainAspectRatio: false,
             legend: { display: false },
             scales: {
-                xAxes: [{ ticks: { beginAtZero: true, fontSize: 11 } }],
-                yAxes: [{ ticks: { beginAtZero: true, fontSize: 11, max: 10 } }]
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        fontSize: 10,
+                        max: 10
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        fontSize: 11,
+                        autoSkip: false,
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
+                }]
             }
         }
     });
