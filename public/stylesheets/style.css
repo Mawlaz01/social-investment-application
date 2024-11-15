@@ -81,6 +81,10 @@ body {
 #sidebar.expand a.sidebar-link span {
     animation: fadeIn .25s ease;
 }
+.avatar{
+    border-radius: 50%;
+    overflow: hidden;
+}
 
 
 @keyframes fadeIn {
@@ -183,7 +187,21 @@ a.sidebar-link:hover {
     margin: 0 !important;
 }
 
+@media (max-width: 768px) {
+    #sidebar {
+        position: fixed;
+        height: 100%;
+        z-index: 999; 
+    }
 
 
+    #sidebar.expand {
+        transform: translateX(0);
+        opacity: 1;
+    }
 
-@media (min-width: 768px) {}
+
+    .main {
+        margin-left: 55px;
+    }
+}

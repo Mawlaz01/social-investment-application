@@ -29,12 +29,8 @@ router.get('/', async function(req, res, next) {
     }
 });
 
-router.get('/register', function(req, res) {
-    res.render('auth/register');
-});
-
 router.get('/login', function(req, res) {
-    res.render('auth/login');
+    res.render('auth/login_register');
 });
 
 router.get('/register_superuser', function(req, res) {
