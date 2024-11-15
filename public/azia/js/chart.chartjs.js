@@ -1,7 +1,7 @@
 $(function(){
   'use strict';
 
-/* BAR CHART PERBANDINGAN DB */
+/* BAR CHART PERBANDINGAN */
 const chartBarElement = document.getElementById('chartBar5');
 if (chartBarElement) {
     const labels = JSON.parse(chartBarElement.getAttribute('data-labels'));
