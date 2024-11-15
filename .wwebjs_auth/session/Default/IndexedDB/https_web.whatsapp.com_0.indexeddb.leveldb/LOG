@@ -1,0 +1,39 @@
+2024/11/15-21:50:46.485 35dc Reusing MANIFEST C:\Users\Mawla\Downloads\social-investment-application\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/11/15-21:50:46.490 35dc Recovering log #1115
+2024/11/15-21:50:46.526 35dc Reusing old log C:\Users\Mawla\Downloads\social-investment-application\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/001115.log 
+2024/11/15-21:50:46.527 35dc Delete type=2 #1105
+2024/11/15-21:50:46.527 35dc Delete type=2 #1106
+2024/11/15-21:50:46.527 35dc Delete type=2 #1107
+2024/11/15-21:50:46.527 35dc Delete type=2 #1108
+2024/11/15-21:50:46.527 35dc Delete type=2 #1109
+2024/11/15-21:50:46.527 35dc Delete type=2 #1110
+2024/11/15-21:50:46.527 35dc Delete type=2 #1111
+2024/11/15-21:50:46.528 35dc Delete type=2 #1112
+2024/11/15-21:50:46.528 35dc Delete type=2 #1113
+2024/11/15-21:50:46.528 35dc Delete type=2 #1116
+2024/11/15-21:50:49.766 1764 Level-0 table #1128: started
+2024/11/15-21:50:49.845 1764 Level-0 table #1128: 95756 bytes OK
+2024/11/15-21:50:49.849 1764 Delete type=0 #1115
+2024/11/15-21:50:49.850 1764 Manual compaction at level-0 from '\x00(\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00)\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/11/15-21:50:50.192 36a4 Compacting 1@1 + 9@2 files
+2024/11/15-21:50:50.950 36a4 Generated table #1129@1: 85103 keys, 2234526 bytes
+2024/11/15-21:50:51.492 36a4 Generated table #1130@1: 71169 keys, 2255059 bytes
+2024/11/15-21:50:51.924 36a4 Generated table #1131@1: 45449 keys, 2207339 bytes
+2024/11/15-21:50:52.172 36a4 Generated table #1132@1: 17875 keys, 2162872 bytes
+2024/11/15-21:50:52.507 36a4 Generated table #1133@1: 7352 keys, 2167589 bytes
+2024/11/15-21:50:53.044 36a4 Generated table #1134@1: 24011 keys, 2273967 bytes
+2024/11/15-21:50:53.431 36a4 Generated table #1135@1: 19646 keys, 2163724 bytes
+2024/11/15-21:50:54.374 36a4 Generated table #1136@1: 40995 keys, 2179032 bytes
+2024/11/15-21:50:54.883 36a4 Generated table #1137@1: 69735 keys, 1448458 bytes
+2024/11/15-21:50:54.883 36a4 Compacted 1@1 + 9@2 files => 19092566 bytes
+2024/11/15-21:50:54.886 36a4 compacted to: files[ 0 0 9 0 0 0 0 ]
+2024/11/15-21:50:54.888 36a4 Delete type=2 #1117
+2024/11/15-21:50:54.888 36a4 Delete type=2 #1118
+2024/11/15-21:50:54.888 36a4 Delete type=2 #1119
+2024/11/15-21:50:54.889 36a4 Delete type=2 #1120
+2024/11/15-21:50:54.889 36a4 Delete type=2 #1121
+2024/11/15-21:50:54.889 36a4 Delete type=2 #1122
+2024/11/15-21:50:54.889 36a4 Delete type=2 #1123
+2024/11/15-21:50:54.889 36a4 Delete type=2 #1124
+2024/11/15-21:50:54.889 36a4 Delete type=2 #1125
+2024/11/15-21:50:54.889 36a4 Delete type=2 #1128

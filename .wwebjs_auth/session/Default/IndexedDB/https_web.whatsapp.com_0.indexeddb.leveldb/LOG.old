@@ -1,0 +1,29 @@
+2024/11/15-21:50:14.540 1c3c Reusing MANIFEST C:\Users\Mawla\Downloads\social-investment-application\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/11/15-21:50:14.541 1c3c Recovering log #1103
+2024/11/15-21:50:14.711 1c3c Reusing old log C:\Users\Mawla\Downloads\social-investment-application\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/001103.log 
+2024/11/15-21:50:14.714 1c3c Delete type=2 #1093
+2024/11/15-21:50:14.714 1c3c Delete type=2 #1094
+2024/11/15-21:50:14.714 1c3c Delete type=2 #1095
+2024/11/15-21:50:14.714 1c3c Delete type=2 #1096
+2024/11/15-21:50:14.714 1c3c Delete type=2 #1097
+2024/11/15-21:50:14.714 1c3c Delete type=2 #1098
+2024/11/15-21:50:14.714 1c3c Delete type=2 #1099
+2024/11/15-21:50:14.715 1c3c Delete type=2 #1100
+2024/11/15-21:50:14.715 1c3c Delete type=2 #1101
+2024/11/15-21:50:14.715 1c3c Delete type=2 #1104
+2024/11/15-21:50:20.735 78 Level-0 table #1116: started
+2024/11/15-21:50:20.853 78 Level-0 table #1116: 315709 bytes OK
+2024/11/15-21:50:20.858 78 Delete type=0 #1103
+2024/11/15-21:50:20.859 78 Manual compaction at level-0 from '\x00'\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00(\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/11/15-21:50:21.219 3408 Compacting 1@1 + 9@2 files
+2024/11/15-21:50:21.962 3408 Generated table #1117@1: 85076 keys, 2233209 bytes
+2024/11/15-21:50:22.784 3408 Generated table #1118@1: 70924 keys, 2254014 bytes
+2024/11/15-21:50:23.342 3408 Generated table #1119@1: 45545 keys, 2207163 bytes
+2024/11/15-21:50:23.569 3408 Generated table #1120@1: 17772 keys, 2172515 bytes
+2024/11/15-21:50:24.438 3408 Generated table #1121@1: 7456 keys, 2168008 bytes
+2024/11/15-21:50:24.787 3408 Generated table #1122@1: 24012 keys, 2273835 bytes
+2024/11/15-21:50:25.055 3408 Generated table #1123@1: 19558 keys, 2163561 bytes
+2024/11/15-21:50:25.382 3408 Generated table #1124@1: 41254 keys, 2180200 bytes
+2024/11/15-21:50:25.763 3408 Generated table #1125@1: 69488 keys, 1442768 bytes
+2024/11/15-21:50:25.763 3408 Compacted 1@1 + 9@2 files => 19095273 bytes
+2024/11/15-21:50:25.772 3408 compacted to: files[ 0 0 9 0 0 0 0 ]
