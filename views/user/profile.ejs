@@ -16,65 +16,64 @@
 
     <body>
         <%- include('partials/__nav_sidebar') %>
-                <main class="content px-3 py-4">
+                <main class="content">
                     <div class="container-fluid">
-                        <div class="mb-3">
-                            <div class="container-fluid frm-profile">
-                                <h4 class="mb-3">EDIT PROFILE</h4>
-                                <form class="needs-validation" action="/users/profile/update" method="POST" enctype="multipart/form-data" novalidate>
-                                    <div class="row g-3 frm_layout">
-                
-                                        <!-- Upload Photo Section -->
-                                        <div class="col-12 text-center position-relative mt-2 mb-2">
-                                            <label for="uploadPhoto" class="profile-photo-label">
-                                                <img id="photoPreview" class="rounded-circle" 
-                                                    src="../images/user/<%= user.foto %>" 
-                                                    alt="Foto Profil">
-                                            </label>
-                                            <input type="file" class="form-control d-none" id="uploadPhoto" name="foto" accept="image/*" onchange="previewImage(event)">
-                                        </div>
-                
-                                        <!-- Nama Input -->
-                                        <div class="col-12">
-                                            <label for="name" class="form-label">Nama</label>
-                                            <input type="text" class="form-control" id="name" name="nama" value="<%= user.nama %>" placeholder="Masukkan Nama" required>
-                                        </div>
-                
-                                        <!-- NIK Input -->
-                                        <div class="col-12">
-                                            <label for="nik" class="form-label">NIK</label>
-                                            <input type="text" class="form-control" id="nik" name="NIK" value="<%= user.NIK %>" placeholder="Masukkan NIK" required>
-                                        </div>
-                
-                                        <!-- Nomor WhatsApp Input -->
-                                        <div class="col-12">
-                                            <label for="whatsappNumber" class="form-label">Nomor WhatsApp</label>
-                                            <input type="text" class="form-control" id="whatsappNumber" name="no_wa" value="<%= user.no_wa %>" placeholder="Masukkan Nomor WhatsApp" required>
-                                        </div>
-                
-                                        <!-- Email Input -->
-                                        <div class="col-12">
-                                            <label for="email" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" placeholder="Masukkan Email" required>
-                                        </div>
-                
-                                        <!-- Password Input -->
-                                        <div class="col-12">
-                                            <label for="password" class="form-label">Kata Sandi Baru</label>
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Kata Sandi">
-                                            <small>Isi untuk mengubah kata sandi.</small>
-                                        </div>
-                                        
-                                        <!-- Submit Button -->
-                                        <div class="line-divider"></div>
-                                        <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">Simpan</button>
+
+                        <div class="container-fluid frm-profile m">
+                            <h4 class="mb-3">EDIT PROFILE</h4>
+                            <form class="needs-validation" action="/users/profile/update" method="POST" enctype="multipart/form-data" novalidate>
+                                <div class="row g-3 frm_layout">
+            
+                                    <!-- Upload Photo Section -->
+                                    <div class="col-12 text-center position-relative mt-2 mb-2">
+                                        <label for="uploadPhoto" class="profile-photo-label">
+                                            <img id="photoPreview" class="rounded-circle" 
+                                                src="../images/user/<%= user.foto %>" 
+                                                alt="Foto Profil">
+                                        </label>
+                                        <input type="file" class="form-control d-none" id="uploadPhoto" name="foto" accept="image/*" onchange="previewImage(event)">
                                     </div>
-                                </form>
-                            </div>
+            
+                                    <!-- Nama Input -->
+                                    <div class="col-12">
+                                        <label for="name" class="form-label">Nama</label>
+                                        <input type="text" class="form-control" id="name" name="nama" value="<%= user.nama %>" placeholder="Masukkan Nama" required>
+                                    </div>
+            
+                                    <!-- NIK Input -->
+                                    <div class="col-12">
+                                        <label for="nik" class="form-label">NIK</label>
+                                        <input type="text" class="form-control" id="nik" name="NIK" value="<%= user.NIK %>" placeholder="Masukkan NIK" required>
+                                    </div>
+            
+                                    <!-- Nomor WhatsApp Input -->
+                                    <div class="col-12">
+                                        <label for="whatsappNumber" class="form-label">Nomor WhatsApp</label>
+                                        <input type="text" class="form-control" id="whatsappNumber" name="no_wa" value="<%= user.no_wa %>" placeholder="Masukkan Nomor WhatsApp" required>
+                                    </div>
+            
+                                    <!-- Email Input -->
+                                    <div class="col-12">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" placeholder="Masukkan Email" required>
+                                    </div>
+            
+                                    <!-- Password Input -->
+                                    <div class="col-12">
+                                        <label for="password" class="form-label">Kata Sandi Baru</label>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Kata Sandi">
+                                        <small>Isi untuk mengubah kata sandi.</small>
+                                    </div>
+                                    
+                                    <!-- Submit Button -->
+                                    <div class="line-divider"></div>
+                                    <button class="w-100 btn btn-primary btn-lg mt-4" type="submit">Simpan</button>
+                                </div>
+                            </form>
                         </div>
+
                     </div>
                 </main>
-        
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

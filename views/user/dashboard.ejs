@@ -58,27 +58,29 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <% if (unvalidatedAcara.length === 0) { %>
-                                    <div class="col-12">
-                                        <p>Tidak ada acara yang perlu divalidasi.</p>
-                                    </div>
-                                <% } else { %>
-                                    <% unvalidatedAcara.forEach(event => { %>
-                                        <div class="col-md-4">
-                                            <div class="card acara-card">
-                                                <div class="card-header card-color-1">
-                                                    <a href="/users/detail_investasi/<%= event.id_acara %>"><%= event.nama_acara %></a>
-                                                    <p class="pemilik-info"><%= event.nama_pembuat %></p>
-                                                </div>
-                                                <div class="card-body">
-                                                    <p><span>Waktu Dimulai: </span><%= new Date(event.waktu_acara).toLocaleString() %></p>
-                                                    <p><span>Waktu Selesai: </span><%= new Date(event.acara_selesai).toLocaleString() %></p>
+                            <div class="row validasi-acara">
+                                <div class="row">
+                                    <% if (unvalidatedAcara.length === 0) { %>
+                                        <div class="col-12">
+                                            <p>Tidak ada acara yang perlu divalidasi.</p>
+                                        </div>
+                                    <% } else { %>
+                                        <% unvalidatedAcara.forEach(event => { %>
+                                            <div class="col-md-4">
+                                                <div class="card acara-card">
+                                                    <div class="card-header card-color-1">
+                                                        <a href="/users/detail_investasi/<%= event.id_acara %>"><%= event.nama_acara %></a>
+                                                        <p class="pemilik-info"><%= event.nama_pembuat %></p>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p><span>Waktu Dimulai: </span><%= new Date(event.waktu_acara).toLocaleString() %></p>
+                                                        <p><span>Waktu Selesai: </span><%= new Date(event.acara_selesai).toLocaleString() %></p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    <% }) %>
-                                <% } %>
+                                        <% }) %>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
                     </div>
