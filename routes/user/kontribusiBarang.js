@@ -5,6 +5,18 @@ const Kontribusi = require('../../models/Kontribusi');
 const Acara = require('../../models/Acara');
 const User = require('../../models/User');
 const NotificationService = require('../../services/notificationService');
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images/user/'); 
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
 
 const auth = async (req, res, next) => {
     if (req.session.userId) {
@@ -16,12 +28,14 @@ const auth = async (req, res, next) => {
 
 router.get('/', auth, async (req, res) => {
     try {
-        const acaraId = req.query.acaraId; 
-        if (!acaraId) {
-            req.flash('error', 'ID acara tidak ditemukan');
-            return res.redirect('/users/detail_acara');
-        }
+        const acaraId = req.query.acaraId;
         const acara = await Acara.getById(acaraId);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk menambahkan kontribusi barang pada acara ini');
+            return res.redirect('/users/dashboard');
+        }
+
         res.render('user/create_kontribusi_barang', { acara });
     } catch (error) {
         console.error("Error:", error);
@@ -29,6 +43,7 @@ router.get('/', auth, async (req, res) => {
         res.redirect('/users/detail_acara');
     }
 });
+
 
 router.get('/search_nik', auth, async (req, res) => {
     try {
@@ -50,6 +65,13 @@ router.get('/search_nik', auth, async (req, res) => {
 router.post('/create', auth, async (req, res) => {
     try {
         const { nik, nama_barang, jumlah_barang, id_acara } = req.body;
+
+        const acara = await Acara.getById(id_acara);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk menambahkan kontribusi barang pada acara ini');
+            return res.redirect('/users/dashboard');
+        }
 
         const user = await User.getByNIK(nik);
         if (!user) {
@@ -91,12 +113,20 @@ router.post('/create', auth, async (req, res) => {
     }
 });
 
+
 router.get('/edit/:id', auth, async (req, res) => {
     try {
         const kontribusiBarangId = req.params.id;
         const kontribusiBarang = await KontribusiBarang.getById(kontribusiBarangId);
         const kontribusi = await Kontribusi.getById(kontribusiBarang.id_kontribusi);
-        kontribusiBarang.id_acara = kontribusi.id_acara; // Tambahkan id_acara ke objek kontribusiBarang
+        const acara = await Acara.getById(kontribusi.id_acara);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk mengedit kontribusi ini');
+            return res.redirect('/users/dashboard');
+        }
+
+        kontribusiBarang.id_acara = kontribusi.id_acara;
         res.render('user/edit_kontribusi_barang', { kontribusiBarang });
     } catch (error) {
         console.error("Error:", error);
@@ -105,10 +135,20 @@ router.get('/edit/:id', auth, async (req, res) => {
     }
 });
 
+
 router.post('/update/:id', auth, async (req, res) => {
     try {
         const kontribusiBarangId = req.params.id;
         const { nama_barang, jumlah_barang, id_acara } = req.body;
+
+        const kontribusiBarang = await KontribusiBarang.getById(kontribusiBarangId);
+        const kontribusi = await Kontribusi.getById(kontribusiBarang.id_kontribusi);
+        const acara = await Acara.getById(kontribusi.id_acara);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk mengupdate kontribusi ini');
+            return res.redirect('/users/dashboard');
+        }
 
         const isMoreThan7DaysOld = await Acara.isMoreThan7DaysOld(id_acara);
         if (isMoreThan7DaysOld) {
@@ -123,7 +163,10 @@ router.post('/update/:id', auth, async (req, res) => {
 
         await KontribusiBarang.update(kontribusiBarangId, data);
 
-        await Kontribusi.update(kontribusiBarang.id_kontribusi, { tanggal_edit_sumbangan: new Date() });
+        const updateData = { tanggal_edit_sumbangan: new Date() };
+        await Kontribusi.update(kontribusi.id_kontribusi, updateData);
+
+        await NotificationService.sendWhatsAppMessage(kontribusi.id_penyumbang, 'Kontribusi barang Anda telah diperbarui.');
 
         req.flash('success', 'Kontribusi barang berhasil diperbarui');
         res.redirect(`/users/detail_acara/${id_acara}`);

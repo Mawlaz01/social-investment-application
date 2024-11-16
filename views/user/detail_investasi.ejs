@@ -15,202 +15,158 @@
 
   <body>
     <%- include('partials/__nav_sidebar') %>
-        <main class="content px-3 py-4">
-            <div class="container-fluid">
-              <div class="mb-3">
-                <h1>Detail Investasi</h1>
-                <div class="acara-detail">
-                  <p><strong>Nama Acara:</strong> <%= acara.nama_acara %></p>
-                  <p><strong>Waktu Acara:</strong> <%= new Date(acara.waktu_acara).toLocaleString() %></p>
-                  <p><strong>Acara Selesai:</strong> <%= new Date(acara.acara_selesai).toLocaleString() %></p>
-                  <p><strong>Lokasi Acara:</strong> <%= acara.lokasi_acara %></p>
-                  <p><strong>Keterangan:</strong> <%= acara.keterangan %></p>
-                  <p><strong>Informasi Kontak:</strong> <%= acara.informasi_kontak %></p>
+    <main class="content px-3 py-4">
+      <div class="container-fluid">
+        <div class="mb-3">
+          <h1>Detail Investasi</h1>
+          <div class="acara-detail">
+            <p><strong>Nama Acara:</strong> <%= acara.nama_acara %></p>
+            <p><strong>Waktu Acara:</strong> <%= new Date(acara.waktu_acara).toLocaleString() %></p>
+            <p><strong>Acara Selesai:</strong> <%= new Date(acara.acara_selesai).toLocaleString() %></p>
+            <p><strong>Lokasi Acara:</strong> <%= acara.lokasi_acara %></p>
+            <p><strong>Keterangan:</strong> <%= acara.keterangan %></p>
+            <p><strong>Informasi Kontak:</strong> <%= acara.informasi_kontak %></p>
+          </div>
+          <div class="mt-4">
+            <h2>Kontribusi Uang</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <tr>
+                        <th>No</th>
+                        <th>NIK</th>
+                        <th>Nama Penyumbang</th>
+                        <th>No WA</th>
+                        <th>Tanggal Sumbangan</th>
+                        <th>Tanggal Edit</th>
+                        <th>Jumlah Uang</th>
+                        <th>Status Validasi</th>
+                        <th>Aksi</th>
+                    </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% kontribusiUang.forEach((item, index) => { %>
+                    <tr>
+                      <td><%= index + 1 %></td>
+                      <td><%= item.NIK %></td>
+                      <td><%= item.nama_penyumbang %></td>
+                      <td><%= item.no_wa %></td>
+                      <td><%= item.tanggal_sumbangan %></td>
+                      <td><%= item.tanggal_edit_sumbangan ? item.tanggal_edit_sumbangan : '-' %></td>
+                      <td><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(item.jumlah_uang) %></td>
+                      <td><%= item.status_validasi %></td>
+                        <td>
+                            <% if (item.status_validasi === 'belum divalidasi') { %>
+                            <form class="d-inline" method="post" action="/users/detail_investasi/validate">
+                                <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
+                                <input type="hidden" name="jenis_kontribusi" value="uang">
+                                <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
+                                <button type="submit" class="btn btn-success">Yes</button>
+                            </form>
+                            <button class="btn btn-danger btn-lapor" data-id="<%= item.id_kontribusi %>" data-acara="<%= acara.id_acara %>" data-type="uang">No</button>
+                            <% } %>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mt-4">
+            <h2>Kontribusi Barang</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>NIK</th>
+                      <th>Nama Penyumbang</th>
+                      <th>No WA</th>
+                      <th>Tanggal Sumbangan</th>
+                      <th>Tanggal Edit</th>
+                      <th>Nama Barang</th>
+                      <th>Jumlah Barang</th>
+                      <th>Status Validasi</th>
+                      <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% kontribusiBarang.forEach((item, index) => { %>
+                    <tr>
+                      <td><%= index + 1 %></td>
+                      <td><%= item.NIK %></td>
+                      <td><%= item.nama_penyumbang %></td>
+                      <td><%= item.no_wa %></td>
+                      <td><%= item.tanggal_sumbangan %></td>
+                      <td><%= item.tanggal_edit_sumbangan ? item.tanggal_edit_sumbangan : '-' %></td>
+                      <td><%= item.nama_barang %></td>
+                      <td><%= item.jumlah_barang %></td>
+                      <td><%= item.status_validasi %></td>
+                        <td>
+                            <% if (item.status_validasi === 'belum divalidasi') { %>
+                            <form class="d-inline" method="post" action="/users/detail_investasi/validate">
+                                <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
+                                <input type="hidden" name="jenis_kontribusi" value="barang">
+                                <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
+                                <button type="submit" class="btn btn-success">Yes</button>
+                            </form>
+                            <button class="btn btn-danger btn-lapor" data-id="<%= item.id_kontribusi %>" data-acara="<%= acara.id_acara %>" data-type="barang">No</button>
+                            <% } %>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportModalLabel">Laporan Kontribusi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form id="reportForm" method="post" action="/users/detail_investasi/lapor">
+                        <div class="modal-body">
+                            <input type="hidden" name="id_kontribusi" id="reportIdKontribusi">
+                            <input type="hidden" name="acaraId" id="reportAcaraId">
+                            <input type="hidden" name="jenis_kontribusi" id="reportJenisKontribusi">
+                            <div class="mb-3">
+                                <label for="laporan" class="form-label">Laporan</label>
+                                <textarea class="form-control" id="laporan" name="laporan" rows="4" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Kirim Laporan</button>
+                        </div>
+                    </form>
                 </div>
-          
-                <!-- Kontribusi Uang -->
-                <div class="mt-4">
-                    <h2>Kontribusi Uang</h2>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>NIK</th>
-                          <th>Nama Penyumbang</th>
-                          <th>Tanggal Sumbangan</th>
-                          <th>Tanggal Edit</th>
-                          <th>Jumlah Uang</th>
-                          <th>Status Validasi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% kontribusiUang.forEach((item, index) => { %>
-                          <tr>
-                            <td><%= index + 1 %></td>
-                            <td><%= item.NIK %></td>
-                            <td><%= item.nama_penyumbang %></td>
-                            <td><%= new Date(item.tanggal_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) %></td>
-                            <td>
-                              <%= item.tanggal_edit_sumbangan ? new Date(item.tanggal_edit_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) : '-' %>
-                            </td>
-                            <td><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(item.jumlah_uang) %></td>
-                            <td>
-                              <%= item.status_validasi === 'belum divalidasi' ? `
-                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#validateModalUang${item.id_kontribusi}">Yes</button>
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#reportModalUang${item.id_kontribusi}">No</button>
-                              ` : item.status_validasi %>
-                            </td>
-                          </tr>
-                  
-                          <!-- Modal Validate Kontribusi Uang -->
-                          <div class="modal fade" id="validateModalUang<%= item.id_kontribusi %>" tabindex="-1" aria-labelledby="validateModalUangLabel<%= item.id_kontribusi %>" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="validateModalUangLabel<%= item.id_kontribusi %>">Validasi Kontribusi Uang</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form action="/users/detail_investasi/validate" method="POST">
-                                  <div class="modal-body">
-                                    <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
-                                    <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
-                                    <p>Apakah Anda yakin ingin memvalidasi kontribusi uang ini?</p>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="submit" class="btn btn-success">Validasi</button>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                  
-                          <!-- Modal Report Kontribusi Uang -->
-                          <div class="modal fade" id="reportModalUang<%= item.id_kontribusi %>" tabindex="-1" aria-labelledby="reportModalUangLabel<%= item.id_kontribusi %>" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="reportModalUangLabel<%= item.id_kontribusi %>">Laporan Kontribusi Uang Tidak Valid</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form action="/users/detail_investasi/lapor" method="POST">
-                                  <div class="modal-body">
-                                    <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
-                                    <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
-                                    <div class="mb-3">
-                                      <label for="laporanUang" class="form-label">Laporan</label>
-                                      <textarea class="form-control" id="laporanUang" name="laporan" required></textarea>
-                                    </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="submit" class="btn btn-danger">Laporkan</button>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        <% }); %>
-                      </tbody>
-                    </table>
-                  </div>
-                  
-                  <div class="mt-4">
-                    <h2>Kontribusi Barang</h2>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>NIK</th>
-                          <th>Nama Penyumbang</th>
-                          <th>Tanggal Sumbangan</th>
-                          <th>Tanggal Edit</th>
-                          <th>Nama Barang</th>
-                          <th>Jumlah Barang</th>
-                          <th>Status Validasi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% kontribusiBarang.forEach((item, index) => { %>
-                          <tr>
-                            <td><%= index + 1 %></td>
-                            <td><%= item.NIK %></td>
-                            <td><%= item.nama_penyumbang %></td>
-                            <td><%= new Date(item.tanggal_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) %></td>
-                            <td>
-                              <%= item.tanggal_edit_sumbangan ? new Date(item.tanggal_edit_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' }) : '-' %>
-                            </td>
-                            <td><%= item.nama_barang %></td>
-                            <td><%= item.jumlah_barang %></td>
-                            <td>
-                              <%= item.status_validasi === 'belum divalidasi' ? `
-                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#validateModalBarang${item.id_kontribusi}">Yes</button>
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#reportModalBarang${item.id_kontribusi}">No</button>
-                              ` : item.status_validasi %>
-                            </td>
-                          </tr>
-                  
-                          <!-- Modal Validate Kontribusi Barang -->
-                          <div class="modal fade" id="validateModalBarang<%= item.id_kontribusi %>" tabindex="-1" aria-labelledby="validateModalBarangLabel<%= item.id_kontribusi %>" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="validateModalBarangLabel<%= item.id_kontribusi %>">Validasi Kontribusi Barang</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form action="/users/detail_investasi/validate" method="POST">
-                                  <div class="modal-body">
-                                    <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
-                                    <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
-                                    <p>Apakah Anda yakin ingin memvalidasi kontribusi barang ini?</p>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="submit" class="btn btn-success">Validasi</button>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                  
-                          <!-- Modal Report Kontribusi Barang -->
-                          <div class="modal fade" id="reportModalBarang<%= item.id_kontribusi %>" tabindex="-1" aria-labelledby="reportModalBarangLabel<%= item.id_kontribusi %>" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="reportModalBarangLabel<%= item.id_kontribusi %>">Laporan Kontribusi Barang Tidak Valid</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form action="/users/detail_investasi/lapor" method="POST">
-                                  <div class="modal-body">
-                                    <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
-                                    <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
-                                    <div class="mb-3">
-                                      <label for="laporanBarang" class="form-label">Laporan</label>
-                                      <textarea class="form-control" id="laporanBarang" name="laporan" required></textarea>
-                                    </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                    <button type="submit" class="btn btn-danger">Laporkan</button>
-                                  </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        <% }); %>
-                      </tbody>
-                    </table>
-                  </div>
-                  
-              </div>
             </div>
-          </main>
+        </div>
         </div>
       </div>
+    </main>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qV/U5NpHxxC/DHhr23LZEMVZLIL0A5hr3WCE3N8l6M0DBZWwBfJ4pvMboZe1QssM" crossorigin="anonymous"></script>
       <script src="/javascripts/script.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.btn-lapor').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id_kontribusi = button.getAttribute('data-id');
+                    const acaraId = button.getAttribute('data-acara');
+                    const jenis_kontribusi = button.getAttribute('data-type');
+    
+                    document.getElementById('reportIdKontribusi').value = id_kontribusi;
+                    document.getElementById('reportJenisKontribusi').value = jenis_kontribusi;
+                    document.getElementById('reportAcaraId').value = acaraId;
+    
+                    const reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
+                    reportModal.show();
+                });
+            });
+        });
+    </script>
   </body>
 </html>

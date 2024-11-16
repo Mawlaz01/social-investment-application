@@ -32,12 +32,12 @@
                                     
                                         <div class="col-sm-6">
                                             <label for="waktuAcara" class="form-label">Waktu Mulai</label>
-                                            <input type="datetime-local" class="form-control" id="waktuAcara" name="waktu_acara" value="<%= new Date(acara.waktu_acara).toISOString().slice(0, 16) %>" required>
+                                            <input type="datetime-local" class="form-control" id="waktuAcara" name="waktu_acara" value="<%= acara.waktu_acara %>" required>
                                         </div>
                                     
                                         <div class="col-sm-6">
                                             <label for="acaraSelesai" class="form-label">Waktu Selesai</label>
-                                            <input type="datetime-local" class="form-control" id="acaraSelesai" name="acara_selesai" value="<%= new Date(acara.acara_selesai).toISOString().slice(0, 16) %>" required>
+                                            <input type="datetime-local" class="form-control" id="acaraSelesai" name="acara_selesai" value="<%= acara.acara_selesai %>" required>
                                         </div>
                                     
                                         <div class="col-12">

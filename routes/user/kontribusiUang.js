@@ -5,6 +5,18 @@ const Kontribusi = require('../../models/Kontribusi');
 const Acara = require('../../models/Acara');
 const User = require('../../models/User');
 const NotificationService = require('../../services/notificationService');
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images/user/'); 
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
 
 const auth = async (req, res, next) => {
     if (req.session.userId) {
@@ -18,6 +30,12 @@ router.get('/', auth, async (req, res) => {
     try {
         const acaraId = req.query.acaraId;
         const acara = await Acara.getById(acaraId);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk menambahkan kontribusi uang pada acara ini');
+            return res.redirect('/users/dashboard');
+        }
+
         res.render('user/create_kontribusi_uang', { acara });
     } catch (error) {
         console.error("Error:", error);
@@ -45,8 +63,13 @@ router.get('/search_nik', auth, async (req, res) => {
 router.post('/create', auth, async (req, res) => {
     try {
         const { nik, jumlah_uang, id_acara } = req.body;
-        
-        console.log('Jumlah Uang Diterima:', jumlah_uang);
+
+        const acara = await Acara.getById(id_acara);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk menambahkan kontribusi uang pada acara ini');
+            return res.redirect('/users/dashboard');
+        }
 
         const user = await User.getByNIK(nik);
         if (!user) {
@@ -89,12 +112,20 @@ router.post('/create', auth, async (req, res) => {
     }
 });
 
+
 router.get('/edit/:id', auth, async (req, res) => {
     try {
-        const kontribusiId = req.params.id;
-        const kontribusiUang = await KontribusiUang.getById(kontribusiId);
-        const kontribusi = await Kontribusi.getById(kontribusiUang.id_kontribusi); // Ambil data kontribusi untuk mendapatkan id_acara
-        kontribusiUang.id_acara = kontribusi.id_acara; // Tambahkan id_acara ke objek kontribusiUang
+        const kontribusiUangId = req.params.id;
+        const kontribusiUang = await KontribusiUang.getById(kontribusiUangId);
+        const kontribusi = await Kontribusi.getById(kontribusiUang.id_kontribusi);
+        const acara = await Acara.getById(kontribusi.id_acara);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk mengedit kontribusi ini');
+            return res.redirect('/users/dashboard');
+        }
+
+        kontribusiUang.id_acara = kontribusi.id_acara;
         res.render('user/edit_kontribusi_uang', { kontribusiUang });
     } catch (error) {
         console.error("Error:", error);
@@ -103,10 +134,20 @@ router.get('/edit/:id', auth, async (req, res) => {
     }
 });
 
+
 router.post('/update/:id', auth, async (req, res) => {
     try {
-        const kontribusiId = req.params.id;
+        const kontribusiUangId = req.params.id;
         const { jumlah_uang, id_acara } = req.body;
+
+        const kontribusiUang = await KontribusiUang.getById(kontribusiUangId);
+        const kontribusi = await Kontribusi.getById(kontribusiUang.id_kontribusi);
+        const acara = await Acara.getById(kontribusi.id_acara);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk mengupdate kontribusi ini');
+            return res.redirect('/users/dashboard');
+        }
 
         const isMoreThan7DaysOld = await Acara.isMoreThan7DaysOld(id_acara);
         if (isMoreThan7DaysOld) {
@@ -120,9 +161,12 @@ router.post('/update/:id', auth, async (req, res) => {
             jumlah_uang: jumlahUangBersih
         };
 
-        await KontribusiUang.update(kontribusiId, data);
-        
-        await Kontribusi.update(kontribusiId, { tanggal_edit_sumbangan: new Date() });
+        await KontribusiUang.update(kontribusiUangId, data);
+
+        const updateData = { tanggal_edit_sumbangan: new Date() };
+        await Kontribusi.update(kontribusi.id_kontribusi, updateData);
+
+        await NotificationService.sendWhatsAppMessage(kontribusi.id_penyumbang, 'Kontribusi uang Anda telah diperbarui.');
 
         req.flash('success', 'Kontribusi uang berhasil diperbarui');
         res.redirect(`/users/detail_acara/${id_acara}`);
@@ -132,6 +176,7 @@ router.post('/update/:id', auth, async (req, res) => {
         res.redirect(`/users/detail_acara/${req.body.id_acara}`);
     }
 });
+
 
 router.post('/delete/:id', auth, async (req, res) => {
     try {

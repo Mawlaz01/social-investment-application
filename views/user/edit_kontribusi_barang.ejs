@@ -26,11 +26,11 @@
                 
                                         <div class="col-sm-6">
                                             <label for="jumlahBarang" class="form-label">Jumlah Barang</label>
-                                            <input type="number" class="form-control" id="jumlahBarang" name="jumlah_barang" placeholder="Masukkan Jumlah Barang" value="<%= kontribusiBarang.jumlah_barang %>" min="1" required>
+                                            <input type="text" class="form-control" id="jumlahBarang" name="jumlah_barang" value="<%= kontribusiBarang.jumlah_barang %>" required>
                                         </div>
                 
                                         <input type="hidden" name="id_acara" value="<%= kontribusiBarang.id_acara %>">
-                
+                                        <input type="hidden" name="tanggal_edit_sumbangan" value="<%= new Date().toISOString() %>">
                                         <hr class="my-6 border-3 border-top border-info">
                                         <button class="w-100 btn btn-primary btn-lg" type="submit">Simpan Perubahan</button>
                                     </div>

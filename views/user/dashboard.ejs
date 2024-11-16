@@ -16,126 +16,74 @@
 
     <body>
         <%- include('partials/__nav_sidebar') %>
-                <main class="content px-3 py-4">
-                    <div class="container-fluid">
-                        <div class="mb-3">                    
-                            <div class="container mt-4 ">
-                                
-                                <div class="row">
-                                    <div class="col-12 col-md-6 d-flex mb-4">
-                                        <div class="card flex-fill border-0">
-                                            <div class="card-body py-4">
-                                                <div class="d-flex align-items-start">
-                                                    <div class="flex-grow-1">
-                                                        <p class="mb-2">
-                                                            Total Investasi
-                                                        </p>
-                                                        <h4 class="mb-2">
-                                                            <span class="currency">Rp.12000</span>
-                                                        </h4>
-                                                        <div class="mb-0">
-                                                            <span class="text-muted">
-                                                                Since Last Month
-                                                            </span>
-                                                        </div>
+            <main class="content px-3 py-4">
+                <div class="container-fluid">
+                    <div class="mb-3">
+                        <div class="container mt-4">
+                            <div class="row">
+                                <div class="col-12 col-md-6 d-flex mb-4">
+                                    <div class="card flex-fill border-0">
+                                        <div class="card-body py-4">
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-2">Total Uang Disumbangkan</p>
+                                                    <h4 class="mb-2">
+                                                        <span class="currency">Rp.<%= totalUangDisumbangkan ? totalUangDisumbangkan.toLocaleString('id-ID') : '0' %></span>
+                                                    </h4>
+                                                    <div class="mb-0">
+                                                        <span class="text-muted">Sejak Pendaftaran</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                
-                                    <div class="col-12 col-md-6 d-flex mb-4">
-                                        <div class="card flex-fill border-0">
-                                            <div class="card-body py-4">
-                                                <div class="d-flex align-items-start">
-                                                    <div class="flex-grow-1">
-                                                        <p class="mb-2">
-                                                            Total Dinvestasi
-                                                        </p>
-                                                        <h4 class="mb-2">
-                                                            <span class="currency">Rp.12000</span>
-                                                        </h4>
-                                                        <div class="mb-0">
-                                                            <span class="text-muted">
-                                                                Since Last Month
-                                                            </span>
-                                                        </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 d-flex mb-4">
+                                    <div class="card flex-fill border-0">
+                                        <div class="card-body py-4">
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-grow-1">
+                                                    <p class="mb-2">Total Uang Diterima</p>
+                                                    <h4 class="mb-2">
+                                                        <span class="currency">Rp.<%= totalUangDiterima ? totalUangDiterima.toLocaleString('id-ID') : '0' %></span>
+                                                    </h4>
+                                                    <div class="mb-0">
+                                                        <span class="text-muted">Sejak Pendaftaran</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>                            
-
-                                <div class="row validasi-acara">
-                                    <div class="col-md-4">
-                                        <div class="card acara-card">
-                                            <div class="card-header card-color-1">
-                                                <a href="">Pernikahan</a>
-                                                <p class="pemilik-info">Aqil Yoga Pramono</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p><span>Waktu Acara: </span>12 Agustus 2024, 08.30-10.40 WIB</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="card acara-card">
-                                            <div class="card-header card-color-1">
-                                                <a href="">Pernikahan</a>
-                                                <p class="pemilik-info">Aqil Yoga Pramono</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p><span>Waktu Acara: </span>12 Agustus 2024, 08.30-10.40 WIB</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="card acara-card">
-                                            <div class="card-header card-color-1">
-                                                <a href="">Pernikahan</a>
-                                                <p class="pemilik-info">Aqil Yoga Pramono</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p><span>Waktu Acara: </span>12 Agustus 2024, 08.30-10.40 WIB</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="card acara-card">
-                                            <div class="card-header card-color-1">
-                                                <a href="">Pernikahan</a>
-                                                <p class="pemilik-info">Aqil Yoga Pramono</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p><span>Waktu Acara: </span>12 Agustus 2024, 08.30-10.40 WIB</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="card acara-card">
-                                            <div class="card-header card-color-1">
-                                                <a href="">Pernikahan</a>
-                                                <p class="pemilik-info">Aqil Yoga Pramono</p>
-                                            </div>
-                                            <div class="card-body">
-                                                <p><span>Waktu Acara: </span>12 Agustus 2024, 08.30-10.40 WIB</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <% if (unvalidatedAcara.length === 0) { %>
+                                    <div class="col-12">
+                                        <p>Tidak ada acara yang perlu divalidasi.</p>
+                                    </div>
+                                <% } else { %>
+                                    <% unvalidatedAcara.forEach(event => { %>
+                                        <div class="col-md-4">
+                                            <div class="card acara-card">
+                                                <div class="card-header card-color-1">
+                                                    <a href="/users/detail_investasi/<%= event.id_acara %>"><%= event.nama_acara %></a>
+                                                    <p class="pemilik-info"><%= event.nama_pembuat %></p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p><span>Waktu Dimulai: </span><%= new Date(event.waktu_acara).toLocaleString() %></p>
+                                                    <p><span>Waktu Selesai: </span><%= new Date(event.acara_selesai).toLocaleString() %></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% }) %>
+                                <% } %>
+                            </div>
                         </div>
                     </div>
-                </main>
-            </div>
-        </div>
+                </div>
+            </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
