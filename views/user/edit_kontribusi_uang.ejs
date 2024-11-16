@@ -21,6 +21,7 @@
                             <form class="needs-validation" novalidate="" method="POST" action="/users/kontribusi_uang/update/<%= kontribusiUang.id_kontribusi_uang %>">
                                 <div class="row g-3 frm_layout">
                                     <input type="hidden" name="id_acara" value="<%= kontribusiUang.id_acara %>">
+                                    <input type="hidden" name="tanggal_edit_sumbangan" value="<%= new Date().toISOString() %>">
                                     <div class="col-12">
                                         <label for="jumlahUang" class="form-label">Jumlah Uang</label>
                                         <div class="input-group">

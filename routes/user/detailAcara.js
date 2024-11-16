@@ -6,7 +6,19 @@ const KontribusiBarang = require('../../models/KontribusiBarang');
 const User = require('../../models/User');
 const Kontribusi = require('../../models/Kontribusi');
 const Validasi = require('../../models/Validasi');
-const connection = require('../../config/db'); // Tambahkan baris ini untuk mendefinisikan koneksi database
+const connection = require('../../config/db');
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images/user/'); 
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
 
 const auth = async (req, res, next) => {
     if (req.session.userId) {
@@ -20,15 +32,36 @@ router.get('/:id', auth, async (req, res) => {
     try {
         const acaraId = req.params.id;
         const acara = await Acara.getById(acaraId);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk mengakses detail acara ini');
+            return res.redirect('/users/dashboard');
+        }
+
         const kontribusiUang = await KontribusiUang.getAllByAcaraId(acaraId);
         const kontribusiBarang = await KontribusiBarang.getAllByAcaraId(acaraId);
         const isMoreThan7DaysOld = await Acara.isMoreThan7DaysOld(acaraId);
 
         const totalUang = kontribusiUang.reduce((total, item) => total + item.jumlah_uang, 0);
 
-        console.log("Kontribusi Uang setelah proses:", kontribusiUang);
+        for (const item of kontribusiUang) {
+            item.laporan = await Validasi.getByKontribusiId(item.id_kontribusi);
+        }
+        for (const item of kontribusiBarang) {
+            item.laporan = await Validasi.getByKontribusiId(item.id_kontribusi);
+        }
 
-        res.render('user/detail_acara', { acara, kontribusiUang, kontribusiBarang, isMoreThan7DaysOld, totalUang });
+        res.render('user/detail_acara', {
+            acara: {
+                ...acara,
+                waktu_acara: acara.waktu_acara.toISOString(),
+                acara_selesai: acara.acara_selesai.toISOString()
+            },
+            kontribusiUang,
+            kontribusiBarang,
+            isMoreThan7DaysOld,
+            totalUang
+        });
     } catch (error) {
         console.error("Error:", error);
         req.flash('error', 'Terjadi kesalahan saat memuat detail acara');
@@ -40,7 +73,24 @@ router.get('/edit/:id', auth, async (req, res) => {
     try {
         const acaraId = req.params.id;
         const acara = await Acara.getById(acaraId);
-        res.render('user/edit_detail_acara', { acara });
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk mengedit acara ini');
+            return res.redirect(`/users/detail_acara/${acaraId}`);
+        }
+
+        const formatDateForInput = (date) => {
+            const d = new Date(date);
+            return `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}T${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
+        };
+
+        res.render('user/edit_detail_acara', {
+            acara: {
+                ...acara,
+                waktu_acara: formatDateForInput(acara.waktu_acara),
+                acara_selesai: formatDateForInput(acara.acara_selesai)
+            }
+        });
     } catch (error) {
         console.error("Error:", error);
         req.flash('error', 'Terjadi kesalahan saat memuat halaman edit acara');
@@ -48,12 +98,30 @@ router.get('/edit/:id', auth, async (req, res) => {
     }
 });
 
+
 router.post('/update/:id', auth, async (req, res) => {
     try {
         const acaraId = req.params.id;
         const { nama_acara, waktu_acara, acara_selesai, lokasi_acara, keterangan, informasi_kontak } = req.body;
 
+        const acara = await Acara.getById(acaraId);
+
+        if (acara.id_pembuat_acara !== req.session.userId) {
+            req.flash('error', 'Anda tidak memiliki izin untuk mengupdate acara ini');
+            return res.redirect(`/users/dashboard`);
+        }
+
         await Acara.update(acaraId, { nama_acara, waktu_acara, acara_selesai, lokasi_acara, keterangan, informasi_kontak });
+
+        const kontribusiUang = await KontribusiUang.getAllByAcaraId(acaraId);
+        for (const kontribusi of kontribusiUang) {
+            await Kontribusi.updateValidasi(kontribusi.id_kontribusi, 'belum divalidasi');
+        }
+        
+        const kontribusiBarang = await KontribusiBarang.getAllByAcaraId(acaraId);
+        for (const kontribusi of kontribusiBarang) {
+            await Kontribusi.updateValidasi(kontribusi.id_kontribusi, 'belum divalidasi');
+        }
 
         req.flash('success', 'Acara berhasil diperbarui');
         res.redirect('/users/detail_acara/' + acaraId);
@@ -63,6 +131,7 @@ router.post('/update/:id', auth, async (req, res) => {
         res.redirect('/users/detail_acara/' + req.params.id);
     }
 });
+
 
 router.post('/delete/:id', auth, async (req, res) => {
     try {
