@@ -11,139 +11,172 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
       <link rel="stylesheet" href="/stylesheets/style.css">
       <link rel="stylesheet" href="/stylesheets/form_acara.css">
+      <link rel="stylesheet" href="/stylesheets/detail_acara.css">
   </head>
 
   <body>
     <%- include('partials/__nav_sidebar') %>
     <main class="content px-3 py-4">
-      <div class="container-fluid">
-        <div class="mb-3">
-          <h1>Detail Investasi</h1>
-          <div class="acara-detail">
-            <p><strong>Nama Acara:</strong> <%= acara.nama_acara %></p>
-            <p><strong>Waktu Acara:</strong> <%= new Date(acara.waktu_acara).toLocaleString() %></p>
-            <p><strong>Acara Selesai:</strong> <%= new Date(acara.acara_selesai).toLocaleString() %></p>
-            <p><strong>Lokasi Acara:</strong> <%= acara.lokasi_acara %></p>
-            <p><strong>Keterangan:</strong> <%= acara.keterangan %></p>
-            <p><strong>Informasi Kontak:</strong> <%= acara.informasi_kontak %></p>
-          </div>
-          <div class="mt-4">
-            <h2>Kontribusi Uang</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                      <tr>
-                        <th>No</th>
-                        <th>NIK</th>
-                        <th>Nama Penyumbang</th>
-                        <th>No WA</th>
-                        <th>Tanggal Sumbangan</th>
-                        <th>Tanggal Edit</th>
-                        <th>Jumlah Uang</th>
-                        <th>Status Validasi</th>
-                        <th>Aksi</th>
-                    </tr>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% kontribusiUang.forEach((item, index) => { %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= item.NIK %></td>
-                      <td><%= item.nama_penyumbang %></td>
-                      <td><%= item.no_wa %></td>
-                      <td><%= item.tanggal_sumbangan %></td>
-                      <td><%= item.tanggal_edit_sumbangan ? item.tanggal_edit_sumbangan : '-' %></td>
-                      <td><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(item.jumlah_uang) %></td>
-                      <td><%= item.status_validasi %></td>
-                        <td>
-                            <% if (item.status_validasi === 'belum divalidasi') { %>
-                            <form class="d-inline" method="post" action="/users/detail_investasi/validate">
-                                <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
-                                <input type="hidden" name="jenis_kontribusi" value="uang">
-                                <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
-                                <button type="submit" class="btn btn-success">Yes</button>
-                            </form>
-                            <button class="btn btn-danger btn-lapor" data-id="<%= item.id_kontribusi %>" data-acara="<%= acara.id_acara %>" data-type="uang">No</button>
-                            <% } %>
-                        </td>
-                    </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="mt-4">
-            <h2>Kontribusi Barang</h2>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>NIK</th>
-                      <th>Nama Penyumbang</th>
-                      <th>No WA</th>
-                      <th>Tanggal Sumbangan</th>
-                      <th>Tanggal Edit</th>
-                      <th>Nama Barang</th>
-                      <th>Jumlah Barang</th>
-                      <th>Status Validasi</th>
-                      <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% kontribusiBarang.forEach((item, index) => { %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= item.NIK %></td>
-                      <td><%= item.nama_penyumbang %></td>
-                      <td><%= item.no_wa %></td>
-                      <td><%= item.tanggal_sumbangan %></td>
-                      <td><%= item.tanggal_edit_sumbangan ? item.tanggal_edit_sumbangan : '-' %></td>
-                      <td><%= item.nama_barang %></td>
-                      <td><%= item.jumlah_barang %></td>
-                      <td><%= item.status_validasi %></td>
-                        <td>
-                            <% if (item.status_validasi === 'belum divalidasi') { %>
-                            <form class="d-inline" method="post" action="/users/detail_investasi/validate">
-                                <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
-                                <input type="hidden" name="jenis_kontribusi" value="barang">
-                                <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
-                                <button type="submit" class="btn btn-success">Yes</button>
-                            </form>
-                            <button class="btn btn-danger btn-lapor" data-id="<%= item.id_kontribusi %>" data-acara="<%= acara.id_acara %>" data-type="barang">No</button>
-                            <% } %>
-                        </td>
-                    </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="reportModalLabel">Laporan Kontribusi</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form id="reportForm" method="post" action="/users/detail_investasi/lapor">
-                        <div class="modal-body">
-                            <input type="hidden" name="id_kontribusi" id="reportIdKontribusi">
-                            <input type="hidden" name="acaraId" id="reportAcaraId">
-                            <input type="hidden" name="jenis_kontribusi" id="reportJenisKontribusi">
-                            <div class="mb-3">
-                                <label for="laporan" class="form-label">Laporan</label>
-                                <textarea class="form-control" id="laporan" name="laporan" rows="4" required></textarea>
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="mb-3">
+                    <h5><b>INFORMASI ACARA</b></h5>
+                </div>
+            
+                <!-- Informasi Acara -->
+                <div class="row mt-4">
+                    <!-- Kolom Kiri: Informasi Acara -->
+                    <div class="col-md-6">
+                        <div class="card flex-fill border-0">
+                            <div class="card-body-header">
+                                <p><strong>Nama Acara:</strong> <%= acara.nama_acara %></p>
+                                <p><strong>Waktu Acara:</strong> <%= new Date(acara.waktu_acara).toLocaleString() %></p>
+                                <p><strong>Acara Selesai:</strong> <%= new Date(acara.acara_selesai).toLocaleString() %></p>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Kirim Laporan</button>
+                    </div>
+            
+                    <!-- Kolom Kanan: Lokasi Acara & Kontak -->
+                    <div class="col-md-6">
+                        <div class="card flex-fill border-0">
+                            <div class="card-body-header">
+                                <p><strong>Lokasi Acara: </strong><a class="lokasi-a" href="<%= acara.lokasi_acara %>"><%= acara.lokasi_acara %></a> </p>
+                                <p><strong>Keterangan:</strong> <%= acara.keterangan %></p>
+                                <p><strong>Informasi Kontak:</strong> <%= acara.informasi_kontak %></p>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+            
+
+            <div class="card border-0 mt-4">
+                <div class="card-header">
+                    <h4 class="card-title">TABEL KONTRIBUSI UANG</h4>
+                </div>
+                <div class="card-body">
+                    <div class="wrapper">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">NIK</th>
+                                    <th scope="col">Nama Penyumbang</th>
+                                    <th scope="col">Nomor WA</th>
+                                    <th scope="col">Tanggal Sumbangan</th>
+                                    <th scope="col">Tanggal Edit</th>
+                                    <th scope="col">Jumlah Uang</th>
+                                    <th scope="col">Status Validasi</th>
+                                    <th scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% kontribusiUang.forEach((item, index) => { %>
+                                <tr>
+                                    <td scope="row"><%= index + 1 %></td>
+                                    <td><%= item.NIK %></td>
+                                    <td><%= item.nama_penyumbang %></td>
+                                    <td><%= item.no_wa %></td>
+                                    <td><%= item.tanggal_sumbangan %></td>
+                                    <td><%= item.tanggal_edit_sumbangan ? item.tanggal_edit_sumbangan : '-' %></td>
+                                    <td><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(item.jumlah_uang) %></td>
+                                    <td><%= item.status_validasi %></td>
+                                    <td>
+                                        <% if (item.status_validasi === 'belum divalidasi') { %>
+                                        <form class="d-inline" method="post" action="/users/detail_investasi/validate">
+                                            <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
+                                            <input type="hidden" name="jenis_kontribusi" value="uang">
+                                            <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
+                                            <button type="submit" class="btn btn-success btn-sm">Yes</button>
+                                        </form>
+                                        <button class="btn btn-danger btn-sm btn-lapor" data-id="<%= item.id_kontribusi %>" data-acara="<%= acara.id_acara %>" data-type="uang">No</button>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="card border-0 mt-4">
+                <div class="card-header">
+                    <h4 class="card-title">TABEL KONTRIBUSI BARANG</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">NIK</th>
+                                <th scope="col">Nama Penyumbang</th>
+                                <th scope="col">Nomor WA</th>
+                                <th scope="col">Tanggal Sumbangan</th>
+                                <th scope="col">Tanggal Edit</th>
+                                <th scope="col">Nama Barang</th>
+                                <th scope="col">Jumlah Barang</th>
+                                <th scope="col">Status Validasi</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% kontribusiBarang.forEach((item, index) => { %>
+                            <tr>
+                                <td scope="row"><%= index + 1 %></td>
+                                <td><%= item.NIK %></td>
+                                <td><%= item.nama_penyumbang %></td>
+                                <td><%= item.no_wa %></td>
+                                <td><%= item.tanggal_sumbangan %></td>
+                                <td><%= item.tanggal_edit_sumbangan ? item.tanggal_edit_sumbangan : '-' %></td>
+                                <td><%= item.nama_barang %></td>
+                                <td><%= item.jumlah_barang %></td>
+                                <td><%= item.status_validasi %></td>
+                                <td>
+                                    <% if (item.status_validasi === 'belum divalidasi') { %>
+                                    <form class="d-inline" method="post" action="/users/detail_investasi/validate">
+                                        <input type="hidden" name="id_kontribusi" value="<%= item.id_kontribusi %>">
+                                        <input type="hidden" name="jenis_kontribusi" value="barang">
+                                        <input type="hidden" name="acaraId" value="<%= acara.id_acara %>">
+                                        <button type="submit" class="btn btn-success btn-sm">Yes</button>
+                                    </form>
+                                    <button class="btn btn-danger btn-sm btn-lapor" data-id="<%= item.id_kontribusi %>" data-acara="<%= acara.id_acara %>" data-type="barang">No</button>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            
+            <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="reportModalLabel">Laporan Kontribusi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form id="reportForm" method="post" action="/users/detail_investasi/lapor">
+                            <div class="modal-body">
+                                <input type="hidden" name="id_kontribusi" id="reportIdKontribusi">
+                                <input type="hidden" name="acaraId" id="reportAcaraId">
+                                <input type="hidden" name="jenis_kontribusi" id="reportJenisKontribusi">
+                                <div class="mb-3">
+                                    <label for="laporan" class="form-label">Laporan</label>
+                                    <textarea class="form-control" id="laporan" name="laporan" rows="4" required></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Kirim Laporan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </main>

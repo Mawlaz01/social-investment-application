@@ -177,7 +177,7 @@ class Acara {
                     if (rows.length === 0) {
                         reject(new Error("Acara tidak ditemukan"));
                     } else {
-                        resolve(rows[0].days_old > 7);
+                        resolve(rows[0].days_old > 0);
                     }
                 }
             });
