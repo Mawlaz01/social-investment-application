@@ -28,6 +28,15 @@ class Validasi {
         });
     }
 
+    static async getAllByKontribusiId(id_kontribusi) {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM Validasi WHERE id_kontribusi = ?', [id_kontribusi], (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows);
+            });
+        });
+    }
+
     static async reportInvalidContribution(id_kontribusi, id_user_pelapor, laporan) {
         const data = {
             id_kontribusi,
@@ -56,7 +65,7 @@ class Validasi {
                 WHERE id_kontribusi = ?`;
             connection.query(query, [id_kontribusi], (err, rows) => {
                 if (err) reject(err);
-                else resolve(rows.length ? rows[0].status_laporan : null); // Default value set to null if no report is found
+                else resolve(rows.length ? rows[0].status_laporan : null); 
             });
         });
     }

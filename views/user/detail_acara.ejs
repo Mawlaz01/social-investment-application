@@ -25,10 +25,7 @@
                 </a>
                 <h5><b>INFORMASI ACARA</b></h5>
             </div>
-        
-            <!-- Informasi Acara -->
             <div class="row mt-4">
-                <!-- Kolom Kiri: Informasi Acara -->
                 <div class="col-md-6">
                     <div class="card flex-fill border-0">
                         <div class="card-body-header">
@@ -42,8 +39,7 @@
                         </div>
                     </div>
                 </div>
-        
-                <!-- Kolom Kanan: Lokasi Acara & Kontak -->
+
                 <div class="col-md-6">
                     <div class="card flex-fill border-0">
                         <div class="card-body-header">
@@ -66,7 +62,6 @@
                 </div>
             <% } %>
         </div>
-          
 
                     <div class="card border-0">
                         <div class="card-header">
@@ -126,21 +121,30 @@
                                                                 </button>
                                                             </form>
                                                         <% } %>
-                                                        <% if (item.status_validasi === 'tidak valid') { %>
-                                                            <button class="btn btn-danger btn-sm"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#reportModal<%= item.id_kontribusi %>"
-                                                                data-laporan="<%= item.laporan?.[0]?.laporan || '-' %>"
-                                                                data-waktu="<%= item.laporan?.[0]?.waktu_validasi
-                                                                    ? new Date(item.laporan[0].waktu_validasi).toLocaleString('id-ID', {
-                                                                        day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
-                                                                    })
-                                                                    : '-' %>">
-                                                                Tidak Valid
-                                                            </button>
+                                                        <% if (!isMoreThan7DaysOld && item.laporan && item.laporan.length > 0) { %>
+                                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal<%= item.id_kontribusi %>">Tidak Valid</button>
+                                                            <div class="modal fade" id="reportModal<%= item.id_kontribusi %>" tabindex="-1" aria-labelledby="reportModalLabel<%= item.id_kontribusi %>" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="reportModalLabel<%= item.id_kontribusi %>">Laporan Kontribusi Tidak Valid</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <% item.laporan.forEach((laporan) => { %>
+                                                                                <p><strong>Laporan:</strong> <%= laporan.laporan %></p>
+                                                                                <p><strong>Waktu Validasi:</strong> <%= new Date(laporan.waktu_validasi).toLocaleString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) %></p>
+                                                                            <% }); %>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <a href="/users/kontribusi_uang/edit/<%= item.id_kontribusi_uang %>" class="btn btn-warning">Edit</a>
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         <% } %>
                                                     </div>
-                                                    
                                                 </td>
                                             </tr>
                                         <% }); %>
@@ -212,18 +216,28 @@
                                                         </button>
                                                     </form>
                                                 <% } %>
-                                                <% if (item.status_validasi === 'tidak valid') { %>
-                                                    <button class="btn btn-danger btn-sm"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#reportModalBarang<%= item.id_kontribusi %>"
-                                                        data-laporan="<%= item.laporan?.[0]?.laporan || '-' %>"
-                                                        data-waktu="<%= item.laporan?.[0]?.waktu_validasi
-                                                            ? new Date(item.laporan[0].waktu_validasi).toLocaleString('id-ID', {
-                                                                day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
-                                                            })
-                                                            : '-' %>">
-                                                        Tidak Valid
-                                                    </button>
+                                                <% if (!isMoreThan7DaysOld && item.laporan && item.laporan.length > 0) { %>
+                                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#reportModalBarang<%= item.id_kontribusi %>">Tidak Valid</button>
+                                                    <div class="modal fade" id="reportModalBarang<%= item.id_kontribusi %>" tabindex="-1" aria-labelledby="reportModalBarangLabel<%= item.id_kontribusi %>" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="reportModalBarangLabel<%= item.id_kontribusi %>">Laporan Kontribusi Tidak Valid</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <% item.laporan.forEach((laporan) => { %>
+                                                                        <p><strong>Laporan:</strong> <%= laporan.laporan %></p>
+                                                                        <p><strong>Waktu Validasi:</strong> <%= new Date(laporan.waktu_validasi).toLocaleString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) %></p>
+                                                                    <% }); %>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a href="/users/kontribusi_barang/edit/<%= item.id_kontribusi_barang %>" class="btn btn-warning">Edit</a>
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 <% } %>
                                             </td>
                                         </tr>

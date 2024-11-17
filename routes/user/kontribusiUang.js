@@ -21,7 +21,10 @@ const upload = multer({ storage: storage });
 const auth = async (req, res, next) => {
     if (req.session.userId) {
         let user = await User.getById(req.session.userId);
-        if (user) return next();
+        if (user) {
+            res.locals.user = user;
+            return next();
+        }
     }
     res.redirect('/login');
 };

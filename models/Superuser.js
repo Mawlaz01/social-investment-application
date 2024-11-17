@@ -41,7 +41,7 @@ class Superuser {
 
     static async getById(id) {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM Superuser WHERE id_superuser = ?', [id], (err, rows) => { // Ubah `id_admin` menjadi `id_superuser`
+            connection.query('SELECT * FROM Superuser WHERE id_superuser = ?', [id], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
