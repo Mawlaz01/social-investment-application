@@ -85,7 +85,7 @@ body {
 }
 
 .table th, .table td {
-    padding: 12px;
+
     text-align: left;
     border-bottom: 1px solid #ddd;
     
@@ -208,7 +208,7 @@ body {
         overflow-x: hidden;
         overflow-y: auto;
         width: 170px;
-        height: 60px;
+        height: 70px;
         font-size: 13px;
         text-overflow: ellipsis;
     }.table th{
@@ -217,7 +217,7 @@ body {
         overflow-x: hidden;
         overflow-y: auto;
         width: 120px;
-        height: 60px;
+        height: 70px;
         font-size: 13px;
         text-overflow: ellipsis;
     }

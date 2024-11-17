@@ -204,4 +204,12 @@ a.sidebar-link:hover {
     .main {
         margin-left: 55px;
     }
+}.btn-secondary {
+    background-color: #10266f;  /* Ubah warna background */
+    border-color: #10266f;      /* Ubah warna border */
+}
+
+.btn-primary:hover {
+    background-color: #003cff; /* Ubah warna tombol saat hover */
+    border-color: #003cff;      /* Ubah warna border saat hover */
 }
