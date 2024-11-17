@@ -1,0 +1,45 @@
+.feature {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  width: 3rem;
+  font-size: 1.5rem;
+}
+.warna-primary{
+  background-color: #37B7C3;
+  color: #EBF4F6;
+
+}.warna-secondary{
+  background-color: #088395;
+  color: #ffffff;
+}.warna-utama{
+  background-color: #cce1e6;
+  color: #071952;
+}.warna-dark{
+  background-color: #071952;
+  color: #EBF4F6;
+}
+.btn-primary{
+  background-color: #37B7C3;
+  border-color: #37B7C3;
+}.sidebar-logo {
+  margin: auto 0;
+}
+
+.sidebar-logo a {
+  color: #071952;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050; /* Pastikan navbar berada di atas elemen lainnya */
+}
+
+body {
+  padding-top: 56px; /* Tambahkan padding untuk mencegah konten terpotong di bawah navbar */
+}
