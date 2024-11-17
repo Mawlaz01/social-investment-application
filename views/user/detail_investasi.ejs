@@ -27,9 +27,7 @@
                     <h5><b>INFORMASI ACARA</b></h5>
                 </div>
             
-                <!-- Informasi Acara -->
                 <div class="row mt-4">
-                    <!-- Kolom Kiri: Informasi Acara -->
                     <div class="col-md-6">
                         <div class="card flex-fill border-0">
                             <div class="card-body-header">
@@ -40,7 +38,6 @@
                         </div>
                     </div>
             
-                    <!-- Kolom Kanan: Lokasi Acara & Kontak -->
                     <div class="col-md-6">
                         <div class="card flex-fill border-0">
                             <div class="card-body-header">
@@ -188,22 +185,40 @@
       <script src="/javascripts/script.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
       <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.btn-lapor').forEach(button => {
-                button.addEventListener('click', () => {
-                    const id_kontribusi = button.getAttribute('data-id');
-                    const acaraId = button.getAttribute('data-acara');
-                    const jenis_kontribusi = button.getAttribute('data-type');
-    
-                    document.getElementById('reportIdKontribusi').value = id_kontribusi;
-                    document.getElementById('reportJenisKontribusi').value = jenis_kontribusi;
-                    document.getElementById('reportAcaraId').value = acaraId;
-    
-                    const reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
-                    reportModal.show();
-                });
-            });
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn-lapor').forEach(button => {
+        button.addEventListener('click', () => {
+            const id_kontribusi = button.getAttribute('data-id');
+            const acaraId = button.getAttribute('data-acara');
+            const jenis_kontribusi = button.getAttribute('data-type');
+
+            document.getElementById('reportIdKontribusi').value = id_kontribusi;
+            document.getElementById('reportJenisKontribusi').value = jenis_kontribusi;
+            document.getElementById('reportAcaraId').value = acaraId;
+
+            const reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
+            reportModal.show();
         });
+    });
+
+    document.querySelectorAll('.btn-primary').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            const form = this.closest('form');
+            const id_kontribusi = form.querySelector('input[name="id_kontribusi"]').value;
+            const jenis_kontribusi = form.querySelector('input[name="jenis_kontribusi"]').value;
+            const acaraId = form.querySelector('input[name="acaraId"]').value;
+
+            console.log('ID Kontribusi:', id_kontribusi);
+            console.log('Jenis Kontribusi:', jenis_kontribusi);
+            console.log('Acara ID:', acaraId);
+
+            form.submit(); 
+        });
+    });
+});
+
     </script>
   </body>
 </html>

@@ -43,7 +43,8 @@ class WhatsAppService {
 
         for (const kontribusi of kontribusiList) {
             const differenceInDays = Math.floor((currentDate - new Date(kontribusi.tanggal_sumbangan)) / (1000 * 60 * 60 * 24));
-            if (differenceInDays < 7) {
+            console.log(`Memeriksa kontribusi ID: ${kontribusi.id_kontribusi}, ${differenceInDays} hari sejak sumbangan.`);
+            if (differenceInDays < 7) { 
                 await this.sendWhatsAppMessage(kontribusi.id_penyumbang, 'Pengingat: Silakan validasi kontribusi Anda.');
             }
         }

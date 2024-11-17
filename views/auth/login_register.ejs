@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +8,8 @@
     <title>SIAPP Login</title>
         <link rel="icon" type="image/x-icon" href="/images/user/Siapp.ico" />
 </head>
-
 <body>
-
     <div class="container" id="container">
-        <!-- Form Login -->
         <div class="form-container log-in">
             <form action="/login" method="POST">
                 <h1>Log In</h1>
@@ -23,8 +19,6 @@
                 <p class="message">Belum punya akun? <a class="hidden" id="register"><b>Sign Up</b></a></p>
             </form>
         </div>
-        
-        <!-- Form Register -->
         <div class="form-container sign-up" id="register-panel">
             <form action="/register" method="POST" enctype="multipart/form-data">
                 <h1>Sign Up</h1>
@@ -39,14 +33,12 @@
                 <p class="message">Sudah punya akun? <a class="hidden" id="login"><b>Login</b></a></p>
             </form>
         </div>
-        
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
                     <img src="/images/user/logo_siap_putih.png" alt="Logo" class="logo">
                     <h1>Welcome back to SIAPP!</h1>
                     <p>Senang melihat Anda kembali! Mari lanjutkan pengelolaan sumbangan Anda dengan mudah dan terorganisir.</p>
-
                 </div>
                 <div class="toggle-panel toggle-right">
                     <img src="/images/user/logo_siap_putih.png" alt="Logo" class="logo">
@@ -56,8 +48,6 @@
             </div>
         </div>
     </div>
-
     <script src="/js/login_register.js"></script>
 </body>
-
 </html>

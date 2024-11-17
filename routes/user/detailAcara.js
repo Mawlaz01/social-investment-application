@@ -23,7 +23,10 @@ const upload = multer({ storage: storage });
 const auth = async (req, res, next) => {
     if (req.session.userId) {
         let user = await User.getById(req.session.userId);
-        if (user) return next();
+        if (user) {
+            res.locals.user = user;
+            return next();
+        }
     }
     res.redirect('/login');
 };
@@ -45,10 +48,10 @@ router.get('/:id', auth, async (req, res) => {
         const totalUang = kontribusiUang.reduce((total, item) => total + item.jumlah_uang, 0);
 
         for (const item of kontribusiUang) {
-            item.laporan = await Validasi.getByKontribusiId(item.id_kontribusi);
+            item.laporan = await Validasi.getAllByKontribusiId(item.id_kontribusi);
         }
         for (const item of kontribusiBarang) {
-            item.laporan = await Validasi.getByKontribusiId(item.id_kontribusi);
+            item.laporan = await Validasi.getAllByKontribusiId(item.id_kontribusi);
         }
 
         res.render('user/detail_acara', {
@@ -98,7 +101,6 @@ router.get('/edit/:id', auth, async (req, res) => {
     }
 });
 
-
 router.post('/update/:id', auth, async (req, res) => {
     try {
         const acaraId = req.params.id;
@@ -131,7 +133,6 @@ router.post('/update/:id', auth, async (req, res) => {
         res.redirect('/users/detail_acara/' + req.params.id);
     }
 });
-
 
 router.post('/delete/:id', auth, async (req, res) => {
     try {

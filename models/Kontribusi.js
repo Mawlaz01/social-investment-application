@@ -90,7 +90,7 @@ class Kontribusi {
     static async update(id, data) {
         return new Promise((resolve, reject) => {
             data.tanggal_edit_sumbangan = new Date();
-            data.status_validasi = 'belum divalidasi';  // Reset status validasi saat kontribusi diubah
+            data.status_validasi = 'belum divalidasi';
             connection.query('UPDATE Kontribusi SET ? WHERE id_kontribusi = ?', [data, id], (err, result) => {
                 if (err) reject(err);
                 else resolve(result);
@@ -156,6 +156,20 @@ class Kontribusi {
             });
         });
     }
+
+    static async getUnvalidated() {
+        return new Promise((resolve, reject) => {
+            const query = `
+                SELECT * FROM Kontribusi 
+                WHERE status_validasi = 'belum divalidasi'
+            `;
+            connection.query(query, (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows);
+            });
+        });
+    }
+    
 }
 
 module.exports = Kontribusi;
