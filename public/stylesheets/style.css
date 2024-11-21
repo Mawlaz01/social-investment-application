@@ -210,6 +210,38 @@ a.sidebar-link:hover {
 }
 
 .btn-primary:hover {
-    background-color: #003cff; /* Ubah warna tombol saat hover */
-    border-color: #003cff;      /* Ubah warna border saat hover */
+    background-color: #003cff;
+    border-color: #003cff;
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.legend-box {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.legend-item h6 {
+    margin: 0;
+    line-height: 15px;
+}
+
+.new-customer {
+    background-color: #37B7C3;
+}
+
+.returning-customer {
+    background-color: #071952;
 }
