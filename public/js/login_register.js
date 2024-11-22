@@ -2,18 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const container = document.getElementById('container');
     const loginBtn = document.getElementById('login');
     const registerBtn = document.getElementById('register');
-    const loginNav = document.getElementById('lognav');
 
     loginBtn.addEventListener('click', () => {
-        container.classList.add("active");
+        container.classList.remove("active");
     });
 
     registerBtn.addEventListener('click', () => {
-        container.classList.remove("active");
-    });
-
-    loginNav.addEventListener('click', () => {
-        container.classList.remove("active");
+        container.classList.add("active");
     });
 
     document.getElementById('foto').addEventListener('change', function(event) {
