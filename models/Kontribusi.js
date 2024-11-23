@@ -42,12 +42,7 @@ class Kontribusi {
 
     static async getAllUangByUserIdAndAcaraId(userId, acaraId) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT Kontribusi.*, User.NIK, User.nama AS nama_penyumbang, Kontribusi_Uang.jumlah_uang
-                FROM Kontribusi
-                JOIN User ON Kontribusi.id_penyumbang = User.id_user
-                JOIN Kontribusi_Uang ON Kontribusi.id_kontribusi = Kontribusi_Uang.id_kontribusi
-                WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
+            const query = `SELECT Kontribusi.*, User.NIK, User.nama AS nama_penyumbang, Kontribusi_Uang.jumlah_uang FROM Kontribusi JOIN User ON Kontribusi.id_penyumbang = User.id_user JOIN Kontribusi_Uang ON Kontribusi.id_kontribusi = Kontribusi_Uang.id_kontribusi WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
             connection.query(query, [userId, acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
@@ -57,12 +52,7 @@ class Kontribusi {
 
     static async getAllBarangByUserIdAndAcaraId(userId, acaraId) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT Kontribusi.*, User.NIK, User.nama AS nama_penyumbang, Kontribusi_Barang.nama_barang, Kontribusi_Barang.jumlah_barang
-                FROM Kontribusi
-                JOIN User ON Kontribusi.id_penyumbang = User.id_user
-                JOIN Kontribusi_Barang ON Kontribusi.id_kontribusi = Kontribusi_Barang.id_kontribusi
-                WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
+            const query = `SELECT Kontribusi.*, User.NIK, User.nama AS nama_penyumbang, Kontribusi_Barang.nama_barang, Kontribusi_Barang.jumlah_barang FROM Kontribusi JOIN User ON Kontribusi.id_penyumbang = User.id_user JOIN Kontribusi_Barang ON Kontribusi.id_kontribusi = Kontribusi_Barang.id_kontribusi WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
             connection.query(query, [userId, acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
@@ -72,13 +62,7 @@ class Kontribusi {
 
     static async getAllByUserIdAndAcaraId(userId, acaraId) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT Kontribusi.*, User.NIK, User.nama AS nama_penyumbang, Kontribusi_Uang.jumlah_uang
-                FROM Kontribusi
-                JOIN User ON Kontribusi.id_penyumbang = User.id_user
-                LEFT JOIN Kontribusi_Uang ON Kontribusi.id_kontribusi = Kontribusi_Uang.id_kontribusi
-                LEFT JOIN Kontribusi_Barang ON Kontribusi.id_kontribusi = Kontribusi_Barang.id_kontribusi
-                WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
+            const query = `SELECT Kontribusi.*, User.NIK, User.nama AS nama_penyumbang, Kontribusi_Uang.jumlah_uang FROM Kontribusi JOIN User ON Kontribusi.id_penyumbang = User.id_user LEFT JOIN Kontribusi_Uang ON Kontribusi.id_kontribusi = Kontribusi_Uang.id_kontribusi LEFT JOIN Kontribusi_Barang ON Kontribusi.id_kontribusi = Kontribusi_Barang.id_kontribusi WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
             connection.query(query, [userId, acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
@@ -119,11 +103,7 @@ class Kontribusi {
 
     static async getTotalUangByUserId(userId) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT SUM(Kontribusi_Uang.jumlah_uang) AS total_uang
-                FROM Kontribusi
-                JOIN Kontribusi_Uang ON Kontribusi.id_kontribusi = Kontribusi_Uang.id_kontribusi
-                WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.status_validasi = 'valid'`;
+            const query = `SELECT SUM(Kontribusi_Uang.jumlah_uang) AS total_uang FROM Kontribusi JOIN Kontribusi_Uang ON Kontribusi.id_kontribusi = Kontribusi_Uang.id_kontribusi WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.status_validasi = 'valid'`;
             connection.query(query, [userId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows.length ? rows[0].total_uang : 0);
@@ -159,10 +139,7 @@ class Kontribusi {
 
     static async getUnvalidated() {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT * FROM Kontribusi 
-                WHERE status_validasi = 'belum divalidasi'
-            `;
+            const query = `SELECT * FROM Kontribusi WHERE status_validasi = 'belum divalidasi'`;
             connection.query(query, (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);

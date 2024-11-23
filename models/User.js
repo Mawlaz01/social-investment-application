@@ -72,28 +72,12 @@ class User {
 
     static async getTotalPendaftarPerBulan() { 
         return new Promise((resolve, reject) => {
-            const sql = `
-                SELECT 
-                    MONTH(tanggal_daftar) AS bulan,
-                    COUNT(id_user) AS total_pendaftar
-                FROM 
-                    User
-                WHERE 
-                    YEAR(tanggal_daftar) = YEAR(CURDATE())
-                GROUP BY 
-                    MONTH(tanggal_daftar)
-                ORDER BY 
-                    bulan;
-            `;
+            const sql = `SELECT MONTH(tanggal_daftar) AS bulan, COUNT(id_user) AS total_pendaftar FROM User WHERE YEAR(tanggal_daftar) = YEAR(CURDATE()) GROUP BY MONTH(tanggal_daftar) ORDER BY bulan;`;
             connection.query(sql, (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
-                    const namaBulan = [
-                        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-                        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-                    ];
-    
+                    const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
                     const result = Array(12).fill(0).map((_, i) => ({
                         bulan: namaBulan[i],
                         total_pendaftar: 0

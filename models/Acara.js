@@ -29,13 +29,7 @@ class Acara {
 
     static async getAllByUserIdWithCreatorName(userId) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT Acara.*, User.nama AS nama_pembuat
-                FROM Acara
-                JOIN User ON Acara.id_pembuat_acara = User.id_user
-                WHERE Acara.id_pembuat_acara = ?
-                ORDER BY Acara.id_acara DESC
-            `;
+            const query = `SELECT Acara.*, User.nama AS nama_pembuat FROM Acara JOIN User ON Acara.id_pembuat_acara = User.id_user WHERE Acara.id_pembuat_acara = ? ORDER BY Acara.id_acara DESC`;
             connection.query(query, [userId], (err, results) => {
                 if (err) reject(err);
                 else resolve(results);
@@ -45,14 +39,7 @@ class Acara {
 
     static async getAllAcaraWithCreatorNameByUserContribution(userId) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT DISTINCT Acara.*, User.nama AS nama_pembuat
-                FROM Kontribusi
-                JOIN Acara ON Kontribusi.id_acara = Acara.id_acara
-                JOIN User ON Acara.id_pembuat_acara = User.id_user
-                WHERE Kontribusi.id_penyumbang = ?
-                ORDER BY Acara.id_acara DESC
-            `;
+            const query = `SELECT DISTINCT Acara.*, User.nama AS nama_pembuat FROM Kontribusi JOIN Acara ON Kontribusi.id_acara = Acara.id_acara JOIN User ON Acara.id_pembuat_acara = User.id_user WHERE Kontribusi.id_penyumbang = ? ORDER BY Acara.id_acara DESC`;
             connection.query(query, [userId], (err, results) => {
                 if (err) {
                     reject(err);
@@ -101,11 +88,7 @@ class Acara {
 
     static async delete(id) {
         return new Promise((resolve, reject) => {
-            connection.query(`
-                SELECT COUNT(*) AS kontribusi_count
-                FROM Kontribusi
-                WHERE id_acara = ?
-            `, [id], (err, rows) => {
+            connection.query(`SELECT COUNT(*) AS kontribusi_count FROM Kontribusi WHERE id_acara = ?`, [id], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -128,29 +111,12 @@ class Acara {
 
     static async getTotalAcaraPerBulan() { 
         return new Promise((resolve, reject) => {
-            const sql = `
-                SELECT 
-                    MONTH(waktu_acara) AS bulan,
-                    COUNT(id_acara) AS total_acara
-                FROM 
-                    acara
-                WHERE 
-                    YEAR(waktu_acara) = YEAR(CURDATE()) 
-                GROUP BY 
-                    MONTH(waktu_acara)
-                ORDER BY 
-                    bulan;
-            `;
+            const sql = `SELECT MONTH(waktu_acara) AS bulan, COUNT(id_acara) AS total_acara FROM acara WHERE YEAR(waktu_acara) = YEAR(CURDATE()) GROUP BY MONTH(waktu_acara) ORDER BY bulan;`;
             connection.query(sql, (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
-
-                    const namaBulan = [
-                        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-                        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-                    ];
-
+                    const namaBulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
                     const result = Array(12).fill(0).map((_, i) => ({
                         bulan: namaBulan[i],
                         total_acara: 0
@@ -182,14 +148,7 @@ class Acara {
 
     static async getUnvalidatedByUserId(userId) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT DISTINCT Acara.*, User.nama AS nama_pembuat
-                FROM Acara
-                JOIN Kontribusi ON Acara.id_acara = Kontribusi.id_acara
-                JOIN User ON Acara.id_pembuat_acara = User.id_user
-                WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.status_validasi = 'belum divalidasi'
-                ORDER BY Acara.id_acara DESC
-            `;
+            const query = `SELECT DISTINCT Acara.*, User.nama AS nama_pembuat FROM Acara JOIN Kontribusi ON Acara.id_acara = Kontribusi.id_acara JOIN User ON Acara.id_pembuat_acara = User.id_user WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.status_validasi = 'belum divalidasi' ORDER BY Acara.id_acara DESC`;
             connection.query(query, [userId], (err, results) => {
                 if (err) reject(err);
                 else resolve(results);
@@ -199,18 +158,7 @@ class Acara {
 
     static async getDetailById(acaraId) {
         return new Promise((resolve, reject) => {
-            connection.query(`
-                SELECT 
-                    a.*, 
-                    GROUP_CONCAT(DISTINCT ku.id_kontribusi_uang, ':', ku.jumlah_uang) as kontribusi_uang,
-                    GROUP_CONCAT(DISTINCT kb.id_kontribusi_barang, ':', kb.nama_barang, ':', kb.jumlah_barang) as kontribusi_barang
-                FROM Acara a
-                LEFT JOIN Kontribusi k ON a.id_acara = k.id_acara
-                LEFT JOIN Kontribusi_Uang ku ON k.id_kontribusi = ku.id_kontribusi
-                LEFT JOIN Kontribusi_Barang kb ON k.id_kontribusi = kb.id_kontribusi
-                WHERE a.id_acara = ?
-                GROUP BY a.id_acara
-            `, [acaraId], (err, rows) => {
+            connection.query(`SELECT a.*, GROUP_CONCAT(DISTINCT ku.id_kontribusi_uang, ':', ku.jumlah_uang) as kontribusi_uang, GROUP_CONCAT(DISTINCT kb.id_kontribusi_barang, ':', kb.nama_barang, ':', kb.jumlah_barang) as kontribusi_barang FROM Acara a LEFT JOIN Kontribusi k ON a.id_acara = k.id_acara LEFT JOIN Kontribusi_Uang ku ON k.id_kontribusi = ku.id_kontribusi LEFT JOIN Kontribusi_Barang kb ON k.id_kontribusi = kb.id_kontribusi WHERE a.id_acara = ? GROUP BY a.id_acara`, [acaraId], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
