@@ -3,13 +3,7 @@ const connection = require('../config/db');
 class KontribusiBarang {
     static async getAllByAcaraId(acaraId) {
         return new Promise((resolve, reject) => {
-            connection.query(`
-                SELECT kb.*, k.tanggal_sumbangan, k.tanggal_edit_sumbangan, k.status_validasi, u.nik, u.nama AS nama_penyumbang, u.no_wa -- tambahkan u.no_wa di sini
-                FROM Kontribusi_Barang kb
-                JOIN Kontribusi k ON kb.id_kontribusi = k.id_kontribusi
-                JOIN User u ON k.id_penyumbang = u.id_user
-                WHERE k.id_acara = ?
-            `, [acaraId], (err, rows) => {
+            connection.query(`SELECT kb.*, k.tanggal_sumbangan, k.tanggal_edit_sumbangan, k.status_validasi, u.nik, u.nama AS nama_penyumbang, u.no_wa -- tambahkan u.no_wa di sini FROM Kontribusi_Barang kb JOIN Kontribusi k ON kb.id_kontribusi = k.id_kontribusi JOIN User u ON k.id_penyumbang = u.id_user WHERE k.id_acara = ?`, [acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             });
@@ -54,13 +48,7 @@ class KontribusiBarang {
 
     static async getUnvalidatedByAcaraId(acaraId) {
         return new Promise((resolve, reject) => {
-            connection.query(`
-                SELECT kb.*, k.tanggal_sumbangan, k.tanggal_edit_sumbangan, k.status_validasi, u.nik, u.nama AS nama_penyumbang
-                FROM Kontribusi_Barang kb
-                JOIN Kontribusi k ON kb.id_kontribusi = k.id_kontribusi
-                JOIN User u ON k.id_penyumbang = u.id_user
-                WHERE k.id_acara = ? AND k.status_validasi = 'belum divalidasi'
-            `, [acaraId], (err, rows) => {
+            connection.query(`SELECT kb.*, k.tanggal_sumbangan, k.tanggal_edit_sumbangan, k.status_validasi, u.nik, u.nama AS nama_penyumbang FROM Kontribusi_Barang kb JOIN Kontribusi k ON kb.id_kontribusi = k.id_kontribusi JOIN User u ON k.id_penyumbang = u.id_user WHERE k.id_acara = ? AND k.status_validasi = 'belum divalidasi'`, [acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             });
@@ -79,15 +67,7 @@ class KontribusiBarang {
 
     static async getAllByUserIdAndAcaraId(userId, acaraId) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT Kontribusi_Barang.*, User.NIK, User.nama AS nama_penyumbang, User.no_wa, 
-                       DATE_FORMAT(Kontribusi.tanggal_sumbangan, '%d/%m/%Y, %H.%i') AS tanggal_sumbangan, 
-                       DATE_FORMAT(Kontribusi.tanggal_edit_sumbangan, '%d/%m/%Y, %H.%i') AS tanggal_edit_sumbangan, 
-                       Kontribusi.status_validasi
-                FROM Kontribusi_Barang
-                JOIN Kontribusi ON Kontribusi_Barang.id_kontribusi = Kontribusi.id_kontribusi
-                JOIN User ON Kontribusi.id_penyumbang = User.id_user
-                WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
+            const query = `SELECT Kontribusi_Barang.*, User.NIK, User.nama AS nama_penyumbang, User.no_wa, DATE_FORMAT(Kontribusi.tanggal_sumbangan, '%d/%m/%Y, %H.%i') AS tanggal_sumbangan, DATE_FORMAT(Kontribusi.tanggal_edit_sumbangan, '%d/%m/%Y, %H.%i') AS tanggal_edit_sumbangan, Kontribusi.status_validasi FROM Kontribusi_Barang JOIN Kontribusi ON Kontribusi_Barang.id_kontribusi = Kontribusi.id_kontribusi JOIN User ON Kontribusi.id_penyumbang = User.id_user WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
             connection.query(query, [userId, acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);

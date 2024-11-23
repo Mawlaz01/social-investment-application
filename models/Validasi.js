@@ -59,10 +59,7 @@ class Validasi {
 
     static async getStatusByKontribusiId(id_kontribusi) {
         return new Promise((resolve, reject) => {
-            const query = `
-                SELECT status_laporan
-                FROM Validasi
-                WHERE id_kontribusi = ?`;
+            const query = `SELECT status_laporan FROM Validasi WHERE id_kontribusi = ?`;
             connection.query(query, [id_kontribusi], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows.length ? rows[0].status_laporan : null); 
