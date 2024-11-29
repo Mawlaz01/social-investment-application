@@ -29,6 +29,14 @@ router.get('/', async function(req, res, next) {
     }
 });
 
+router.get('/about', function(req, res) {
+    res.render('about');
+});
+
+router.get('/faq', function(req, res) {
+    res.render('faq');
+});
+
 router.get('/login', function(req, res) {
     res.render('auth/login_register');
 });
