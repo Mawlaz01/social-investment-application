@@ -69,7 +69,7 @@ I would like to express my heartfelt gratitude to all team members who contribut
 
 Special thanks to my mentors and peers for their moral and technical support. This application is now ready for public use, and I hope it brings meaningful benefits to the community.
 
-Once again, thank you all.
+Thank you all.
 
 <img src="https://media1.tenor.com/m/3KSG8LgKn8cAAAAd/tachibana-arisu.gif" alt="Autoplay GIF" style="display: block; max-width: 100%; height: auto;" autoplay>
 
