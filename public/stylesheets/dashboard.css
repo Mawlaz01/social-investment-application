@@ -2,9 +2,35 @@ main.content {
     width: 100%;
     height: 100% !important;
     background: linear-gradient(to bottom, #37B7C3 30%, #EBF4F6 30%);
-}.validasi-acara {
-    background-color: white;
+}
+
+.investasi {
+    background: linear-gradient(135deg, #071952, #102E72);
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.divestasi {
+    background: linear-gradient(135deg, #EBF4F6, #DCEEEF);
+    color: #071952;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.validasi-acara {
+    background: white;
     border-radius: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px; /* Optional, to give some spacing inside */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    color: #333;
+}
+
+.card-body {
+    padding: 20px;
+    border-radius: 10px;
+}
+
+p, h4 {
+    margin-bottom: 10px;
 }

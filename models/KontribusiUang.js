@@ -3,11 +3,7 @@ const connection = require('../config/db');
 class KontribusiUang {
     static async getAllByAcaraId(acaraId) {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT ku.*, k.tanggal_sumbangan, k.tanggal_edit_sumbangan, k.status_validasi, u.nik, u.nama AS nama_penyumbang, u.no_wa 
-                              FROM Kontribusi_Uang ku 
-                              JOIN Kontribusi k ON ku.id_kontribusi = k.id_kontribusi 
-                              JOIN User u ON k.id_penyumbang = u.id_user 
-                              WHERE k.id_acara = ?`, [acaraId], (err, rows) => {
+            connection.query(`SELECT ku.*, k.tanggal_sumbangan, k.tanggal_edit_sumbangan, k.status_validasi, u.nik, u.nama AS nama_penyumbang, u.no_wa FROM Kontribusi_Uang ku JOIN Kontribusi k ON ku.id_kontribusi = k.id_kontribusi JOIN User u ON k.id_penyumbang = u.id_user WHERE k.id_acara = ?`, [acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             });
@@ -52,11 +48,7 @@ class KontribusiUang {
 
     static async getUnvalidatedByAcaraId(acaraId) {
         return new Promise((resolve, reject) => {
-            connection.query(`SELECT ku.*, k.tanggal_sumbangan, k.tanggal_edit_sumbangan, k.status_validasi, u.nik, u.nama AS nama_penyumbang 
-                              FROM Kontribusi_Uang ku 
-                              JOIN Kontribusi k ON ku.id_kontribusi = k.id_kontribusi 
-                              JOIN User u ON k.id_penyumbang = u.id_user 
-                              WHERE k.id_acara = ? AND k.status_validasi = 'belum divalidasi'`, [acaraId], (err, rows) => {
+            connection.query(`SELECT ku.*, k.tanggal_sumbangan, k.tanggal_edit_sumbangan, k.status_validasi, u.nik, u.nama AS nama_penyumbang FROM Kontribusi_Uang ku JOIN Kontribusi k ON ku.id_kontribusi = k.id_kontribusi JOIN User u ON k.id_penyumbang = u.id_user WHERE k.id_acara = ? AND k.status_validasi = 'belum divalidasi'`, [acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             });
@@ -75,11 +67,7 @@ class KontribusiUang {
 
     static async getTotalUangByCreatorId(userId) {
         return new Promise((resolve, reject) => {
-            const query = `SELECT SUM(Kontribusi_Uang.jumlah_uang) AS total_uang 
-                           FROM Kontribusi_Uang 
-                           JOIN Kontribusi ON Kontribusi_Uang.id_kontribusi = Kontribusi.id_kontribusi 
-                           JOIN Acara ON Kontribusi.id_acara = Acara.id_acara 
-                           WHERE Acara.id_pembuat_acara = ? AND Kontribusi.status_validasi = 'valid'`;
+            const query = `SELECT SUM(Kontribusi_Uang.jumlah_uang) AS total_uang FROM Kontribusi_Uang JOIN Kontribusi ON Kontribusi_Uang.id_kontribusi = Kontribusi.id_kontribusi JOIN Acara ON Kontribusi.id_acara = Acara.id_acara WHERE Acara.id_pembuat_acara = ? AND Kontribusi.status_validasi = 'valid'`;
             connection.query(query, [userId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows.length ? rows[0].total_uang : 0);
@@ -89,13 +77,7 @@ class KontribusiUang {
 
     static async getAllByUserIdAndAcaraId(userId, acaraId) {
         return new Promise((resolve, reject) => {
-            const query = `SELECT Kontribusi_Uang.*, User.NIK, User.nama AS nama_penyumbang, User.no_wa, 
-                           DATE_FORMAT(Kontribusi.tanggal_sumbangan, '%d/%m/%Y, %H.%i') AS tanggal_sumbangan, 
-                           DATE_FORMAT(Kontribusi.tanggal_edit_sumbangan, '%d/%m/%Y, %H.%i') AS tanggal_edit_sumbangan, Kontribusi.status_validasi 
-                           FROM Kontribusi_Uang 
-                           JOIN Kontribusi ON Kontribusi_Uang.id_kontribusi = Kontribusi.id_kontribusi 
-                           JOIN User ON Kontribusi.id_penyumbang = User.id_user 
-                           WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
+            const query = `SELECT Kontribusi_Uang.*, User.NIK, User.nama AS nama_penyumbang, User.no_wa, DATE_FORMAT(Kontribusi.tanggal_sumbangan, '%d/%m/%Y, %H.%i') AS tanggal_sumbangan, DATE_FORMAT(Kontribusi.tanggal_edit_sumbangan, '%d/%m/%Y, %H.%i') AS tanggal_edit_sumbangan, Kontribusi.status_validasi FROM Kontribusi_Uang JOIN Kontribusi ON Kontribusi_Uang.id_kontribusi = Kontribusi.id_kontribusi JOIN User ON Kontribusi.id_penyumbang = User.id_user WHERE Kontribusi.id_penyumbang = ? AND Kontribusi.id_acara = ?`;
             connection.query(query, [userId, acaraId], (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);

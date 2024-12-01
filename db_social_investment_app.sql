@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 10, 2024 at 12:39 PM
+-- Generation Time: Dec 01, 2024 at 12:46 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `social_investment_app`
+-- Database: `db_social_investment_app`
 --
 
 -- --------------------------------------------------------
@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `acara` (
   `id_acara` int NOT NULL,
-  `nama_acara` varchar(100) NOT NULL,
+  `nama_acara` varchar(255) NOT NULL,
   `waktu_acara` datetime NOT NULL,
   `acara_selesai` datetime NOT NULL,
   `lokasi_acara` varchar(255) NOT NULL,
   `keterangan` text,
-  `informasi_kontak` varchar(100) DEFAULT NULL,
+  `informasi_kontak` varchar(255) DEFAULT NULL,
   `id_pembuat_acara` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -62,8 +62,9 @@ CREATE TABLE `kontribusi` (
 CREATE TABLE `kontribusi_barang` (
   `id_kontribusi_barang` int NOT NULL,
   `id_kontribusi` int NOT NULL,
-  `nama_barang` varchar(100) NOT NULL,
-  `jumlah_barang` varchar(100) NOT NULL
+  `nama_barang` varchar(255) NOT NULL,
+  `foto_kontribusi_barang` varchar(255) NOT NULL,
+  `jumlah_barang` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -75,7 +76,8 @@ CREATE TABLE `kontribusi_barang` (
 CREATE TABLE `kontribusi_uang` (
   `id_kontribusi_uang` int NOT NULL,
   `id_kontribusi` int NOT NULL,
-  `jumlah_uang` decimal(15,2) NOT NULL
+  `foto_kontribusi_uang` varchar(255) NOT NULL,
+  `jumlah_uang` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -86,7 +88,7 @@ CREATE TABLE `kontribusi_uang` (
 
 CREATE TABLE `superuser` (
   `id_superuser` int NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -95,11 +97,11 @@ CREATE TABLE `superuser` (
 --
 
 INSERT INTO `superuser` (`id_superuser`, `email`, `password`) VALUES
-(1, 'Ifzal@superuser', '$2b$10$CnPl3GOdcMwIYoADxa1xK..w8SXFBDHyfappN8Y9cOLhwPwIhOS1C'),
-(2, 'Aqil@superuser', '$2b$10$AguSEkCnERBKPuZNnykgn.gIrSHiXJV2Pi7bvk2/qGaYgeHk5nz1e'),
-(3, 'Agiel@superuser', '$2b$10$lnokCd.Lwjk4xffC2pvwjOI.DmAix3Ktkx1/GraBD67lq4dSqnwjy'),
-(4, 'Iqbal@superuser', '$2b$10$sT2tSE5kHuhUJ.C3a1bj5eoy4S2Ua5N58r2MDvQ8t8qfxl7d139te'),
-(5, 'Tamisa@superuser', '$2b$10$wwuB6g7d.ruADDYzvvE0l.HKc.i.wBzW37kBx7slF/G8aTGJBdkYC');
+(1, 'Agiel@superuser', '$2a$10$QKYhHT3NXinCY2UvmSBy9OW/5uRlaQBk4DG.CbPbU6wQDZK2RB2SC'),
+(2, 'Aqil@superuser', '$2a$10$uFTA7kOvub0YDhVefhog9uv6SdCs7um4I0iCszDi9iVplJT5bsfY2'),
+(3, 'Iqbal@superuser', '$2a$10$.KvuevZDTSAXmGv9BkpacOC9PjqeAdRpUxhmz9yamSCPg5TJv9PUu'),
+(4, 'Tamisa@superuser', '$2a$10$nqfo77Rmo6g5J/uEGWCEYeNF.zpqe8RD7wA9p1ORa9gDy0sk8fPFq'),
+(5, 'Ifzal@superuser', '$2a$10$dQBBYHEybUUNI6ssW1EC/O7K0bJvzWrhuRoLMpeiVvGS5JZGzycgq');
 
 -- --------------------------------------------------------
 
@@ -109,11 +111,11 @@ INSERT INTO `superuser` (`id_superuser`, `email`, `password`) VALUES
 
 CREATE TABLE `user` (
   `id_user` int NOT NULL,
-  `nama` varchar(100) NOT NULL,
+  `nama` varchar(255) NOT NULL,
   `foto` varchar(255) DEFAULT NULL,
   `NIK` bigint NOT NULL,
-  `no_wa` varchar(15) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `no_wa` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `tanggal_daftar` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -123,22 +125,22 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `foto`, `NIK`, `no_wa`, `email`, `password`, `tanggal_daftar`) VALUES
-(1, 'Ibram Maulana Akhsanul Qasasi', 'default.png', 3123522001, '085852769382', 'Ibram@user', '$2b$10$vWfyJJ6AX954DgQ5Y1XqMO1NzDJAfcvrNaCkx/N7ybrix9.fYb7mC', '2024-02-10 09:27:47'),
-(2, 'Ahmad Maulana Afandi', 'default.png', 3123522002, '081359375146', 'Afandi@user', '$2b$10$M2AC1ES3tPnpBqRpWbv7H.EwXV8mwSfN842nwD9aasZsBZu6PIMAW', '2024-02-10 09:28:40'),
-(3, 'Almas Daffa Avicena', 'default.png', 3123522003, '088213135658', 'Daffa@user', '$2b$10$Xnx1Erq8lWs9fTtL77Obm.dsN5sA0ZR4aIp11aHDRvg./IoOehC5W', '2024-03-10 09:29:05'),
-(4, 'Eka Intan Mauliyana', 'default.png', 3123522004, '081937925108', 'Intan@user', '$2b$10$aT3VhoQqZ2ZqPn2X4uo7JefKnZW0xKE1ALHkzteTLI2ZGEF6dOQp2', '2024-04-10 09:29:35'),
-(5, 'Vernanda Mulia Hamonangan Manurung', 'default.png', 3123522005, '081216679709', 'Vernanda@user', '$2b$10$rm.va82kBUHkP6bLQxjwfueWFeMajSTqBI2fWwmwGQS3r2l6pxWxS', '2024-05-10 09:29:58'),
-(6, 'Muhammad Ifzal Faidurrahman', 'default.png', 3123522006, '081907150471', 'Ifzal@user', '$2b$10$QIBvD8XwcklO266ae04H7ODnCnw/m/cxZstEcfq9l4mlNdyWwdNJG', '2024-06-10 09:30:24'),
-(7, 'Dafa Ahmad Fahrisi', 'default.png', 3123522007, '081359684101', 'Dafa@user', '$2b$10$/l.j7EcBiMzP7WjUT84AyuHfGfpOYhw2JiZUwVWUmHVNkTtOFOaXq', '2024-07-10 09:30:45'),
-(8, 'Ahmad Ari Fauzi', 'default.png', 3123522008, '082335838167', 'Ari@user', '$2b$10$aG84lbmo3kwUAMuMgHDIxOp1P74Nk8mZ7uyqEtXqRCT9eBC1KZEtW', '2024-09-10 09:31:10'),
-(9, 'Rahmat M. Alfatih', 'default.png', 3123522009, '082140651676', 'Alfatih@user', '$2b$10$ybiDIuRon1iwkwnII2VUAOnTyZ4glS.BPAdLSXpK5.tnYVei7AgS6', '2024-09-10 09:31:34'),
-(10, 'Aqil Yoga Pramono', 'default.png', 3123522011, '089531322122', 'Aqil@user', '$2b$10$fqyhjw3NrLsOKJVBOp1jCOpTkrUDuZETCvPfznT4tjtozD8ZtZwZy', '2024-10-10 09:32:03'),
-(11, 'R.P. A. Lexy Mangku Saputra', 'default.png', 3123522012, '081238000447', 'Lexy@user', '$2b$10$1Li/5q4XtW50VYemOnQzauRjayopuAGVVdEXDNmfzsC5/6GeUAQIK', '2024-11-10 09:32:25'),
-(12, 'A. Haidar Hafiz', 'default.png', 3123522015, '085230732988', 'Haidar@user', '$2b$10$SbNYcp7tYkaAT.Mx0lKDnO4vjqdKbJ5Jp45KdSR0fFJN.T1H0re52', '2024-12-10 09:33:36'),
-(13, 'Agiel Maula', 'default.png', 3123522016, '085173172800', 'Agiel@user', '$2b$10$na25yn7eeCz2cDq/ebO63.MWSICNsWRjsKsPhYjmipptm8FejcE/u', '2024-01-15 09:34:15'),
-(14, 'Moh Iqbal Triwijaya', 'default.png', 3123522017, '087716845414', 'Iqbal@user', '$2b$10$eIlDwfpZQIrBw88GEpKI2eYuB7hazk4ou/W58XVHBI/Z714fRHlMe', '2024-02-15 09:34:39'),
-(15, 'Rahadyan Danang Susetyo Pranawa', 'default.png', 3123522018, '081235163528', 'Danang@user', '$2b$10$T9UYUSFeVN9WqSy7xhjY6.TEIsoNEZsvVL8UlOWZTfAIH8K4N1Svq', '2024-05-15 09:35:03'),
-(16, 'Tamisa Ulinda Marpaung', 'default.png', 3123522019, '082367702965', 'Tamisa@user', '$2b$10$cXvR7T8VBR38fw66l7nN8ODWCODunLZOASN.a8zkSjkXbDfU.uQ3y', '2024-09-15 09:36:23');
+(1, 'Ibram Maulana Akhsanul Qasasi', 'default.png', 3123522001, '085852769382', 'Ibram@user', '$2a$10$96yseqHSA2zNMFZ4hGzxb.CH9In1.y7ZjHBBa8etmBUw9iHPqDJmu', '2024-02-01 19:35:34'),
+(2, 'Ahmad Maulana Afandi', 'default.png', 3123522002, '081359375146', 'Afandi@user', '$2a$10$ZS8db.D5ZtGPs8m.akkycu1/GOEtix/QRTCZJc7NdfeceEAvNrTou', '2024-02-01 19:36:02'),
+(3, 'Almas Daffa Avicena', 'default.png', 3123522003, '088213135658', 'Daffa@user', '$2a$10$YiRk27iEk8gUxoxcWHKM4.D.YpvJcW3hw5i0n.vx7TnYI7IrTG9iC', '2024-03-01 19:36:20'),
+(4, 'Eka Intan Mauliyana', 'default.png', 3123522004, '081937925108', 'Intan@user', '$2a$10$y5o1utUadrBV0/Pgie.9huF7ePCBEcBDTF1L/5JU9.T81AQNp1MpG', '2024-04-01 19:36:48'),
+(5, 'Vernanda Mulia Hamonangan Manurung', 'default.png', 3123522005, '081216679709', 'Vernanda@user', '$2a$10$Gk8pi2nIzwdJ5cnnUPR8C.xggyuVBx8ziMViG14MiCjNk3eIDT3Fa', '2024-05-01 19:37:22'),
+(6, 'Muhammad Ifzal Faidurrahman', 'default.png', 3123522006, '081907150471', 'Ifzal@user', '$2a$10$hF6A/TqThiDfvuCNhPwV6erInYnc2oE..dOTl86o4YVRIj8i/T0uG', '2024-06-01 19:38:06'),
+(7, 'Dafa Ahmad Fahrisi', 'default.png', 3123522007, '081359684101', 'Dafa@user', '$2a$10$xj9691J5jVl76vAhTDpEMOOP56VMUjF9wetERQk6iZuQxnKLwZta6', '2024-07-01 19:38:27'),
+(8, 'Ahmad Ari Fauzi', 'default.png', 3123522008, '082335838167', 'Ari@user', '$2a$10$hEipWB5Rqns4gIZfGa.LsOyhdpcXWn5qYUOMAOZU4pxXEBZaTltRO', '2024-09-01 19:38:49'),
+(9, 'Rahmat M. Alfatih', 'default.png', 3123522009, '082140651676', 'Alfatih@user', '$2a$10$IsCulmEvDNMLEctzZ2frOu1Q.hh26vrbkjaxery3VnvWC4q1hqE2K', '2024-09-01 19:39:29'),
+(10, 'Aqil Yoga Pramono', 'default.png', 3123522011, '089531322122', 'Aqil@user', '$2a$10$xqlcvhBfgB5xKt4SvKSld.3zSKJgsIGzAHKouDUD9yjItSiglC/Aa', '2024-10-01 19:39:53'),
+(11, 'R.P. A. Lexy Mangku Saputra', 'default.png', 3123522012, '081238000447', 'Lexy@user', '$2a$10$AU8OZpbVUn28oFcNms4McOPcQLGmNY2ACE2.Jq4ZmUBZ9UpFPuifC', '2024-11-01 19:40:16'),
+(12, 'A. Haidar Hafiz', 'default.png', 3123522015, '085230732988', 'Haidar@user', '$2a$10$gEmuyvEjpSh510uWzFulBuoTNF0FW65sTTbB3Zf54b3TExqWPA6sK', '2024-12-01 19:40:41'),
+(13, 'Agiel Maula', 'default.png', 3123522016, '085173172800', 'Agiel@user', '$2a$10$zQYjhqZrkVPAzOe7GDCN4OL7K5V.DZl7myot1/.k1RFq5wGZnNnya', '2024-01-01 19:40:58'),
+(14, 'Moh Iqbal Triwijaya', 'default.png', 3123522017, '087716845414', 'Iqbal@user', '$2a$10$FLbke3eEOR3Ngc6ZaU4k1O68wCXPe4l.2ny8vwxNdqBPou6bDqa3O', '2024-02-01 19:41:14'),
+(15, 'Rahadyan Danang Susetyo Pranawa', 'default.png', 3123522018, '081235163528', 'Danang@user', '$2a$10$0I2bA1fW4hGFsDV.W7g7KuTfKCyLpQzZCunYlcdBgWja/pNP0xCry', '2024-05-01 19:41:40'),
+(16, 'Tamisa Ulinda Marpaung', 'default.png', 3123522019, '082367702965', 'Tamisa@user', '$2a$10$c45BM.Tr5y.iEDx0y7Zhse4cozkuJcYOHeXIXVnbYwXw0CcIFNT3i', '2024-09-01 19:41:55');
 
 -- --------------------------------------------------------
 
@@ -200,6 +202,7 @@ ALTER TABLE `superuser`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `NIK` (`NIK`),
+  ADD UNIQUE KEY `no_wa` (`no_wa`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
