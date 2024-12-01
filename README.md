@@ -49,21 +49,12 @@ Social Investment Application adalah aplikasi web yang dirancang untuk mencatat 
    ```bash
    npm install
    ```
-3. Buat file konfigurasi `.env` berdasarkan contoh:
-   ```bash
-   cp .env.example .env
-   # Edit file .env sesuai dengan konfigurasi MySQL dan API Anda
-   ```
-4. Jalankan migrasi database (opsional jika diperlukan):
-   ```bash
-   node migrate.js
-   ```
 
 ---
 
 ## **Penggunaan**
 1. Jalankan aplikasi menggunakan **nodemon**:
    ```bash
-   nodemon app.js
+   nodemon
    ```
-2. Akses aplikasi di [http://localhost:3000](http://localhost:3000) (atau port lain sesuai konfigurasi Anda).
+2. Akses aplikasi di [http://localhost:3000](http://localhost:3000).
