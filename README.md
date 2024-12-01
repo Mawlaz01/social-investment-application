@@ -69,5 +69,5 @@ Special thanks to my mentors and peers for their moral and technical support. Th
 
 Once again, thank you all.
 
-![Autoplay GIF](https://i.giphy.com/media/3KSG8LgKn8cAAAAd/giphy.gif)
+<img src="https://media1.tenor.com/m/3KSG8LgKn8cAAAAd/tachibana-arisu.gif" alt="Autoplay GIF" style="display: block; max-width: 100%; height: auto;" autoplay>
 
