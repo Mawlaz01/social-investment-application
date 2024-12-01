@@ -11,6 +11,7 @@ Social Investment Application adalah aplikasi web yang dirancang untuk mencatat 
 3. [Persyaratan Sistem](#persyaratan-sistem)
 4. [Instalasi](#instalasi)
 5. [Penggunaan](#penggunaan)
+6. [Ucapan Terima Kasih](#ucapan-terima-kasih)
 
 ---
 
@@ -58,3 +59,16 @@ Social Investment Application adalah aplikasi web yang dirancang untuk mencatat 
    nodemon
    ```
 2. Akses aplikasi di [http://localhost:3000](http://localhost:3000).
+
+---
+
+## **Ucapan Terima Kasih**
+Saya ingin mengucapkan terima kasih yang sebesar-besarnya kepada seluruh anggota tim yang telah bekerja keras dalam pengembangan aplikasi ini. Proyek ini merupakan proyek awal saya di mana saya terlibat aktif dalam seluruh proses pengembangan, mulai dari desain hingga implementasi.  
+
+Saya juga berterima kasih kepada mentor, keluarga, dan teman-teman yang telah memberikan dukungan moral dan teknis sepanjang perjalanan ini. Aplikasi ini kini telah siap digunakan oleh masyarakat luas, dan saya berharap aplikasi ini dapat memberikan manfaat yang besar.  
+
+Sekali lagi, terima kasih banyak! 🎉
+
+---
+
+![Thank You](https://media1.tenor.com/m/3KSG8LgKn8cAAAAd/tachibana-arisu.gif)
