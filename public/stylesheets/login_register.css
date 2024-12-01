@@ -19,24 +19,24 @@ body{
 
 .alert {
     position: fixed;
-    top: 5%; /* Atur posisi dari atas */
+    top: 5%;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
-    padding: 10px 20px; /* Kurangi padding agar pop-up lebih ramping */
+    padding: 10px 20px;
     border-radius: 8px;
     font-family: Arial, sans-serif;
-    font-size: 14px; /* Mengurangi ukuran font */
+    font-size: 14px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Menjaga isi di tengah */
+    justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.5s, fadeOut 0.5s 4.5s;
     opacity: 0;
     animation-fill-mode: forwards;
     text-align: center;
-    max-width: 400px; /* Menetapkan lebar maksimum */
-    width: 100%; /* Pop-up akan mengisi lebar yang tersedia namun tidak lebih dari max-width */
+    max-width: 400px;
+    width: 100%;
 }
 
 .alert.alert-danger {
@@ -95,7 +95,7 @@ body{
     max-width: 100%;
     min-height: 480px;
 }
-/*lorem ipsum*/
+
 .container p{
     font-size: 10px;
     line-height: 20px;
@@ -142,19 +142,19 @@ body{
 }
 
 .logo{
-    width: 20%; /* Sesuaikan dengan ukuran logo Anda */
+    width: 20%;
     height: auto;
     margin-bottom: 100px;    
     display: block;
     border-radius: 100px;
-    margin: 0 auto; /* Untuk men-center logo secara horizontal */
+    margin: 0 auto;
 }
 
 /*kolom form*/
 
 .container input{
     background-color: #ffffff;
-    border: 1px solid #37b7c3; /* Garis pinggir hijau */
+    border: 1px solid #37b7c3;
     margin: 5px 0;
     padding: 8px 10px;
     font-size: 11px;

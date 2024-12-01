@@ -37,9 +37,9 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1050; /* Pastikan navbar berada di atas elemen lainnya */
+  z-index: 1050;
 }
 
 body {
-  padding-top: 56px; /* Tambahkan padding untuk mencegah konten terpotong di bawah navbar */
+  padding-top: 56px;
 }

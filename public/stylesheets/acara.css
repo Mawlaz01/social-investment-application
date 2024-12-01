@@ -32,12 +32,12 @@
     flex-grow: 1;
 }.acara-card {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px; /* Optional, to make the card corners rounded */
-    transition: box-shadow 0.3s ease; /* Optional, to add smooth shadow effect on hover */
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease;
 }
 
 .acara-card:hover {
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Adds a stronger shadow when the card is hovered */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
 }
 .acara-card .pemilik-info {
     font-size: 0.9rem;
