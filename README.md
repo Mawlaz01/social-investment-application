@@ -1,4 +1,5 @@
-![SIAPP Logo](https://github.com/user-attachments/assets/9af589da-82da-498f-bd27-869f26e65722)
+
+![Cuplikan layar 2024-12-01 231625](https://github.com/user-attachments/assets/56baeb77-083d-449a-94c3-9e615206b57e)
 
 # Social Investment Application
 
