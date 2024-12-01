@@ -1,4 +1,6 @@
 
+![siapp-high-resolution-logo-transparent](https://github.com/user-attachments/assets/9af589da-82da-498f-bd27-869f26e65722)
+
 # Social Investment Application
 
 The **Social Investment Application** is a web-based platform designed to track and validate contributors' donations for specific events. This application offers transparency through detailed reporting, reminders for validation, and insightful statistics for users and events.
