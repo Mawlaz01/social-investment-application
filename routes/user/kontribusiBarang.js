@@ -10,7 +10,7 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/user/'); 
+        cb(null, 'public/images/kontribusi_barang/');
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -47,11 +47,10 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-
 router.get('/search_nik', auth, async (req, res) => {
     try {
         const nik = req.query.nik;
-        console.log('Mencari NIK:', nik); 
+        console.log('Mencari NIK:', nik);
         const user = await User.getByNIK(nik);
         if (user) {
             res.json({ nama: user.nama });
@@ -64,10 +63,10 @@ router.get('/search_nik', auth, async (req, res) => {
     }
 });
 
-
-router.post('/create', auth, async (req, res) => {
+router.post('/create', auth, upload.single('foto_kontribusi_barang'), async (req, res) => {
     try {
         const { nik, nama_barang, jumlah_barang, id_acara } = req.body;
+        const foto_kontribusi_barang = req.file ? req.file.filename : null;
 
         const acara = await Acara.getById(id_acara);
 
@@ -98,7 +97,8 @@ router.post('/create', auth, async (req, res) => {
         let kontribusiBarangData = {
             id_kontribusi: kontribusiResult.insertId,
             nama_barang,
-            jumlah_barang
+            jumlah_barang,
+            foto_kontribusi_barang
         };
         await KontribusiBarang.store(kontribusiBarangData);
 
@@ -115,7 +115,6 @@ router.post('/create', auth, async (req, res) => {
         res.redirect(`/users/detail_acara/${req.body.id_acara}`);
     }
 });
-
 
 router.get('/edit/:id', auth, async (req, res) => {
     try {
@@ -138,11 +137,11 @@ router.get('/edit/:id', auth, async (req, res) => {
     }
 });
 
-
-router.post('/update/:id', auth, async (req, res) => {
+router.post('/update/:id', auth, upload.single('foto_kontribusi_barang'), async (req, res) => {
     try {
         const kontribusiBarangId = req.params.id;
         const { nama_barang, jumlah_barang, id_acara } = req.body;
+        let foto_kontribusi_barang = req.file ? req.file.filename : null;
 
         const kontribusiBarang = await KontribusiBarang.getById(kontribusiBarangId);
         const kontribusi = await Kontribusi.getById(kontribusiBarang.id_kontribusi);
@@ -159,17 +158,20 @@ router.post('/update/:id', auth, async (req, res) => {
             return res.redirect(`/users/detail_acara/${id_acara}`);
         }
 
+        if (!foto_kontribusi_barang) {
+            foto_kontribusi_barang = kontribusiBarang.foto_kontribusi_barang;
+        }
+
         const data = {
             nama_barang,
-            jumlah_barang
+            jumlah_barang,
+            foto_kontribusi_barang
         };
 
         await KontribusiBarang.update(kontribusiBarangId, data);
 
         const updateData = { tanggal_edit_sumbangan: new Date() };
         await Kontribusi.update(kontribusi.id_kontribusi, updateData);
-
-        await NotificationService.sendWhatsAppMessage(kontribusi.id_penyumbang, 'Kontribusi barang Anda telah diperbarui.');
 
         req.flash('success', 'Kontribusi barang berhasil diperbarui');
         res.redirect(`/users/detail_acara/${id_acara}`);
@@ -179,6 +181,7 @@ router.post('/update/:id', auth, async (req, res) => {
         res.redirect(`/users/detail_acara/${req.body.id_acara}`);
     }
 });
+
 
 router.post('/delete/:id', auth, async (req, res) => {
     try {

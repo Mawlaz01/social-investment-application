@@ -43,6 +43,11 @@ app.use(session({
 // Setup flash middleware
 app.use(flash());
 
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/users/detail_acara', detailAcaraRoutes);
 app.use('/users/kontribusi_uang', kontribusiUangRoutes);

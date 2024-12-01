@@ -83,6 +83,7 @@
                                             <th scope="col">Tanggal Sumbangan</th>
                                             <th scope="col">Tanggal Edit</th>
                                             <th scope="col">Jumlah Uang</th>
+                                            <th scope="col">Foto Kontribusi Uang</th>
                                             <th scope="col">Status Validasi</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
@@ -94,18 +95,10 @@
                                                 <td><%= item.nik %></td>
                                                 <td><%= item.nama_penyumbang %></td>
                                                 <td><%= item.no_wa %></td>
-                                                <td><%= new Date(item.tanggal_sumbangan).toLocaleString('id-ID', {
-                                                    year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
-                                                }) %></td>
-                                                <td><%= item.tanggal_edit_sumbangan
-                                                    ? new Date(item.tanggal_edit_sumbangan).toLocaleString('id-ID', {
-                                                        year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
-                                                    })
-                                                    : '-' %>
-                                                </td>
-                                                <td><%= new Intl.NumberFormat('id-ID', {
-                                                    style: 'currency', currency: 'IDR', minimumFractionDigits: 0
-                                                }).format(item.jumlah_uang) %></td>
+                                                <td><%= new Date(item.tanggal_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) %></td>
+                                                <td><%= item.tanggal_edit_sumbangan ? new Date(item.tanggal_edit_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-' %></td>
+                                                <td><%= new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(item.jumlah_uang) %></td>
+                                                <td><img src="/images/kontribusi_uang/<%= item.foto_kontribusi_uang %>" alt="Foto Kontribusi Uang" style="width: 100px; height: auto;"></td>
                                                 <td><%= item.status_validasi %></td>
                                                 <td>
                                                     <div class="aksi">
@@ -180,6 +173,7 @@
                                         <th scope="col">Tanggal Edit</th>
                                         <th scope="col">Nama Barang</th>
                                         <th scope="col">Jumlah</th>
+                                        <th scope="col">Foto Kontribusi Barang</th>
                                         <th scope="col">Status Validasi</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
@@ -191,17 +185,17 @@
                                             <td><%= item.nik %></td>
                                             <td><%= item.nama_penyumbang %></td>
                                             <td><%= item.no_wa %></td>
-                                            <td><%= new Date(item.tanggal_sumbangan).toLocaleString('id-ID', {
-                                                year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
-                                            }) %></td>
-                                            <td><%= item.tanggal_edit_sumbangan
-                                                ? new Date(item.tanggal_edit_sumbangan).toLocaleString('id-ID', {
-                                                    year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit'
-                                                })
-                                                : '-' %>
+                                            <td>
+                                                <%= new Date(item.tanggal_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) %>
+                                            </td>
+                                            <td>
+                                                <%= item.tanggal_edit_sumbangan ? new Date(item.tanggal_edit_sumbangan).toLocaleString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) : '-' %>
                                             </td>
                                             <td><%= item.nama_barang %></td>
                                             <td><%= item.jumlah_barang %></td>
+                                            <td>
+                                                <img src="/images/kontribusi_barang/<%= item.foto_kontribusi_barang %>" alt="Foto Kontribusi Barang" style="width: 100px; height: auto;">
+                                            </td>
                                             <td><%= item.status_validasi %></td>
                                             <td>
                                                 <% if (!isMoreThan7DaysOld && item.status_validasi !== 'valid') { %>
@@ -243,6 +237,7 @@
                                     <% }); %>
                                 </tbody>
                             </table>
+                            
                         </div>
                     </div>
                     
@@ -251,12 +246,9 @@
           </main>
       </div>
     </div>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qV/U5NpHxxC/DHhr23LZEMVZLIL0A5hr3WCE3N8l6M0DBZWwBfJ4pvMboZe1QssM" crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
                   document.querySelectorAll('[data-bs-toggle="modal"]').forEach(button => {
@@ -276,7 +268,6 @@
                   });
                 });
               </script>
-        <script src="/js/script.js"></script>
 </body>
 
 </html>

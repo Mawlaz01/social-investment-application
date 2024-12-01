@@ -1,5 +1,5 @@
 const connection = require('../config/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 class User {
     static async getAll() {
@@ -69,6 +69,25 @@ class User {
             });
         });
     }
+
+    static async getByEmail(email) {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM User WHERE email = ?', [email], (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows[0]);
+            });
+        });
+    }
+
+    static async getByNoWa(no_wa) {
+        return new Promise((resolve, reject) => {
+            connection.query('SELECT * FROM User WHERE no_wa = ?', [no_wa], (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows[0]);
+            });
+        });
+    }
+
 
     static async getTotalPendaftarPerBulan() { 
         return new Promise((resolve, reject) => {

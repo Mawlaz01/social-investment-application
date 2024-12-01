@@ -6,13 +6,12 @@ const KontribusiBarang = require('../../models/KontribusiBarang');
 const User = require('../../models/User');
 const Kontribusi = require('../../models/Kontribusi');
 const Validasi = require('../../models/Validasi');
-const connection = require('../../config/db');
 const multer = require('multer');
 const path = require('path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/user/'); 
+        cb(null, 'public/images/');
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -138,19 +137,7 @@ router.post('/delete/:id', auth, async (req, res) => {
     try {
         const acaraId = req.params.id;
 
-        const kontribusiCount = await new Promise((resolve, reject) => {
-            connection.query(`
-                SELECT COUNT(*) AS kontribusi_count
-                FROM Kontribusi
-                WHERE id_acara = ?
-            `, [acaraId], (err, rows) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows[0].kontribusi_count);
-                }
-            });
-        });
+        const kontribusiCount = await Acara.getKontribusiCountByAcaraId(acaraId);
 
         if (kontribusiCount > 0) {
             req.flash('error', 'Acara tidak dapat dihapus karena masih ada kontribusi terkait.');
@@ -167,6 +154,7 @@ router.post('/delete/:id', auth, async (req, res) => {
         res.redirect('/users/detail_acara/' + req.params.id);
     }
 });
+
 
 router.post('/lapor', auth, async (req, res) => {
     try {
