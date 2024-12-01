@@ -10,7 +10,7 @@ const path = require('path');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/user/'); 
+        cb(null, 'public/images/kontribusi_uang/');
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
@@ -50,7 +50,7 @@ router.get('/', auth, async (req, res) => {
 router.get('/search_nik', auth, async (req, res) => {
     try {
         const nik = req.query.nik;
-        console.log('Mencari NIK:', nik); 
+        console.log('Mencari NIK:', nik);
         const user = await User.getByNIK(nik);
         if (user) {
             res.json({ nama: user.nama });
@@ -63,9 +63,10 @@ router.get('/search_nik', auth, async (req, res) => {
     }
 });
 
-router.post('/create', auth, async (req, res) => {
+router.post('/create', auth, upload.single('foto_kontribusi_uang'), async (req, res) => {
     try {
         const { nik, jumlah_uang, id_acara } = req.body;
+        const foto_kontribusi_uang = req.file ? req.file.filename : null;
 
         const acara = await Acara.getById(id_acara);
 
@@ -97,7 +98,8 @@ router.post('/create', auth, async (req, res) => {
 
         let kontribusiUangData = {
             id_kontribusi: kontribusiResult.insertId,
-            jumlah_uang: jumlahUangBersih
+            jumlah_uang: jumlahUangBersih,
+            foto_kontribusi_uang
         };
         await KontribusiUang.store(kontribusiUangData);
 
@@ -114,7 +116,6 @@ router.post('/create', auth, async (req, res) => {
         res.redirect(`/users/detail_acara/${id_acara}`);
     }
 });
-
 
 router.get('/edit/:id', auth, async (req, res) => {
     try {
@@ -137,11 +138,11 @@ router.get('/edit/:id', auth, async (req, res) => {
     }
 });
 
-
-router.post('/update/:id', auth, async (req, res) => {
+router.post('/update/:id', auth, upload.single('foto_kontribusi_uang'), async (req, res) => {
     try {
         const kontribusiUangId = req.params.id;
         const { jumlah_uang, id_acara } = req.body;
+        let foto_kontribusi_uang = req.file ? req.file.filename : null;
 
         const kontribusiUang = await KontribusiUang.getById(kontribusiUangId);
         const kontribusi = await Kontribusi.getById(kontribusiUang.id_kontribusi);
@@ -160,8 +161,13 @@ router.post('/update/:id', auth, async (req, res) => {
 
         const jumlahUangBersih = parseInt(jumlah_uang.replace(/[^\d]/g, ''));
 
+        if (!foto_kontribusi_uang) {
+            foto_kontribusi_uang = kontribusiUang.foto_kontribusi_uang;
+        }
+
         const data = {
-            jumlah_uang: jumlahUangBersih
+            jumlah_uang: jumlahUangBersih,
+            foto_kontribusi_uang
         };
 
         await KontribusiUang.update(kontribusiUangId, data);

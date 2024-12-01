@@ -167,6 +167,20 @@ class Acara {
             });
         });
     }
+
+    static async getKontribusiCountByAcaraId(acaraId) {
+        return new Promise((resolve, reject) => {
+            connection.query(`
+                SELECT COUNT(*) AS kontribusi_count
+                FROM Kontribusi
+                WHERE id_acara = ?
+            `, [acaraId], (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows[0].kontribusi_count);
+            });
+        });
+    }
+
 }
 
 module.exports = Acara;

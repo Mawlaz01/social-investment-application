@@ -6,9 +6,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/stylesheets/login_register.css">
     <title>SIAPP</title>
-        <link rel="icon" type="image/x-icon" href="/images/user/Siapp.ico" />
+    <link rel="icon" type="image/x-icon" href="/images/user/Siapp.ico" />
 </head>
 <body>
+    <% if (messages.error) { %>
+        <div class="alert alert-danger">
+            <i class="fas fa-times-circle"></i>
+            <% messages.error.forEach(function(message) { %>
+                <p><%= message %></p>
+            <% }) %>
+        </div>
+    <% } %>
+    <% if (messages.success) { %>
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i>
+            <% messages.success.forEach(function(message) { %>
+                <p><%= message %></p>
+            <% }) %>
+        </div>
+    <% } %>
     <div class="container" id="container">
         <div class="form-container log-in">
             <form action="/login" method="POST">
@@ -53,6 +69,5 @@
     </div>
 
     <script src="/js/login_register.js"></script>
-
 </body>
 </html>

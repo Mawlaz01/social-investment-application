@@ -6,6 +6,7 @@ const User = require('../../models/User');
 const Acara = require('../../models/Acara');
 const Kontribusi = require('../../models/Kontribusi');
 const KontribusiUang = require('../../models/KontribusiUang');
+const KontribusiBarang = require('../../models/KontribusiBarang');
 
 const auth = async (req, res, next) => {
     if (!req.session.isSuperuser && req.session.userId) {
@@ -35,11 +36,17 @@ router.get('/', auth, async (req, res) => {
 
         const totalUangDiterima = await KontribusiUang.getTotalUangByCreatorId(req.session.userId);
 
+        const totalBarangDisumbangkan = await KontribusiBarang.getTotalBarangByUserId(req.session.userId);
+        
+        const totalBarangDiterima = await KontribusiBarang.getTotalBarangByCreatorId(req.session.userId);
+
         res.render('user/dashboard', {
             user,
             unvalidatedAcara,
             totalUangDisumbangkan,
-            totalUangDiterima
+            totalUangDiterima,
+            totalBarangDisumbangkan, 
+            totalBarangDiterima 
         });
     } catch (error) {
         console.error("Error:", error);

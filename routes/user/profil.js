@@ -4,7 +4,7 @@ const User = require('../../models/User');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 function isAuthenticated(req, res, next) {
     if (req.session.userId) { 
