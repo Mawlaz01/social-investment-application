@@ -1,9 +1,4 @@
-
-<div style="text-align: center; padding: 10px;">
-    <img src="https://github.com/user-attachments/assets/9af589da-82da-498f-bd27-869f26e65722" 
-         alt="SIAPP Logo" 
-         style="max-width: 300px; border: 1px solid #ddd; border-radius: 10px; padding: 10px;">
-</div>
+![SIAPP Logo](https://github.com/user-attachments/assets/9af589da-82da-498f-bd27-869f26e65722)
 
 # Social Investment Application
 
