@@ -51,7 +51,11 @@ The **Social Investment Application** is a web-based platform designed to track 
    ```bash
    npm install
    ```
-
+3. Set up WhatsApp connection:
+   - When you start the application, a QR code will be displayed in the terminal.
+   - Open WhatsApp on your phone and navigate to **Settings > Linked Devices**.
+   - Tap on **Link a Device**, then scan the QR code displayed in the terminal using your phone.
+   - Wait for the application to confirm the connection. Once successful, it will be ready to send notifications.
 ---
 
 ## Usage
