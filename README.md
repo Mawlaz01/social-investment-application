@@ -1,5 +1,5 @@
 
-![Cuplikan layar 2024-12-01 231625](https://github.com/user-attachments/assets/56baeb77-083d-449a-94c3-9e615206b57e)
+![20241201_233416](https://github.com/user-attachments/assets/4fdf9f48-c1e9-4773-ba56-879a159c607e)
 
 # Social Investment Application
 
