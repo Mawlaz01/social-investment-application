@@ -1,5 +1,5 @@
 
-![20241201_233416](https://github.com/user-attachments/assets/4fdf9f48-c1e9-4773-ba56-879a159c607e)
+![20241201_233952](https://github.com/user-attachments/assets/0f4ac8a7-3bc6-4b7b-ac7b-d2724724b73f)
 
 # Social Investment Application
 
