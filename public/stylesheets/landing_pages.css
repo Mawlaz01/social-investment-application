@@ -4507,7 +4507,7 @@ textarea.form-control-lg {
   float: left;
   padding-right: var(--bs-breadcrumb-item-padding-x);
   color: var(--bs-breadcrumb-divider-color);
-  content: var(--bs-breadcrumb-divider, "/") /* rtl: var(--bs-breadcrumb-divider, "/") */;
+  content: var(--bs-breadcrumb-divider, "/")
 }
 .breadcrumb-item.active {
   color: var(--bs-breadcrumb-item-active-color);
@@ -5599,7 +5599,6 @@ textarea.form-control-lg {
   border-top-color: var(--bs-tooltip-bg);
 }
 
-/* rtl:begin:ignore */
 .bs-tooltip-end .tooltip-arrow, .bs-tooltip-auto[data-popper-placement^=right] .tooltip-arrow {
   left: 0;
   width: var(--bs-tooltip-arrow-height);
@@ -5611,7 +5610,6 @@ textarea.form-control-lg {
   border-right-color: var(--bs-tooltip-bg);
 }
 
-/* rtl:end:ignore */
 .bs-tooltip-bottom .tooltip-arrow, .bs-tooltip-auto[data-popper-placement^=bottom] .tooltip-arrow {
   top: 0;
 }
@@ -5621,7 +5619,6 @@ textarea.form-control-lg {
   border-bottom-color: var(--bs-tooltip-bg);
 }
 
-/* rtl:begin:ignore */
 .bs-tooltip-start .tooltip-arrow, .bs-tooltip-auto[data-popper-placement^=left] .tooltip-arrow {
   right: 0;
   width: var(--bs-tooltip-arrow-height);
@@ -5633,7 +5630,6 @@ textarea.form-control-lg {
   border-left-color: var(--bs-tooltip-bg);
 }
 
-/* rtl:end:ignore */
 .tooltip-inner {
   max-width: var(--bs-tooltip-max-width);
   padding: var(--bs-tooltip-padding-y) var(--bs-tooltip-padding-x);
@@ -8194,18 +8190,18 @@ textarea.form-control-lg {
 
 .omaga1 {
   display: flex;
-  flex-wrap: wrap; /* Agar elemen dapat pindah baris */
+  flex-wrap: wrap;
 }
 
 .border1 {
-  border-radius: 0px 0px 200px 200px; /* Semua sudut memiliki radius 20px */
+  border-radius: 0px 0px 200px 200px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 5;
 }
 
 .borderindek {
-  border-radius: 200px 200px 0px 0px; /* Sudut atas kiri dan kanan melengkung */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Efek bayangan lebih tebal */
+  border-radius: 200px 200px 0px 0px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -8227,20 +8223,20 @@ textarea.form-control-lg {
   }
 
   .baten {
-    width: 40px; /* Tombol lebih kecil */
-    display: block; /* Rata kiri */
-    text-align: left; /* Teks di tombol rata kiri */
+    width: 40px;
+    display: block;
+    text-align: left;
   }
 
   .baten2 {
     width: 225px;
     text-align: center;
     display: block;
-    margin: 0 auto; /* Mengatur margin otomatis untuk horizontal center */
+    margin: 0 auto;
   }
 
   .anjay {
-    margin-right: 120px; /* Geser ke kiri dengan nilai negatif */
+    margin-right: 120px;
   }
   
   .maju {

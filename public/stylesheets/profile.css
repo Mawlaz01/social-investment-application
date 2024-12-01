@@ -14,40 +14,40 @@
 }
 
 input[type="datetime-local"]::placeholder {
-    color: #37B7C3; /* Ubah warna placeholder */
+    color: #37B7C3;
 }
 
-/* Mengubah teks dalam input */
+
 input[type="datetime-local"]::-webkit-datetime-edit {
-    color: #37B7C3; /* Ubah warna teks pada input datetime */
+    color: #37B7C3; 
 }
 .frm-profile h4 {
-    font-weight: bold; /* Membuat teks menjadi bold */
-    color: #10266f;    /* Mengubah warna teks menjadi #071952 */
+    font-weight: bold;
+    color: #10266f;
 }
 
 .btn-primary {
-    background-color: #37B7C3;  /* Ubah warna background */
+    background-color: #37B7C3; 
     border-radius: 20px;
-    border-color: #ffffff;      /* Ubah warna border */
+    border-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary:hover {
-    background-color: #2b9f9d; /* Ubah warna tombol saat hover */
-    border-color: #2b9f9d;      /* Ubah warna border saat hover */
+    background-color: #2b9f9d;
+    border-color: #2b9f9d; 
 }
 
 .profile-photo-label {
     display: inline-block;
     width: 80px;
-    height: 80px; /* Ukuran lingkaran foto */
+    height: 80px;
     position: relative;
 }
 
 #photoPreview {
-    width: 100px; /* ukuran lingkaran */
-    height: 100px; /* ukuran lingkaran */
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #37B7C3;

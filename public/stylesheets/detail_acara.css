@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');font-
-/* Global Styles */
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
     color: #10266f;
 }
 
-/* Container */
+
 .container-fluid {
     margin-top: 20px;
     color: #10266f;
 }
 
-/* Card Styling */
+
 .card {
     background-color: #fff;
     border-radius: 8px;
@@ -49,7 +49,6 @@ body {
     border-radius: 10px;
 }
 
-/* Button Styling */
 .btn {
     border-radius: 5px;
 }
@@ -77,7 +76,6 @@ body {
     background-color: #3774c3;
 }
 
-/* Table Styling */
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -90,7 +88,7 @@ body {
     border-bottom: 1px solid #ddd;
     
 }.table-sm td, .table-sm th {
-    font-size: 12px;  /* Menyesuaikan ukuran font sesuai kebutuhan */
+    font-size: 12px;
 }
 
 .table th {
@@ -107,7 +105,6 @@ body {
     background-color: #EBF4F6;
 }
 
-/* Badge Styling */
 .badge {
     padding: 5px 10px;
     border-radius: 12px;
@@ -122,7 +119,6 @@ body {
     background-color: #6c757d;
 }
 
-/* Responsive Layout */
 @media (max-width: 768px) {
     .row {
         flex-direction: column;
@@ -142,7 +138,6 @@ body {
     }
 }
 
-/* Illustration Section */
 .illustration-img {
     max-width: 100%;
     height: auto;
@@ -173,7 +168,6 @@ body {
     text-decoration: none;
     color: #ffffff;
 }
-/* Responsive */
 
 @media (max-width: 835px) {
     .table {

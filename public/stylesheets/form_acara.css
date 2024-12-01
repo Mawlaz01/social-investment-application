@@ -17,33 +17,30 @@ main.content {
     color: #37B7C3;
 }
 
-/* Mengubah border dan latar belakang input datetime-local */
 input[type="datetime-local"] {
-    border: 2px solid #37B7C3; /* Ubah border */
-    background-color: white; /* Ubah latar belakang */
+    border: 2px solid #37B7C3;
+    background-color: white;
 }
 
-/* Mengubah placeholder */
 input[type="datetime-local"]::placeholder {
-    color: #37B7C3; /* Ubah warna placeholder */
+    color: #37B7C3;
 }
 
-/* Mengubah teks dalam input */
 input[type="datetime-local"]::-webkit-datetime-edit {
-    color: #37B7C3; /* Ubah warna teks pada input datetime */
+    color: #37B7C3;
 }
 .frm-acara h4 {
-    font-weight: bold; /* Membuat teks menjadi bold */
-    color: #10266f;    /* Mengubah warna teks menjadi #071952 */
+    font-weight: bold;
+    color: #10266f;
 }
 
 .btn-primary {
-    background-color: #37B7C3;  /* Ubah warna background */
-    border-color: #37B7C3;      /* Ubah warna border */
+    background-color: #37B7C3;
+    border-color: #37B7C3;
 }
 
 .btn-primary:hover {
-    background-color: #2b9f9d; /* Ubah warna tombol saat hover */
-    border-color: #2b9f9d;      /* Ubah warna border saat hover */
+    background-color: #2b9f9d;
+    border-color: #2b9f9d;
 }
 

@@ -205,8 +205,8 @@ a.sidebar-link:hover {
         margin-left: 55px;
     }
 }.btn-secondary {
-    background-color: #10266f;  /* Ubah warna background */
-    border-color: #10266f;      /* Ubah warna border */
+    background-color: #10266f;
+    border-color: #10266f; 
 }
 
 .btn-primary:hover {

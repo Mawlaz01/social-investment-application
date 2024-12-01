@@ -41,18 +41,24 @@ router.get('/:id', auth, async (req, res) => {
             return res.redirect('/users/dashboard');
         }
 
-        const kontribusiUang = await KontribusiUang.getAllByAcaraId(acaraId);
-        const kontribusiBarang = await KontribusiBarang.getAllByAcaraId(acaraId);
+        const kontribusiUang = await KontribusiUang.getAllByUserIdAndAcaraId(userId, acaraId);
+        const kontribusiBarang = await KontribusiBarang.getAllByUserIdAndAcaraId(userId, acaraId);
         const acara = await Acara.getById(acaraId);
 
         const kontribusiUangWithStatus = await Promise.all(kontribusiUang.map(async item => {
-            item.laporan = await Validasi.getAllByKontribusiId(item.id_kontribusi);
-            return item;
+            const laporan = await Validasi.getByKontribusiId(item.id_kontribusi);
+            return { 
+                ...item, 
+                laporan: laporan.length > 0 ? laporan[0].laporan : '-', 
+            };
         }));
 
         const kontribusiBarangWithStatus = await Promise.all(kontribusiBarang.map(async item => {
-            item.laporan = await Validasi.getAllByKontribusiId(item.id_kontribusi);
-            return item;
+            const laporan = await Validasi.getByKontribusiId(item.id_kontribusi);
+            return { 
+                ...item, 
+                laporan: laporan.length > 0 ? laporan[0].laporan : '-', 
+            };
         }));
 
         res.render('user/detail_investasi', {
@@ -63,7 +69,7 @@ router.get('/:id', auth, async (req, res) => {
     } catch (error) {
         console.error("Error:", error);
         res.status(500).send('Terjadi kesalahan saat memuat detail investasi');
-    }
+    }
 });
 
 router.post('/validate', auth, async (req, res) => {
