@@ -1,73 +1,72 @@
 
-# **Social Investment Application**
+# Social Investment Application
 
-Social Investment Application adalah aplikasi web yang dirancang untuk mencatat kontribusi penyumbang pada acara tertentu. Aplikasi ini memberikan validasi kepada penyumbang dan menyediakan sistem pelaporan yang transparan. Pengguna dapat membuat acara, mencatat penyumbang, dan mencatat kontribusi dalam bentuk uang atau barang. Selain itu, aplikasi ini memiliki fitur pengingat untuk validasi dan menyediakan statistik terkait pengguna dan acara.
-
----
-
-## **Daftar Isi**
-1. [Fitur](#fitur)
-2. [Teknologi](#teknologi)
-3. [Persyaratan Sistem](#persyaratan-sistem)
-4. [Instalasi](#instalasi)
-5. [Penggunaan](#penggunaan)
-6. [Ucapan Terima Kasih](#ucapan-terima-kasih)
+The **Social Investment Application** is a web-based platform designed to track and validate contributors' donations for specific events. This application offers transparency through detailed reporting, reminders for validation, and insightful statistics for users and events.
 
 ---
 
-## **Fitur**
-- Membuat dan mengelola acara.
-- Mencatat data penyumbang dan kontribusi mereka (uang atau barang).
-- Sistem pengingat menggunakan WhatsApp API.
-- Statistik pengguna dan acara.
-- Sistem pelaporan transparan.
+## Table of Contents
+1. [Features](#features)
+2. [Technologies](#technologies)
+3. [System Requirements](#system-requirements)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Acknowledgements](#acknowledgements)
 
 ---
 
-## **Teknologi**
+## Features
+- Create and manage events.
+- Record contributors' data and their contributions (money or goods).
+- Reminder system using the WhatsApp API.
+- Event and user statistics.
+- Transparent reporting system for contributors and event organizers.
+
+---
+
+## Technologies
 - **Frontend:** HTML, CSS, JavaScript.
-- **Backend:** Node.js dengan Express.js.
+- **Backend:** Node.js with Express.js.
 - **Database:** MySQL.
-- **Notifikasi:** WhatsApp API untuk pengiriman pesan pengingat.
+- **Notifications:** WhatsApp API for sending reminders.
 
 ---
 
-## **Persyaratan Sistem**
-- Node.js versi terbaru.
+## System Requirements
+- Node.js (latest version).
 - MySQL Server.
-- WhatsApp API (terintegrasi dalam aplikasi).
-- Sistem operasi yang didukung: Windows, MacOS, atau Linux.
+- WhatsApp API integration.
+- Supported OS: Windows, macOS, Linux.
 
 ---
 
-## **Instalasi**
-1. Clone repositori:
+## Installation
+1. Clone the repository:
    ```bash
    git clone https://github.com/Mawlaz01/social-investment-application.git
    cd social-investment-application
    ```
-2. Instal dependensi:
+2. Install dependencies:
    ```bash
    npm install
    ```
 
 ---
 
-## **Penggunaan**
-1. Jalankan aplikasi menggunakan **nodemon**:
+## Usage
+1. Start the application using **nodemon**:
    ```bash
    nodemon
    ```
-2. Akses aplikasi di [http://localhost:3000](http://localhost:3000).
+2. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## **Ucapan Terima Kasih**
-Saya ingin mengucapkan terima kasih yang sebesar-besarnya kepada seluruh anggota tim yang telah bekerja keras dalam pengembangan aplikasi ini. Proyek ini merupakan proyek awal saya di mana saya terlibat aktif dalam seluruh proses pengembangan, mulai dari desain hingga implementasi.  
+## Acknowledgements
+I would like to express my heartfelt gratitude to all team members who contributed to this project. This project represents my first active participation in the complete development process, from design to deployment.
 
-Saya juga berterima kasih kepada mentor, keluarga, dan teman-teman yang telah memberikan dukungan moral dan teknis sepanjang perjalanan ini. Aplikasi ini kini telah siap digunakan oleh masyarakat luas, dan saya berharap aplikasi ini dapat memberikan manfaat yang besar.  
+Special thanks to my mentors and peers for their moral and technical support. This application is now ready for public use, and I hope it brings meaningful benefits to the community.
 
-Sekali lagi, terima kasih banyak! 🎉
+Once again, thank you all.
 
-https://github.com/user-attachments/assets/58c5b338-6baa-42cb-b002-d3cbba9357b4
-
+![Thank you!](https://media1.tenor.com/m/3KSG8LgKn8cAAAAd/tachibana-arisu.gif)
