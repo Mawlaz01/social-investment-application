@@ -69,6 +69,5 @@ Saya juga berterima kasih kepada mentor, keluarga, dan teman-teman yang telah me
 
 Sekali lagi, terima kasih banyak! 🎉
 
----
+https://github.com/user-attachments/assets/58c5b338-6baa-42cb-b002-d3cbba9357b4
 
-![Thank You](https://media1.tenor.com/m/3KSG8LgKn8cAAAAd/tachibana-arisu.gif)
