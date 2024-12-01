@@ -69,4 +69,5 @@ Special thanks to my mentors and peers for their moral and technical support. Th
 
 Once again, thank you all.
 
-![Thank you!](https://media1.tenor.com/m/3KSG8LgKn8cAAAAd/tachibana-arisu.gif)
+![Autoplay GIF](https://i.giphy.com/media/3KSG8LgKn8cAAAAd/giphy.gif)
+
