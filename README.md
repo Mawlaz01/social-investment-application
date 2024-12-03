@@ -46,17 +46,16 @@ The **Social Investment Application** is a web-based platform designed to track 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Mawlaz01/social-investment-application.git
+   ```
+   ```bash
    cd social-investment-application
    ```
+      
 2. Install dependencies:
    ```bash
    npm install
    ```
-3. Set up WhatsApp connection:
-   - When you start the application, a QR code will be displayed in the terminal.
-   - Open WhatsApp on your phone and navigate to **Settings > Linked Devices**.
-   - Tap on **Link a Device**, then scan the QR code displayed in the terminal using your phone.
-   - Wait for the application to confirm the connection. Once successful, it will be ready to send notifications.
+
 ---
 
 ## Usage
@@ -64,7 +63,14 @@ The **Social Investment Application** is a web-based platform designed to track 
    ```bash
    nodemon
    ```
-2. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
+
+2. Set up WhatsApp connection:
+   - When you start the application, a QR code will be displayed in the terminal.
+   - Open WhatsApp on your phone and navigate to **Settings > Linked Devices**.
+   - Tap on **Link a Device**, then scan the QR code displayed in the terminal using your phone.
+   - Wait for the application to confirm the connection. Once successful, it will be ready to send notifications.
+
+3. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
 ---
 
